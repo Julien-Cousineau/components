@@ -1,0 +1,36 @@
+{
+  "name": "@julien.cousineau/ui",
+  "version": "1.0.0",
+  "description": "UI components for Javascript",
+  "main": "build/ui",
+  "scripts": {
+    "fix": "eslint --fix src/index.js test/test.js",
+    "test": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
+    "cov": "istanbul cover test/test.js -x test/test.js",
+    "build": "browserify src/index.js -s ui -o build/ui.js",
+    "build-min": "browserify src/index.js -s ui | uglifyjs -c warnings=false -m > build/ui.min.js",
+    "prepare": "npm run build && npm run build-min"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Julien-Cousineau/components.git"
+  },
+  "keywords": [
+    "ui",
+    "JavaScript"
+  ],
+  "author": "Julien Cousineau <julien.cousineau@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Julien-Cousineau/components/issues"
+  },
+  "homepage": "https://github.com/Julien-Cousineau/components#readme",
+  "devDependencies": {
+    "browserify": "^16.2.2",
+    "eslint": "^5.0.1",
+    "faucet": "0.0.1",
+    "istanbul": "^0.4.5",
+    "tape": "^4.9.1",
+    "uglify-es": "^3.3.9"
+  }
+}
