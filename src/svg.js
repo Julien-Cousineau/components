@@ -1,19 +1,4 @@
-
-const debounce=function(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
-
+const util = require('@julien.cousineau/util')
 
 module.exports = class SVG{
   constructor(options){
@@ -26,7 +11,7 @@ module.exports = class SVG{
     
    
     const self=this;
-    window.addEventListener("resize", debounce(function(){return self.resize()},10));
+    // window.addEventListener("resize", debounce(function(){return self.resize()},10));
     
   }
   get width(){return Math.max(this.minwidth,this.element.node().getBoundingClientRect().width)}
@@ -60,6 +45,9 @@ module.exports = class SVG{
     graph.render();
     this.resize();
     
+  }
+  add(a,b){
+    return a+b;
   }
 
 };

@@ -32,5 +32,8 @@
     "istanbul": "^0.4.5",
     "tape": "^4.9.1",
     "uglify-es": "^3.3.9"
+  },
+  "dependencies": {
+    "@julien.cousineau/util": "^1.0.1"
   }
 }

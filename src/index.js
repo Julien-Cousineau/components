@@ -1,5 +1,3 @@
 'use strict';
 
-const SVG = require('./svg.js');
-
-module.exports = SVG;
+module.exports.SVG = require('./svg.js');
