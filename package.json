@@ -34,7 +34,8 @@
     "uglify-es": "^3.3.9"
   },
   "dependencies": {
-    "@julien.cousineau/util": "^1.0.1",
-    "d3": "^5.5.0"
+    "@julien.cousineau/util": "^1.0.2",
+    "d3": "^5.5.0",
+    "uglify-es": "^3.3.9"
   }
 }
