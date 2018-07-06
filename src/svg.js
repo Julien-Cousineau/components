@@ -1,4 +1,4 @@
-const util = require('@julien.cousineau/util')
+const {debounce} = require('@julien.cousineau/util')
 
 module.exports = class SVG{
   constructor(options){
@@ -9,9 +9,8 @@ module.exports = class SVG{
     this.resizecallback = options.resizecallback;
     this.graphs={};
     
-   
     const self=this;
-    // window.addEventListener("resize", debounce(function(){return self.resize()},10));
+    window.addEventListener("resize", debounce(function(){return self.resize()},10));
     
   }
   get width(){return Math.max(this.minwidth,this.element.node().getBoundingClientRect().width)}

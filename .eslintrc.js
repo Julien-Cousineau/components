@@ -10,6 +10,8 @@ module.exports = {
         "sourceType": "module"
     },
     "rules": {
+        "no-unused-vars": [0, { "varsIgnorePattern": "^h$" }],
+        "no-console": 0,
         "indent": [
             "error",
             4

@@ -4,7 +4,7 @@
   "description": "UI components for Javascript",
   "main": "build/ui",
   "scripts": {
-    "fix": "eslint --fix src/index.js test/test.js",
+    "fix": "eslint --fix src/index.js test/test.js src/slider.js src/colorgradient.js src/d3util.js src/graph.js src/input.js src/picker.js src/popover.js",
     "test": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
     "cov": "istanbul cover test/test.js -x test/test.js",
     "build": "browserify src/index.js -s ui -o build/ui.js",
@@ -34,6 +34,7 @@
     "uglify-es": "^3.3.9"
   },
   "dependencies": {
-    "@julien.cousineau/util": "^1.0.1"
+    "@julien.cousineau/util": "^1.0.1",
+    "d3": "^5.5.0"
   }
 }
