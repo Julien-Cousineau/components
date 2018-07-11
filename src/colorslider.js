@@ -1,11 +1,10 @@
 'use strict';
-const d3 = require('d3');
+const d3 = require('../dist/d3.min.js');
+import Slider from './slider.js';
+import Popup from './popup.js';
+import Picker from './picker.js';
 
-const Slider = require('./slider.js');
-const Popup = require('./popup.js');
-const Picker = require('./picker.js');
-
-module.exports = class ColorSlider extends Slider {
+export default  class ColorSlider extends Slider {
   constructor(options){
     super(options);
     const rgba = this.rgba = options.rgba || {r:255,g:0,b:0,a:1};
@@ -13,7 +12,8 @@ module.exports = class ColorSlider extends Slider {
     const self = this;
     this.picker = new Picker({rgba:rgba,callback:function(rgba){self.changeColor(rgba)}})    
     
-    this.callbacks.color = function(){
+    this.callbacks.color = function(dom){
+      d3.event.stopPropagation();
       const domrect = this.getBoundingClientRect();
       const top = domrect.top;
       const left = domrect.right;

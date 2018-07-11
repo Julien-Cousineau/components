@@ -1,14 +1,34 @@
 'use strict';
-const d3 = require('d3');
+const d3 = require('../dist/d3.min.js');
 
-module.exports = class Popup {
+export default  class Popup {
   constructor(){
     
   }
   render(element){
-    const containerp = this.containerp = element.append('div').attr('class','popoverparent');
-    const container = this.container = containerp.append('div').attr('class','popover');
-    const arrow = container.append('div').attr('class','arrow')
+    const containerp = this.containerp = element.append('div')
+    .style("position",'absolute')
+    .style("z-index",'1060')
+    .style("display",'none')
+    .style("height",'100%')
+    .style("width",'100%');
+
+    const container = this.container = containerp.append('div')
+    .style("position","absolute")
+    .style("top","0")
+    .style("left","0")
+    .style("z-index"," 1061");
+    
+    const arrow = container.append('div')
+    .style("position"," absolute")
+    .style("display"," block")
+    .style("margin"," 0 -0.5rem")
+    .style("left","0")
+    .style("border-top"," 0.5rem solid transparent")
+    .style("border-bottom"," 0.5rem solid transparent")
+    .style("border-right"," 0.5rem solid black");
+    
+
     this.body = container.append('div').style('margin','-5px')
     const self=this;
     containerp.on('click mousedown',(e)=>self.hide(d3.event))

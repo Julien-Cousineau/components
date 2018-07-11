@@ -1,14 +1,16 @@
-const {debounce} = require('@julien.cousineau/util')
+import {debounce} from '@julien.cousineau/util';
 
-module.exports = class SVG{
+export default class SVG{
   constructor(options){
     if(!options)options={};
+    const margin = this.margin = options.margin || {top: 0, right: 0, bottom: 0, left: 0};
     this.minwidth = options.minwidth || 300;
     this.minheight = options.minheight || 300;
     this.style = options.style || {};
     this.resizecallback = options.resizecallback;
     this.graphs={};
     
+   
     const self=this;
     window.addEventListener("resize", debounce(function(){return self.resize()},10));
     
@@ -18,15 +20,17 @@ module.exports = class SVG{
   render(element){
     if(!element)throw new Error("SVG needs a element to draw");
     this.element=element;
-    const {width,height,style}=this;    
+    const {width,height,margin,style}=this;    
     const svg = this.svg = element
     .append("svg")
     .attr("width", width)
     .attr("height", height)
-    .style('box-sizing','content-box');
+    .style('box-sizing','content-box')
     for(let id in style){
       svg.style(id,style[id]);
     }
+    
+    
   }
   resize(){
     const {svg,width,height,graphs,resizecallback}=this;
@@ -37,16 +41,13 @@ module.exports = class SVG{
   }
    
   addGraph(id,graph){
-    if(!id || !graph)throw new Error("addGraph needs a id & graph");
+    if(!id || !graph)throw new Error("addGraph needs a id & graph")
     const self=this;
     graph._svg=function(){return self};
     this.graphs[id]=graph;
     graph.render();
-    this.resize();
+    this.resize()
     
   }
-  add(a,b){
-    return a+b;
-  }
 
-};
+}

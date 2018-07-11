@@ -1,0 +1,1 @@
+import {Parent} from '../src/index.js';
