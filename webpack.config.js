@@ -2,6 +2,8 @@ var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
+
+
 module.exports = {
     entry: {
     
@@ -12,9 +14,11 @@ module.exports = {
           ],
     
       vendor: [
+            './dist/bootstrap.bundle.min.js',
             './dist/d3.min.js',
             ],
     },
+    
     output: {
         path: path.join(__dirname, 'build'),
         filename: "[name].js"
@@ -27,18 +31,26 @@ module.exports = {
         
     },
     module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  },
+      rules: [
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader']
+        },
+        {
+          test: /\.scss$/,
+          use: ['style-loader', 'css-loader', "sass-loader"]
+        }
+      ]
+    },
    
     plugins: [
         new HtmlWebpackPlugin({
         title: 'Julien'
       }),
+      new webpack.ProvidePlugin({
+        $: 'jquery',
+        jQuery: 'jquery'
+    })
         // new webpack.HotModuleReplacementPlugin()
     ]
 };

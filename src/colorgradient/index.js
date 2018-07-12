@@ -1,11 +1,11 @@
 'use strict';
-const d3 = require('../dist/d3.min.js');
-import  LContainer from './lcontainer.js';
-import SVG from './svg';
-import Graph from './graph.js';
-import ColorSlider from './colorslider.js';
+const d3 = require('../../dist/d3.min.js');
+import  LContainer from '../lcontainer';
+import SVG from '../svg';
+import Graph from '../graph';
+import ColorSlider from '../colorslider';
 
-const {transparencyBackground} = require('./d3util.js');
+const {transparencyBackground} = require('../d3util');
 
 export default  class ColorGradient {
   constructor(options){

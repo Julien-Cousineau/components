@@ -1,5 +1,5 @@
 'use strict';
-const d3 = require('../dist/d3.min.js');
+const d3 = require('../../dist/d3.min.js');
 
 export default  class Popup {
   constructor(){

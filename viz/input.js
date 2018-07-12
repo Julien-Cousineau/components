@@ -1,4 +1,3 @@
-import d3 from '../dist/d3.min.js';
 import {Input,InlineInput,Parent,LContainer} from '../src/index.js';
 
 const lcontainer = LContainer(Parent,150,100,0);

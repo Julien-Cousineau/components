@@ -1,17 +1,15 @@
-//eslint-disable no-unused-vars
 'use strict';
-
-const d3 = require('../dist/d3.min.js');
-import SVG from'./svg.js';
-import Graph from './graph.js';
-import Popover from './popover.js';
-import Input  from './input.js';
-import Slider  from './slider.js';
-import ColorGradient from './colorgradient.js';
+const d3 = require('../../dist/d3.min.js');
+import SVG from'../svg';
+import Graph from '../graph';
+import Popover from '../popover';
+import Input  from '../input';
+import Slider  from '../slider';
+import ColorGradient from '../colorgradient';
 
 
 const {hex2rgb,rgb2hsv,rgb2hex,hsv2rgb,extend} = require('@julien.cousineau/util');
-const {debounceD3Event,transparencyBackground} = require('./d3util.js');
+const {debounceD3Event,transparencyBackground} = require('../d3util');
 
 export default  class Picker extends Popover {
   constructor(options){

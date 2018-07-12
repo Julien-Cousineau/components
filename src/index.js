@@ -1,21 +1,28 @@
 'use strict';
-import Parent from './parent.js';
-import LContainer from './lcontainer.js';
-import SVG from './svg.js';
-import Graph from './graph.js';
-import Input from './input.js';
-import InlineInput from './inlineinput.js';
+import Parent from './parent';
+import LContainer from './lcontainer';
+import SVG from './svg';
+import Graph from './graph';
+import Input from './input';
+import InlineInput from './inlineinput';
 
-import Popover from './popover.js';
-import Popup from './popup.js';
-import Slider from './slider.js';
-import ColorSlider from './colorslider.js';
-import Picker from './picker.js';
-import ColorGradient from './colorgradient.js';
+import Popover from './popover';
+import Popup from './popup';
+import Slider from './slider';
+import ColorSlider from './colorslider';
+import Picker from './picker';
+import ColorGradient from './colorgradient';
 
-import DraggableNumber from './draggablenumber.js';
+import DraggableNumber from './draggablenumber';
+import Checkbox from './checkbox';
+import Button from './button';
+import Dropdown from './dropdown';
+import Panel from './panel';
+import NavigationPanel from './navigationpanel';
+import Pill from './pill';
+import NavigationPill from './navigationpill';
 
-// import {Parent as p} from './parent.js'
+// import {Parent as p} from './parent'
 export {
 Parent,
 LContainer,
@@ -29,21 +36,13 @@ Slider,
 ColorSlider,
 Picker,
 ColorGradient,
-DraggableNumber
+DraggableNumber,
+Checkbox,
+Button,
+Dropdown,
+Panel,
+NavigationPanel,
+Pill,
+NavigationPill,
 };
-// module.exports.Parent = require('./parent.js');
-// module.exports.LContainer = require('./lcontainer.js');
-// module.exports.SVG = require('./svg.js');
-// module.exports.Graph = require('./graph.js');
-// module.exports.InlineInput = require('./inlineinput.js');
-// module.exports.Input = require('./input.js');
-// module.exports.Popover = require('./popover.js');
-// module.exports.Popup = require('./popup.js');
-// module.exports.Slider = require('./slider.js');
-// module.exports.ColorSlider = require('./colorslider.js');
-// module.exports.ColorGradient = require('./colorgradient.js');
-// module.exports.Picker = require('./picker.js');
-
-
-
 

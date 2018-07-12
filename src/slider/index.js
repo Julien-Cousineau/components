@@ -1,6 +1,6 @@
 'use strict';
-const d3 = require('../dist/d3.min.js');
-import {debounceD3Event} from './d3util.js';
+const d3 = require('../../dist/d3.min.js');
+import {debounceD3Event} from '../d3util';
 
 
 export default class Slider {

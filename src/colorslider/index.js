@@ -1,8 +1,8 @@
 'use strict';
-const d3 = require('../dist/d3.min.js');
-import Slider from './slider.js';
-import Popup from './popup.js';
-import Picker from './picker.js';
+const d3 = require('../../dist/d3.min.js');
+import Slider from '../slider';
+import Popup from '../popup';
+import Picker from '../picker';
 
 export default  class ColorSlider extends Slider {
   constructor(options){
