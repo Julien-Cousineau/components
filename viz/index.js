@@ -9,5 +9,7 @@ require('./picker.js')
 require('./colorslider.js')
 require('./colorgradient.js')
 
+require('./draggablenumber.js')
+
 
 

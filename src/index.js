@@ -13,6 +13,8 @@ import ColorSlider from './colorslider.js';
 import Picker from './picker.js';
 import ColorGradient from './colorgradient.js';
 
+import DraggableNumber from './draggablenumber.js';
+
 // import {Parent as p} from './parent.js'
 export {
 Parent,
@@ -26,7 +28,8 @@ Popup,
 Slider,
 ColorSlider,
 Picker,
-ColorGradient
+ColorGradient,
+DraggableNumber
 };
 // module.exports.Parent = require('./parent.js');
 // module.exports.LContainer = require('./lcontainer.js');

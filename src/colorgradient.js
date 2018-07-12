@@ -3,7 +3,6 @@ const d3 = require('../dist/d3.min.js');
 import  LContainer from './lcontainer.js';
 import SVG from './svg';
 import Graph from './graph.js';
-
 import ColorSlider from './colorslider.js';
 
 const {transparencyBackground} = require('./d3util.js');
