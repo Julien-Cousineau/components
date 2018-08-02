@@ -1,15 +1,20 @@
 {
   "name": "@julien.cousineau/ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "UI components for Javascript",
-  "main": "build/ui",
+  "main": "./build/index.js",
   "scripts": {
     "fix": "eslint --fix src/index.js test/test.js src/slider.js src/colorgradient.js src/d3util.js src/graph.js src/input.js src/picker.js src/popover.js",
     "test": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
     "cov": "istanbul cover test/test.js -x test/test.js",
-    "build": "browserify src/index.js -s ui -o build/ui.js",
-    "build-min": "browserify src/index.js -s ui | uglifyjs -c warnings=false -m > build/ui.min.js",
-    "prepare": "npm run build && npm run build-min"
+    "express": "node server/index.js",
+    "app":  "webpack-dev-server --mode development --config webpack.config.app.js  --disable-host-check --host $IP --port $PORT",
+    "start":"webpack-dev-server --mode development --disable-host-check --host $IP --port $PORT",
+    "build": "NODE_ENV='production' webpack --mode production",
+    "prepare": "npm run build",
+    "patch": "npm version patch && npm publish --access=public",
+    "minor": "npm version minor && npm publish --access=public",
+    "major": "npm version major && npm publish --access=public"
   },
   "repository": {
     "type": "git",
@@ -27,15 +32,36 @@
   "homepage": "https://github.com/Julien-Cousineau/components#readme",
   "devDependencies": {
     "browserify": "^16.2.2",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
+    "datatables.net": "^1.10.19",
+    "datatables.net-bs4": "^1.10.19",
     "eslint": "^5.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "faucet": "0.0.1",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
     "istanbul": "^0.4.5",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "tape": "^4.9.1",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.9",
+    "url-loader": "^1.0.1",
+    "webfonts-loader": "^4.1.0",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.5",
+    "webpack-hot-middleware": "^2.22.2"
   },
   "dependencies": {
-    "@julien.cousineau/util": "^1.0.2",
-    "d3": "^5.5.0",
+    "@julien.cousineau/util": "^1.0.5",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "d3": "^4.13.0",
+    "express": "^4.16.3",
+    "jquery": "^3.3.1",
     "uglify-es": "^3.3.9"
   }
 }
