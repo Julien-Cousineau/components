@@ -29,7 +29,7 @@ export default  class ColorGradient {
     
     const graphcallbacks=(addable)?
           {click:function(event){
-            const value=self.graph.y.invert(event.offsetY-8); 
+            const value=self.graph.axes.y.scale.invert(event.offsetY-8); 
             const {r,g,b,opacity} = d3.color(colorScale(1-value));
             
             const newslider=new ColorSlider({
@@ -57,6 +57,7 @@ export default  class ColorGradient {
     
     
   }
+  
   updateColorScale(){
     const {colorScale,sliders}=this;
     const array =this.sortSliders();
@@ -73,7 +74,7 @@ export default  class ColorGradient {
   }
 
   addSlider(slider){
-    console.log("add Slider")
+
     const {graph,sliders} = this;
     const _id='s{0}'.format(this.counter++);
     const self=this;

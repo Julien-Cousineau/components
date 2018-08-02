@@ -1,19 +1,17 @@
 export default  class Input {
   constructor(options){
-    this.title  = options.title  || 'label';
+    this.title  = options.title  || '';
     this.type   = options.type   || 'text';
-    this.min    = options.min    || 0;
-    this.max    = options.max    || 255;
+    this.min    = options.min    || null;
+    this.max    = options.max    || null;
     this.value  = options.value  || 0;
     this.margin = options.margin || '0 0.5rem';
     this.callback = options.callback|| function(){console.log(this.value)};
   }
   render(element){
     const {title,margin,type,min,max,value,callback} = this;
-    const fg = element.append('div').attr('class','form-group')
-    this.label = fg.append('label')
-    .style('margin',margin)
-    .text(title)
+    const fg = element.append('div').attr('class','form-group');
+    if(title!='')this.label = fg.append('label').style('margin',margin).text(title);
     const input = this.input = fg.append('input')
     .attr('class','form-control input-sm')
     .attr('type',type)
@@ -31,9 +29,10 @@ export default  class Input {
        input.on('change paste',()=>callback(this.input.node().value))
     }
     if(type=='number'){
-      input.attr('min',min)
-      input.attr('max',max)   
+      if(min)input.attr('min',min)
+      if(max)input.attr('max',max)   
       input.on('change keydown paste input',()=>callback(this.input.node().value))
     }
+    return fg
   }
 }

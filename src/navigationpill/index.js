@@ -19,7 +19,7 @@ export default class NavigationPill{
   
      const content = this.content = row
        .append("div").attr('class','col-10') 
-       .append("div").attr('class',"tab-content");
+       .append("div").attr('class',"tab-content pillcontent");
      
      this.changePills();
   }

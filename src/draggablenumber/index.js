@@ -17,25 +17,29 @@ export default  class DraggableNumber {
   }
   render(element){
     if(!element)throw new Error("DraggableNumber needs an element to render");       
-   let {title,min,max,f,value,step,dy,callback} = this;
-    const dom = this.dom = element.append('p')
+   let {title,f,value,dy,callback} = this;
+    const dom = this.dom = element.append('div')
+    this.titledom = this.title=dom.append('p')
+        .style('float','left')
         .text(title)
-        .append('span')
-        .style("cursor","row-resize")
-        .style("line-height"," 30px")
-        .style("text-decoration-line"," underline")
-        .style("text-decoration-style"," dotted")
-        .style("user-select"," none")
+    const span = this.span = dom.append('span')
+        .style('float','left')
+        .attr('class','draggablenumber')
+        .style('cursor','row-resize')
+        .style('text-decoration-line','underline')
+        .style('text-decoration-style','dotted')
+        .style('user-select','none')
         .text(value);
     
     const self=this;
     const ondrag = function(d){
+      const {min,max,step}=self;
       dy += d3.event.dy*f;
       if(Math.abs(dy)>1.0){
         dy = parseInt(dy);
         value = (value-dy*step).clamp(min,max);
         dy=0.0;
-        dom.text(value);
+        span.text(value);
         self.value=value;
         callback(value);
         
@@ -47,5 +51,19 @@ export default  class DraggableNumber {
     .on("drag",ondrag)
     .on("end",ondrag);
     dom.call(d3drag);
+    return dom;
+  }
+  hide(){this.dom.style('display','none');}
+  show(){this.dom.style('display','');}
+  changeTitle(title){this.titledom.text(title);}
+  changeMin(value){this.min=value; this.reset();}
+  changeMax(value){this.max=value; this.reset();}
+  changeStep(value){this.step=value; this.reset();}
+  reset(){
+    const {min,max}=this;
+    const value = this.value = this.value.clamp(min,max);
+    this.span.text(value);
+    this.callback(value);
+    
   }
 }

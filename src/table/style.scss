@@ -1,0 +1,21 @@
+$font-size-sm: 0.75rem;
+
+.table.propertycontainer {
+    font-size:$font-size-sm;
+    td, th {
+        padding:0.25rem;
+    }
+}
+ .dataTables_info {
+    font-size:$font-size-sm;
+}
+.dataTables_length {
+     font-size:$font-size-sm;
+}
+.dataTables_filter {
+     font-size:$font-size-sm;
+     input {
+         width:60% !important;
+     }
+}
+

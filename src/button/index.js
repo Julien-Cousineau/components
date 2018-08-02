@@ -7,9 +7,11 @@ export default class Button {
   }
   render(element){
     const {title,classes,callback} = this;
+    
     const dom = this.dom = element.append('button')
     .attr('class','{0}'.format(classes))
     .text(title);    
+    
     if(callback)dom.on('click',callback);
   }
 }

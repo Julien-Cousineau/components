@@ -1,4 +1,13 @@
-'use strict';
+'use strict'
+import bootstrapstyle from '../dist/bootstrap.min.css';
+import style11 from '../dist/datatables.min.css';
+import fontawesome from '../dist/fonts/all.css';
+import style2 from '../styles/style1.scss';
+
+import bootstrap from '../dist/bootstrap.bundle.min.js'
+
+
+
 import Parent from './parent';
 import LContainer from './lcontainer';
 import SVG from './svg';
@@ -22,6 +31,11 @@ import NavigationPanel from './navigationpanel';
 import Pill from './pill';
 import NavigationPill from './navigationpill';
 
+import LayerProperty from './layerproperty';
+import DynamicGraph from './dynamicgraph';
+import GraphHistogram from './graphhistogram';
+import Table from './table';
+
 // import {Parent as p} from './parent'
 export {
 Parent,
@@ -44,5 +58,9 @@ Panel,
 NavigationPanel,
 Pill,
 NavigationPill,
+LayerProperty,
+DynamicGraph,
+GraphHistogram,
+Table,
 };
 

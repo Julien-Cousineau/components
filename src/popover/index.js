@@ -10,7 +10,7 @@ export default  class Popover {
   }
   render(element){
     const {title,width,height,header} = this;
-    const container = element.append("div")
+    const container = this.container = element.append("div")
     .style('position','absolute')
     .style('width',width + 'px')
     .style('height',height + 'px')
@@ -58,6 +58,6 @@ export default  class Popover {
     titlebar.append('div').attr('class',"clearfix");
       
     }
-    const content = this.content = container.append('div').attr('class',"property_content");
+    const content = this.content = container.append('div').attr('class',"content");
   }
 }

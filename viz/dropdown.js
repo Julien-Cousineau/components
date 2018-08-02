@@ -1,6 +1,6 @@
 import {Dropdown,Parent,LContainer} from '../src/index.js';
 
-const lcontainer = LContainer(Parent,150,100,0);
+const lcontainer = LContainer(Parent,150,300,0);
 
 
 const btn1  = new Dropdown({

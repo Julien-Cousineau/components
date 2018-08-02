@@ -1,5 +1,13 @@
-import style from '../dist/bootstrap.min.css';
-import style2 from '../style/style1.scss';
+// import style from '../dist/bootstrap.min.css';
+// import style11 from '../dist/datatables.min.css';
+// import fontawesome from '../dist/fonts/all.css';
+// import style2 from '../styles/style1.scss';
+// require('jquery');
+// require('datatables.net');
+// require('datatables.net-bs4');
+
+
+
 // import appstyle from '../src/css.css';
 
 require('./parent.js')
@@ -16,5 +24,9 @@ require('./button.js')
 require('./dropdown.js')
 require('./navigationpanel.js')
 require('./navigationpill.js')
+require('./layerproperty.js')
+require('./dynamicgraph.js')
+require('./graphhistogram.js')
+require('./table.js')
 
 

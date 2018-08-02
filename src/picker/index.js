@@ -171,11 +171,12 @@ export default  class Picker extends Popover {
   render(element){
     if(!element)throw new Error("Picker needs a element to draw");
     super.render(element)
-    const {res,pad,cgb,cgt,graph,r,svg,d3drag,bsize,content}=this;
+    const {res,pad,cgb,cgt,graph,r,svg,d3drag,bsize,container,content}=this;
     const self=this;
     
-    
+    container.style('background','white');
     const canvasp = content.append('div')
+  
     .style('padding',pad +'px')
     .append('div')
     .style('float','left')
