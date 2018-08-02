@@ -1,6 +1,6 @@
 {
   "name": "@julien.cousineau/ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "UI components for Javascript",
   "main": "./build/index.js",
   "scripts": {
@@ -8,8 +8,8 @@
     "test": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
     "cov": "istanbul cover test/test.js -x test/test.js",
     "express": "node server/index.js",
-    "app":  "webpack-dev-server --mode development --config webpack.config.app.js  --disable-host-check --host $IP --port $PORT",
-    "start":"webpack-dev-server --mode development --disable-host-check --host $IP --port $PORT",
+    "app": "webpack-dev-server --mode development --config webpack.config.app.js  --disable-host-check --host $IP --port $PORT",
+    "start": "webpack-dev-server --mode development --disable-host-check --host $IP --port $PORT",
     "build": "NODE_ENV='production' webpack --mode production",
     "prepare": "npm run build",
     "patch": "npm version patch && npm publish --access=public",
