@@ -19,7 +19,7 @@ export default  class DraggableNumber {
     if(!element)throw new Error("DraggableNumber needs an element to render");       
    let {title,f,value,dy,callback} = this;
     const dom = this.dom = element.append('div')
-    this.titledom = this.title=dom.append('p')
+    this.titledom =dom.append('p')
         .style('float','left')
         .text(title)
     const span = this.span = dom.append('span')

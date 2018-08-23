@@ -1,0 +1,25 @@
+
+.tab-content>.tab-pane {
+    opacity: 0;
+        -webkit-transition: opacity 200ms, visibility 200ms;
+            transition: opacity 200ms, visibility 200ms;
+            visibility: hidden;
+    
+}
+.tab-content>.active {
+    opacity: 1;
+    
+        visibility: visible;
+    opacity: 1;
+    animation: fade 400ms;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

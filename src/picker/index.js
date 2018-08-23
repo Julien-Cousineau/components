@@ -17,6 +17,7 @@ export default  class Picker extends Popover {
     options.header = false;
     options.height = 300;
     super(options)  
+    
     const res     = this.res     = options.res || 190;
     const pad     = this.pad     = options.pad || 10;
     // const padding = this.padding = options.padding || 0;
@@ -171,10 +172,11 @@ export default  class Picker extends Popover {
   render(element){
     if(!element)throw new Error("Picker needs a element to draw");
     super.render(element)
-    const {res,pad,cgb,cgt,graph,r,svg,d3drag,bsize,container,content}=this;
+    const {res,pad,cgb,cgt,graph,r,svg,d3drag,bsize,container,content,contentp}=this;
     const self=this;
     
     container.style('background','white');
+    contentp.style('padding-right',0).style('padding-left',0)
     const canvasp = content.append('div')
   
     .style('padding',pad +'px')

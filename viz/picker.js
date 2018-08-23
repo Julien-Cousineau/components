@@ -5,6 +5,9 @@ const lcontainer = LContainer(Parent,275,360,0);
 
 
 const p1 = new Picker({
+     isstatic:true,
+     isresize:false,
+     isheader:false,
      width:275,
      height:360,
      rgba:{r:255,g:0,b:0,a:1},

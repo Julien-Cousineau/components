@@ -10,7 +10,16 @@ export default  class ColorSlider extends Slider {
     const rgba = this.rgba = options.rgba || {r:255,g:0,b:0,a:1};
     this.popup = new Popup();    
     const self = this;
-    this.picker = new Picker({rgba:rgba,callback:function(rgba){self.changeColor(rgba)}})    
+    this.picker = new Picker({
+     isstatic:true,
+     isresize:false,
+     isheader:false,
+     width:275,
+     height:360,     
+      rgba:rgba,
+      callback:function(rgba){self.changeColor(rgba)}
+      
+    })    
     
     this.callbacks.color = function(dom){
       d3.event.stopPropagation();

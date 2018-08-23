@@ -40,3 +40,19 @@ export function debounceD3Event(func, wait, immediate) {
 
     };
 };
+
+
+// async function
+export async function getJson(url){
+  let data = await (await (fetch(url)
+    .then(res => {
+      return res.json()
+    })
+    .catch(err => {
+      console.log('Error: ', err)
+    })
+  ))
+  return data
+}
+
+

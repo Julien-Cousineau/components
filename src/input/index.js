@@ -10,7 +10,7 @@ export default  class Input {
   }
   render(element){
     const {title,margin,type,min,max,value,callback} = this;
-    const fg = element.append('div').attr('class','form-group');
+    const fg = element.append('div').attr('class','form-group').style('z-index',0);
     if(title!='')this.label = fg.append('label').style('margin',margin).text(title);
     const input = this.input = fg.append('input')
     .attr('class','form-control input-sm')

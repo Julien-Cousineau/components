@@ -14,11 +14,11 @@ export default class NavigationPill{
        .append("div").attr('class','row {0}'.format(style));
     
      const list = this.list = row
-       .append("div").attr('class','col-2')
+       .append("div").attr('class','col-3')
        .append("div").attr('class','nav flex-column nav-pills').attr('role',"tablist").attr("aria-orientation","vertical");  
   
      const content = this.content = row
-       .append("div").attr('class','col-10') 
+       .append("div").attr('class','col-9') 
        .append("div").attr('class',"tab-content pillcontent");
      
      this.changePills();

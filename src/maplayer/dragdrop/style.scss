@@ -1,0 +1,12 @@
+
+.mapdragdrop {
+    display:none;
+    position:absolute;
+    height:100%;
+    width:100%;
+    background:red;
+    opacity:0.5;
+    &.hover {
+        display:block;
+    }
+}

@@ -1,8 +1,9 @@
+import style from './style.scss';
 import NavigationPanel from '../navigationpanel';
 import NavigationPill from '../navigationpill';
 import Pill from '../pill';
 import Panel from '../panel';
-
+import Popover from '../popover';
 
 
 import ColorGradientPanel from './colorgradientpanel';
@@ -10,19 +11,27 @@ import RenderingStylePanel from './renderingstylepanel';
 import RenderingAttPanel from './renderingattpanel';
 import RenderingLabelPanel from './renderinglabelpanel';
 
+import Layer from '../layer';
 
-
-export default class LayerProperty {
+export default class LayerProperty extends Popover{
   constructor(options){
+    super(options)
     if(!options)options={};
+    this._map=options._map || function(){return {}};
     this.title = options.title || 'Layer';
     this.type = options.type || 'mesh';
+    this.activeid = options.activeid || null;
+    
+    const self=this;
+    const callbacks = this.callbacks = {
+      changeRStyle:(style)=>self.changeRStyle(style),
+      changePointSize:(size)=>{self.activelayer.sizes.point = size;self.map.changePaint(self.activeid + "-circle",'circle-radius',size)},
+      changeLineSize:(size)=>{self.activelayer.sizes.line = size;self.map.changePaint(self.activeid + "-line",'line-width',size)},
+      changeIsoSize:(size)=>{self.activelayer.sizes.iso = size;self.map.changePaint(self.activeid + "-line",'line-width',size)},
+    };
     
     
-    const rsp = this.rsp = new RenderingStylePanel({title:'Style',callbacks:{
-      style:function(value){console.log("User has pressed {0}".format(value))},
-      options:function(id,value){console.log("User has pressed {0}-{1}".format(id,value))},
-    }})
+    const rsp = this.rsp = new RenderingStylePanel({_lp:()=>self,title:'Style',callbacks:callbacks})
     const rap =this.rap = new RenderingAttPanel({title:'Attribute',callbacks:{
       att:function(){console.log("User has pressed att")},
     }})
@@ -31,10 +40,7 @@ export default class LayerProperty {
     }})
     
     const npp = new NavigationPanel({panels:[rsp,rap,rlp]})
-    
- 
 
-    
     const colorscalepanel = this.colorscalepanel = new ColorGradientPanel({title:'Style',col:6})
     const statpanel = new Panel({title:'Colorscale',col:12})
     const npp2 = new NavigationPanel({panels:[colorscalepanel]})
@@ -55,29 +61,29 @@ export default class LayerProperty {
               new Panel({title:'Properties',col:6})
              ]
     })})
-    this.np =  new NavigationPill({pills:[pill,pill2,query,stats,calc]})
+    this.np =  new NavigationPill({style:'layerproperty',pills:[pill,pill2,query,stats,calc]})
     
   }
+  
+  get map(){return this._map()}
+  get activelayer(){if(!this.activeid)return new Layer();return this.map.layers[this.activeid]}
+  
   render(element){
-    const {title,np,colorscalepanel} = this;
-    const container = element.append("div").attr('class','layerproperty')
-    const trans = container.append("div").attr('class','background')
-    const titlebar = container.append("div").attr('class','title')
-    const titledom = titlebar.append("span").append("h2").text(title);
-    const nav = titlebar.append("ul").attr('class','nav navbar-right panel_toolbox')
-    const close = nav.append('li').append('a').attr('class','close-link')
-    const closeicon = close.append('i').attr('class','fa fa-times')
-    titlebar.append('div').attr('class',"clearfix");
-    const content = titlebar.append('div').attr('class',"content");
-    np.render(content)
+    super.render(element);
+    const {content} = this;
+    this.np.render(content);
+  }
+  show(activeid){
+    super.show();
+    this.activeid=activeid;
+    this.rsp.refresh();
+     
+  }
+  changeRStyle(rstyle){
+    this.activelayer.rstyle = rstyle;
+    this.rsp.refresh();
+    this.map.refresh(this.activeid)
+  }
 
-    
-  }
-  setStyle(type,active){
-    this.rsp.changeDropdown(type,active);
-    this.rlp.changeType(type);
-  }
-  changeAttributes(id,values){
-    this.rap.changeDropdown(id,values);
-  }
 }
+

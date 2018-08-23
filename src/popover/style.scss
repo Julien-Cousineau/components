@@ -1,0 +1,91 @@
+.uipopover {
+    position: absolute;
+    margin: 5px;
+    /* padding: 10px 17px 0px 17px; */
+    color: #73879C;
+    // transition: all .2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
+    overflow: hidden;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    pointer-events: auto;
+  .handle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.0);
+    opacity: 0.5;
+    &.top {bottom:auto;margin-top: -4px;height: 8px;cursor: ns-resize;}
+    &.bottom {top:auto;margin-bottom: -4px;height: 8px;cursor: ns-resize;}
+    &.left {right:auto;margin-left: -4px;width: 8px;cursor: ew-resize;}
+    &.right {left:auto;margin-right: -4px;width: 8px;cursor: ew-resize;}
+  }
+  .trans{
+    position:absolute;  
+    width:100%;
+    height:100%;  
+    // opacity:0.5;
+    background: #fff;
+    // opacity:0.75;
+    border: 1px solid #E6E9ED;}
+  .header {
+    padding: 1px 6px 0px 6px;
+    margin: 0;
+    height:26px;
+    color: #73879C;
+    opacity:0.99;
+    
+    .navbar-right {
+      float: right !important;
+      margin-right: 0;}
+    li {
+      float: left;
+      cursor: pointer;}
+    li>a {
+      user-select: none;
+      padding: 2px 6px;
+      color: #C5C7CB !important;
+      font-size: 15px;}
+    li>a:hover {
+      background: #F5F7FA;}
+    .icons>li>a{
+      user-select: none;
+      padding: 2px 6px;
+      color: #C5C7CB !important;
+      font-size: 15px;}
+    .icons>li>a:hover {
+      background: #F5F7FA;}
+  }
+  
+
+  .nav.top_menu>li>a, .nav>li>a {
+    position: relative;
+    display: block;}
+  .contentp { 
+      background:#fff;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+     
+      // overflow-y: auto;
+      // overflow-x: hidden;
+     .content { 
+          // background:#fff;
+          // position: relative;
+          // border: 1px solid #E6E9ED;
+          // overflow-y: auto;
+          // overflow-x: hidden;
+     }
+    
+  } 
+      
+ 
+    
+}
+
+
