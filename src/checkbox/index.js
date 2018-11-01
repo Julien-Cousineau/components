@@ -3,7 +3,7 @@ export default class Checkbox {
   constructor(options){
     if(!options)options={};
     if(!options.callback)throw new Error("Checkbox needs a callback");
-    this.title = options.title || '{title}';
+    this.title = options.title || '';
     this.callback=options.callback;
     this.value =(typeof options.value==='undefined')?false:options.value;
     

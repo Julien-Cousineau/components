@@ -1,4 +1,4 @@
-precision mediump float;
+precision highp float;
 
 #define PI 3.1415926535897932384626433832795
 
@@ -6,8 +6,10 @@ attribute vec3 position;
 attribute float value;
 uniform mat4 u_matrix;
 uniform float worldSize;
+uniform float u_pointsize;
 
-varying float fValue;
+
+varying float fvalue;
 
 float lngX(float lng) {
   return  (180.0 + lng) * worldSize / 360.0;
@@ -21,6 +23,6 @@ float latY(float lat) {
 
 void main() {
   gl_Position = u_matrix * vec4(lngX(position[0]),latY(position[1]),position[2], 1.0);
-  gl_PointSize = 10.0;
-  fValue = value;
+  gl_PointSize = u_pointsize;
+  fvalue = value;
 }

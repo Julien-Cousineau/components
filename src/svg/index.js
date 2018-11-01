@@ -11,8 +11,7 @@ export default class SVG{
     this.graphs={};
     
    
-    const self=this;
-    window.addEventListener("resize", debounce(function(){return self.resize()},10));
+
     
   }
   get width(){return Math.max(this.minwidth,this.element.node().getBoundingClientRect().width)}
@@ -29,6 +28,9 @@ export default class SVG{
     for(let id in style){
       svg.style(id,style[id]);
     }
+    
+    const self=this;
+    window.addEventListener("resize", debounce(function(){return self.resize()},10));
     
     
   }

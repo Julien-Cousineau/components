@@ -1,9 +1,9 @@
-import {Map,Parent} from '../src/index.js';
+import {MapBox,Parent} from '../src/index.js';
 
 
 
 
-const m1  = new Map({
+const m1  = new MapBox({
 });
 
 m1.render(Parent);

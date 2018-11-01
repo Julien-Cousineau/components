@@ -27,36 +27,102 @@ export default class GraphHistogram extends DynamicGraph {
       .remove()
       .exit()
       .data(bins);
+      
+      const barwidth = (!this.isflip)?'width':'height';
+      const barheight = (!this.isflip)?'height':'width';
+      
+      const barvar = (!this.isflip)?'x':'y';
+      
       rect.enter().append("rect")
         .attr("class", "bar")
-        .attr("x", 1)
-        .attr("transform", function(d) {return "translate(" + x(d.x0) + "," + self.ytranslate(d) + ")"; })
-        .attr("width", function(d) { return x(d.x1) - x(d.x0)-1 ; })
-        .attr("height", function(d){return self.yheight(d)}); 
+        .attr(barvar, 1)
+        .attr("transform", function(d) { return self.barorigin(d)})
+        .attr(barwidth, function(d) {return self.barwidth(d)})
+        .attr(barheight, function(d){return self.barheight(d)}); 
 
   
   }
-  yheight(d){
-    const {y,extent}=this;
-    let zero = 0.0
-    const slope = extent[3]-extent[1];
-    const min = Math.min(extent[3],extent[1])
-    const max = Math.max(extent[3],extent[1])
+  getvalue(d){
+    const {axes}=this;
     
+    // let zero = 0.0
+    const axis = (this.isflip)?axes.y:axes.y;
+    // const slope = axis.viewable[1]-axis.viewable[0];
+    const min = Math.min(axis.viewable[1],axis.viewable[0])
+    const max = Math.max(axis.viewable[1],axis.viewable[0])
+    // zero = zero.clamp(min,max) 
+    return axis.scale(this.gety(d).clamp(min,max))
+
+  }
+  barorigin(d){
+    const {x,y}=this.axes
+    return (!this.isflip)?"translate({0},{1})".format(x.scale(d.x0),this.getvalue(d)):
+                            "translate(0,{0})".format(y.scale(d.x0)-(y.scale(d.x0) - y.scale(d.x1)-1));
+  }
+  barwidth(d){
+    const {x,y}=this.axes;
+    
+    return (!this.isflip)?x.scale(d.x1) - x.scale(d.x0)-1:
+                          y.scale(d.x0) - y.scale(d.x1)-1;
+    
+  }  
+  barheight(d){
+    const {x,y}=this.axes
+    const axis = (!this.isflip)?y:x;
+    const slope =axis.viewable[1]-y.viewable[0];
+    const min = Math.min(axis.viewable[1],axis.viewable[0])
+    const max = Math.max(axis.viewable[1],axis.viewable[0])
+    let zero=0.0;
     zero = zero.clamp(min,max)
     const value = this.gety(d).clamp(min,max)
-    return (slope>=0)?y(zero)-y(value):y(value)-y(zero);
+    // console.log(y.scale(min) - y.scale(v)-1)
+    console.log(slope,x.scale(value))
+    if(!this.isflip){
+      return (slope>=0)?y.scale(zero) - y.scale(value):
+                        y.scale(value) - y.scale(zero);
+    } else {
+      return x.scale(value);
+    }
+    
+        
+    // return (!this.isflip)?:
+    //                       Math.abs(x.scale(value)-x.scale(min));
+    // const {axes}=this;
+    // let zero = 0.0
+    // const axis = (this.isflip)?axes.y:axes.y;
+    // const slope =axis.viewable[1]-axis.viewable[0];
+    // const min = Math.min(axis.viewable[1],axis.viewable[0])
+    // const max = Math.max(axis.viewable[1],axis.viewable[0])
+    
+    // zero = zero.clamp(min,max)
+    // const value = this.gety(d).clamp(min,max)
+    
+    // console.log('yheight',slope,this.isflip,axis.scale(value))
+    // if(this.isflip)return axis.scale(value)
+    // if(!this.isflip)return axis.scale(value)
+    // if(slope>=0) return axis.scale(value)-axis.scale(zero);
+    // if(slope<0) return axis.scale(zero)-axis.scale(value);
+    // if(slope>=0 && !this.isflip) return axis.scale(value)-axis.scale(zero);
+    // if(slope<0 && !this.isflip) return axis.scale(zero)-axis.scale(value);
+    // return axis.scale(zero)-axis.scale(value);
+   
+    
     
   }
   ytranslate(d){
-    const {y,extent,height}=this;
+    const {y,axes,height}=this;
     let zero = 0.0
-    const slope = extent[3]-extent[1];
-    const min = Math.min(extent[3],extent[1])
-    const max = Math.max(extent[3],extent[1])
+    if(this.isflip)return 0;
+    const axis = axes.y;
+    const slope = axis.viewable[1]-axis.viewable[0];
+    const min = Math.min(axis.viewable[1],axis.viewable[0])
+    const max = Math.max(axis.viewable[1],axis.viewable[0])
     zero = zero.clamp(min,max) 
     const value = this.gety(d).clamp(min,max)
-    return (slope<0.0)?y(zero): y(value);
+    // if(!self.isflip)return axis.scale(value);
+    return axis.scale(value);
+    // if(self.isflip)
+    // return (slope<0.0)?axis.scale(zero): axis.scale(value);
     
   }
   resize(){
@@ -69,7 +135,8 @@ export default class GraphHistogram extends DynamicGraph {
     this.histogram.thresholds(thresholds);    
     const bins = this.bins = this.getbins(this.histogram(this.data));
     const self=this;
-    this.y.domain([0,d3.max(bins, function(d) {return self.gety(d)})]);
+    this.y.scale.domain([0,d3.max(bins, function(d) {return self.gety(d)})]);
+    this.y.setDomain(this.y.scale.domain())
     this.draw();
   }
   getbins(bins){
@@ -103,7 +170,9 @@ export default class GraphHistogram extends DynamicGraph {
     }
     this.min = min;
     this.max = max;
-    this.x.domain([min,max])
+    this.x.setDomain([min,max])
+    this.x.scale.domain([min,max]);
+   
   }
   updateData(data){
     this.getxminmax();    

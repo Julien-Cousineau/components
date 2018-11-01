@@ -8,6 +8,7 @@ export default class GLTexture {
     this.height = options.height || 32;
     this.max = options.max || 1.0;
     this.min = options.min || 0.0;
+    this.glslvarname = options.glslvarname || null;
     if (options.rawdata) {
       this.values = this.rawdata2value(options.rawdata);
     }
@@ -16,6 +17,7 @@ export default class GLTexture {
 
     }
     this.buffer = createTexture(this.gl, this.gl.LINEAR, this.values, this.width, this.height);
+    this.gradient=null
     // this.values = options.values;
     // this.rawdata = options.rawdata;
 
@@ -50,12 +52,30 @@ export default class GLTexture {
 
   }
   todefaultcolor() {
+    this.gradient = this.defaultRampColors;
     this.values = this.getColorRamp(this.defaultRampColors);
+    if(this.buffer)this.delete();
     this.buffer = createTexture(this.gl, this.gl.LINEAR, this.values, this.width, this.height);
   }
 
   delete() {
     this.gl.deleteTexture(this.buffer);
+  }
+  // updatePaintColor(color){
+  //   const obj ={};
+  //   if(typeof color ==='string'){obj={0:color,1:color}}
+  //   else{color.stop.forEach(stop=>obj[stop[0]]=stop[1])}
+  //   this.values = this.getColorRamp(obj);
+  //   if(this.buffer)this.delete();
+  //   this.buffer = createTexture(this.gl, this.gl.LINEAR, this.values, this.width, this.height);
+  // }  
+  updateGradient(obj){
+    // obj = (typeof obj==='string')?{0:obj,1:obj}:obj;
+    obj = (obj && obj.constructor && obj.constructor.name==='Gradient')?obj.obj:obj;
+    this.gradient=obj;
+    this.values = this.getColorRamp(obj);
+    if(this.buffer)this.delete();
+    this.buffer = createTexture(this.gl, this.gl.LINEAR, this.values, this.width, this.height);
   }
 
   getColorRamp(colors) {
@@ -78,12 +98,18 @@ export default class GLTexture {
   putImageData(ctx) {
     const dx = ctx.canvas.width / this.width;
     const dy = ctx.canvas.height / this.height;
+    console.log(ctx.canvas.width,this.width)
     var values = this.values;
     var height = this.height;
     var width = this.width;
     for (let y = 0; y < height; y++) {
       for (let x = 0; x < width; x++) {
         let pos = y * width + x;
+        // const r = values[pos * 4 + 0];
+        // const g = values[pos * 4 + 1];
+        // const b = values[pos * 4 + 2];
+        // const a = values[pos * 4 + 3]/255;
+        // console.log('rgba',r,g,b,a)
         ctx.fillStyle = 'rgba(' + values[pos * 4 + 0] +
           ',' + values[pos * 4 + 1] +
           ',' + values[pos * 4 + 2] +

@@ -1,3 +1,4 @@
+import style from './style.scss'
 export default class Pill {
   constructor(options){
     if(!options)throw new Error("Pill needs options");
@@ -6,12 +7,14 @@ export default class Pill {
     this.id = options.id;
     // this.element = options.element;
     this.title = options.title || options.id;
-    this.navpanels = options.navpanels;
+    this.ishorizontal = (typeof options.ishorizontal ==='undefined')?false: options.ishorizontal;
+    this.content = options.content || null;
     this.active = (typeof options.active === undefined)?false:options.active;    
+    this.callbacks = options.callbacks || {};
   }
   render(elementH,elementC){
     if(!elementH || !elementC)throw new Error("Pill needs two elements to render");        
-    const {id,active,title,navpanels} = this;         
+    const {id,active,title,content,ishorizontal} = this;         
     this.tabheader = elementH
               .append("a")
               .attr('class','nav-link {0}'.format((active)?'active':''))
@@ -20,7 +23,12 @@ export default class Pill {
               .attr('role','tab')
               .attr('aria-controls','nav_content_{0}'.format(id))
               .attr('aria-selected','true')
-              .text(title);
+              .style('padding','5px')
+    if(this.callbacks.click)this.tabheader.on('click',this.callbacks.click);
+    
+    this.p = this.tabheader.append('p').style('margin',0).style('text-align','center').text(title);
+    
+    if(ishorizontal)this.p.style('writing-mode','vertical-lr');
     
     const tabcontent = this.tabcontent = elementC
               .append("a")
@@ -29,7 +37,15 @@ export default class Pill {
               .attr('role','tabpanel')
               .attr('aria-labelledby','nav_content_{0}'.format(id))
               .attr('aria-selected','true'.format(id));
-    if(navpanels)navpanels.render(tabcontent);
-    
-  }    
+    if(content && content.render)content.render(tabcontent);
+    return this;
+  }
+  show(){
+    $(this.tabheader.node()).tab('show');
+    return this;
+  }
+  clear(){
+    this.tabcontent.html("");
+    return this;
+  }
 }

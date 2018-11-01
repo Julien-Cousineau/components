@@ -1,14 +1,17 @@
 'use strict';
-// import style from './style.scss';
+import style from './style.scss';
 // const d3 = require('../../dist/d3.min.js');
 // import Bar  from '../bar';
 // const {extend} = require('@julien.cousineau/util');
 // const { debounceD3Event, transparencyBackground } = require('../d3util');
+
 export default class Header {
   constructor(options) {
     if (!options) options = {}
-  
-
+    this.links={}
+    this.subheader = (typeof options.subheader === 'undefined') ? false : options.subheader;
+    this.title = options.title || 'My Title';
+    this.banner = options.banner || null;
   }
 
   get parentwidth() { return this.parent.node().getBoundingClientRect().width }
@@ -18,12 +21,13 @@ export default class Header {
   render(parent) {
   
     this.parent = parent;
+    const {title,banner}=this;
     const element = this.element = parent.append("div")
       .attr('class', 'header')
     const navbar =element.append('nav')
                         .attr('class','navbar navbar-expand-lg navbar-dark bg-dark')
     
-    const  logo = navbar.append('span').attr('class',"navbar-brand")
+    const  logo = this.logo = navbar.append('span').attr('class',"navbar-brand")
                         .append('img').attr('class',"toplogo invert")
     
     const button = navbar.append('button')
@@ -36,11 +40,21 @@ export default class Header {
                 .attr('aria-label','Toggle navigation')
                 .append('span')
                 .attr('class',"navbar-toggler-icon")
-    const iconscontainer = navbar.append('div').attr('class','collapse navbar-collapse').attr('id',"navbarNavDropdown")
+    const container = this.container = navbar.append('div').attr('class','collapse navbar-collapse').attr('id',"navbarNavDropdown")
                                  .append('ul').attr('class','nav navbar-nav ml-auto')
     
-   
-   iconscontainer.append('li').attr('class','nav-item').append('a').attr('class','nav-link').text('icon1')
+   if(this.subheader){
+     const jumbotron = element.append('div').attr('class','jumbotron jumbotron-fluid')
+     if(banner)jumbotron.style('background-image','url({0})'.format(banner))
+     console.log(banner)
+     const row = jumbotron.append('div').attr('class','container-fluid')
+                                 .append('div').attr('class','row')    
+     const titlecontainer = row.append('div').attr('class','col-sm-12 col-md-6 offset-md-3')
+                               .append('div').attr('class','centerContainer')
+                               .append('h1').attr('class','bannerTitle center').text(title)
+              
+   }
+  
    
    
 
@@ -77,6 +91,16 @@ export default class Header {
 
 
     
+  }
+  addLink(options){
+    const id = options.id || 'linkid'
+    const title = options.title || 'Title'
+    const callback = options.callback || function(){console.log("link callback")}
+    this.links[id] =  this.container.append('li').attr('class','nav-item')
+                                     .append('a')
+                                     .attr('class','nav-link')
+                                     .text(title)
+                                     .on('click',callback)
   }
 
 

@@ -15,24 +15,28 @@ export default  class Input {
     const input = this.input = fg.append('input')
     .attr('class','form-control input-sm')
     .attr('type',type)
-    .style('width','2.5rem')
+    .style('width','4.5rem')
     .style('padding','0 0 0 0.2rem')
     .style('font-size','0.75rem')
     .style('text-align','center')
     .attr('value',value)
    
    
-    
+    const self=this;
     if(type=='text'){
       input.style('width', '4.5rem')
       input.style('padding', '0 0.3rem')
-       input.on('change paste',()=>callback(this.input.node().value))
+       input.on('change paste',()=>{self.value=this.input.node().value;callback(self.value)})
     }
     if(type=='number'){
       if(min)input.attr('min',min)
       if(max)input.attr('max',max)   
-      input.on('change keydown paste input',()=>callback(this.input.node().value))
+      input.on('change keydown paste input',()=>{self.value=this.input.node().value;callback(self.value)})
     }
     return fg
+  }
+  setValue(value){
+    this.value=value;
+    if(this.input)this.input.node().value=value;
   }
 }

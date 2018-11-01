@@ -6,9 +6,10 @@ import Popover from '../popover';
 import Input  from '../input';
 import Slider  from '../slider';
 import ColorGradient from '../colorgradient';
+import Color from '../color';
 
-
-const {hex2rgb,rgb2hsv,rgb2hex,hsv2rgb,extend} = require('@julien.cousineau/util');
+// const {hex2rgb,rgb2hsv,rgb2hex,hsv2rgb,extend} = require('@julien.cousineau/util');
+const {extend} = require('@julien.cousineau/util');
 const {debounceD3Event,transparencyBackground} = require('../d3util');
 
 export default  class Picker extends Popover {
@@ -25,24 +26,26 @@ export default  class Picker extends Popover {
     const sr = this.sr = options.sr || 6;
     this.bsize = options.bsize || 10;
     
-    const rgba         = this.rgba         = options.rgba || {r:150,g:24,b:45,a:0.5};
-    const hsv         = this.hsv         = rgb2hsv(rgba);    
-    const brightness   = this.brightness   = hsv.v;
-    const transparency = this.transparency = rgba.a;
+    
+    const color = this.color = options.color || new Color(options.rgba) || new Color( {r:150,g:24,b:45,a:0.5})
+    // const rgba         = this.rgba         = options.rgba || {r:150,g:24,b:45,a:0.5};
+    // const hsv         = this.hsv         = rgb2hsv(rgba);    
+    const brightness   = this.brightness   = color.hsva.v;
+    const transparency = this.transparency = color.rgba.a;
     const halfres      = this.halfres      = res*0.5;
     this.callback =options.callback || function(){console.log()};
     
-    [this.cx,this.cy]=this.rgba2xy(rgba);
+    [this.cx,this.cy]=this.color2xy();
     const self=this;
      this.inputs = {
-       hex:new Input({title:'# : ',type:'text',value:rgb2hex(rgba),callback:value=>{self.updateHEX({hex:value})}}),
-       a:new Input({title:'A :',type:'number',min:0,max:100,value:rgba.a*100,margin:'0 0.5rem 0 2.75rem',callback:(value)=>{self.updateRGBA({a:parseFloat(value)/100.0})}}),
-       h:new Input({title:'H :',type:'number',min:0,max:360,value:hsv.h,callback:(value)=>{self.updateHSV({h:parseFloat(value)})}}),
-       s:new Input({title:'S :',type:'number',min:0,max:100,value:hsv.s,callback:(value)=>{self.updateHSV({s:parseFloat(value/100.0)})}}),
-       v:new Input({title:'L :',type:'number',min:0,max:100,value:hsv.v,callback:(value)=>{self.updateHSV({v:parseFloat(value/100.0)})}}),
-       r:new Input({title:'R :',type:'number',min:0,max:255,value:rgba.r,callback:(value)=>{self.updateRGBA({r:parseFloat(value)})}}),
-       g:new Input({title:'G :',type:'number',min:0,max:255,value:rgba.g,callback:(value)=>{self.updateRGBA({g:parseFloat(value)})}}),
-       b:new Input({title:'B :',type:'number',min:0,max:255,value:rgba.b,callback:(value)=>{self.updateRGBA({b:parseFloat(value)})}}),
+       hex:new Input({title:'# : ',type:'text',value:color.hex,callback:value=>{self.updateHEX({hex:value})}}),
+       a:new Input({title:'A :',type:'number',min:0,max:100,value:color.rgba.a*100,margin:'0 0.5rem 0 2.75rem',callback:(value)=>{self.updateRGBA({a:parseFloat(value)/100.0})}}),
+       h:new Input({title:'H :',type:'number',min:0,max:360,value:color.hsva.h,callback:(value)=>{self.updateHSV({h:parseFloat(value)})}}),
+       s:new Input({title:'S :',type:'number',min:0,max:100,value:color.hsva.s,callback:(value)=>{self.updateHSV({s:parseFloat(value/100.0)})}}),
+       v:new Input({title:'L :',type:'number',min:0,max:100,value:color.hsva.v,callback:(value)=>{self.updateHSV({v:parseFloat(value/100.0)})}}),
+       r:new Input({title:'R :',type:'number',min:0,max:255,value:color.rgba.r,callback:(value)=>{self.updateRGBA({r:parseFloat(value)})}}),
+       g:new Input({title:'G :',type:'number',min:0,max:255,value:color.rgba.g,callback:(value)=>{self.updateRGBA({g:parseFloat(value)})}}),
+       b:new Input({title:'B :',type:'number',min:0,max:255,value:color.rgba.b,callback:(value)=>{self.updateRGBA({b:parseFloat(value)})}}),
      }    
     
     
@@ -78,48 +81,41 @@ export default  class Picker extends Popover {
     .on("drag",debounceD3Event(ondrag,10))
     .on("end",debounceD3Event(ondrag,10));
   }
-  rgba2str(rgba){
-    const {r,g,b,a}=rgba;
-    return 'rgba({0},{1},{2},{3})'.format(r,g,b,a); 
-  }
-  hsv2str(hsva){
-    const {h,s,v,a}=hsva;
-    return 'hsla({0},{1}%,{2}%,{3})'.format(h,s*100,v*100,a); 
-  }
+  // rgba2str(rgba){
+  //   const {r,g,b,a}=rgba;
+  //   return 'rgba({0},{1},{2},{3})'.format(r,g,b,a); 
+  // }
+  // hsv2str(hsv){
+  //   const {h,s,v,a}=hsv;
+  //   return 'hsla({0},{1}%,{2}%,{3})'.format(h,s*100,v*100,a); 
+  // }
   updateCircle(){
-    const {circle,bcircle,rgba}=this;
-    
-    this.callback(rgba);
-    const [cx,cy] =[this.cx,this.cy]=this.rgba2xy(rgba);   
+    const {circle,bcircle,color}=this;
+    this.callback(color);
+    const [cx,cy] =[this.cx,this.cy]=this.color2xy();   
     circle.attr("cx", cx)
       .attr("cy", cy)
-      .style('fill',this.rgba2str(rgba))
+      .style('fill',color.rgba2str())
     bcircle.attr("cx", cx)
       .attr("cy", cy)
       .style('fill','#fff')
   }
   updateHEX(hex){
-    const {inputs}=this;
-    this.rgba = extend(this.rgba,hex2rgb(hex.hex));  
-    const hsv = this.hsv = rgb2hsv(this.rgba);
+    this.color.update(hex.hex)
     this.changeInputs(hex);
     this.updateCircle();
     this.changeSliderBackground();
     this.draw()
   }
   updateRGBA(newrgba,isslider){
-    for (let i in newrgba) this.rgba[i] = newrgba[i];  
-    const {inputs,rgba}=this;
-    const hsv = this.hsv = rgb2hsv(rgba);
+    this.color.update(newrgba);
     (isslider)?this.changeInputs():this.changeInputs(newrgba);
     this.updateCircle();
     this.changeSliderBackground();
     this.draw()
   }
   updateHSV(newhsv,isslider){
-    for (let i in newhsv) this.hsv[i] = newhsv[i];
-    const {inputs,rgba,hsv}=this;    
-    this.rgba = extend(rgba,hsv2rgb(hsv));       
+    this.color.update(newhsv);
     (isslider)?this.changeInputs():this.changeInputs(newhsv);
     this.updateCircle();
     this.changeSliderBackground();
@@ -127,26 +123,26 @@ export default  class Picker extends Popover {
   }
   changeInputs(newinputs){
     if(!newinputs)newinputs={};
-    const {inputs,rgba,hsv}=this;
-    const brightness = this.brightness   = hsv.v;
+    const {inputs,color}=this;
+    const {rgba,hsva,hex}=color;
+    const brightness = this.brightness   = hsva.v;
     const transparency = this.transparency = rgba.a; 
-    if(!newinputs.hex)inputs.hex.input.node().value=rgb2hex(rgba)
+    if(!newinputs.hex)inputs.hex.input.node().value=hex
     if(!newinputs.r)inputs.r.input.node().value=parseInt(rgba.r)
     if(!newinputs.g)inputs.g.input.node().value=parseInt(rgba.g)
     if(!newinputs.b)inputs.b.input.node().value=parseInt(rgba.b)
     if(!newinputs.a)inputs.a.input.node().value=parseInt(rgba.a*100)
-    if(!newinputs.h)inputs.h.input.node().value=parseInt(hsv.h)
-    if(!newinputs.s)inputs.s.input.node().value=parseInt(hsv.s*100)
-    if(!newinputs.v)inputs.v.input.node().value=parseInt(hsv.v*100)
+    if(!newinputs.h)inputs.h.input.node().value=parseInt(hsva.h)
+    if(!newinputs.s)inputs.s.input.node().value=parseInt(hsva.s*100)
+    if(!newinputs.v)inputs.v.input.node().value=parseInt(hsva.v*100)
     this.changePreview()
     
   }
   updateHue(_x,_y){
-    const {circle,bcircle,inputs}=this;
     const x = this.cx =_x || this.cx;
     const y = this.cy =_y || this.cy;
-    const rgba = this.rgba = this.xy2rgba(x,y);
-    const hsv = this.hsv = rgb2hsv(rgba);
+    this.color.update(this.xy2rgba(x,y));
+    
     
     this.changeInputs()       
     this.updateCircle();
@@ -160,13 +156,18 @@ export default  class Picker extends Popover {
   }
   
   changeSliderBackground(){
-    const {cgb,cgt,rgba,hsv2str,brightness,transparency,brighness_slider,transparency_slider}  =this;
-    brighness_slider.s1.changeValue(brightness)
-    transparency_slider.s1.changeValue(transparency)
-    const hsv = rgb2hsv(rgba)
-    const v= (hsv.h==0)?1.0:0.5;    
-    cgb.changeBackground("linear-gradient({0}, #000)".format(hsv2str(extend(hsv,{s:1,v:v,a:1}))));     
-    cgt.changeBackground("linear-gradient({0}, {1})".format(hsv2str(extend(hsv,{s:1,v:v,a:1})),hsv2str(extend(hsv,{a:0})))); 
+    const {cgb,cgt,brightness,transparency,brighness_slider,transparency_slider}  =this;
+    brighness_slider.s1.changeValue(brightness);
+    transparency_slider.s1.changeValue(transparency);
+
+    let {h,s,v}=this.color.hsva;
+    v= (h==0)?1.0:0.5;  
+    const bcolor=new Color({h:h,s:1.0,v:v,a:1});
+    const tcolor = new Color({h:h,s:s,v:v,a:0});
+    
+  
+    cgb.changeBackground("linear-gradient({0}, #000)".format(bcolor.hex));     
+    cgt.changeBackground("linear-gradient({0}, {1})".format(bcolor.hex,tcolor.hex)); 
     
   }
   render(element){
@@ -247,8 +248,8 @@ export default  class Picker extends Popover {
     
   }
   changePreview(){
-    const {rgba,preview,rgba2str}=this;
-    preview.style('background',rgba2str(rgba))
+    const {preview,color}=this;
+    preview.style('background',color.rgba2str())
   }
   inline(element){
     return element.append('div')
@@ -257,7 +258,7 @@ export default  class Picker extends Popover {
   .style('font-size','0.75rem');
   }
   inputgui(container){
-    const {inline,createinput,inputs}=this;
+    const {inline,inputs}=this;
     const col = container.append('div').style('float','left')
 
     
@@ -290,20 +291,15 @@ export default  class Picker extends Popover {
     if(trim)brightness=outside?1:brightness;
     if(trim)saturation=outside?0:saturation    
     saturation = Math.min(1,saturation);
-    const rgba=hsv2rgb({h:hue, s:saturation, v:brightness});
-    rgba.a=a;
-    return rgba;
+    const color = new Color({h:hue, s:saturation, v:brightness,a:a});
+    return color.rgba
   }
-  hsv2xy(hsv){
-    const {halfres}=this;
-    const {h,s,v}=hsv
+  color2xy(){
+    const {halfres,color}=this;
+    const {h,s,v,a}=color.hsva
     let x = (s*halfres) * Math.cos((h-180.0) * (Math.PI /180.0))+halfres
     let y = (s*halfres) * Math.sin((h-180.0) * (Math.PI /180.0))+halfres;
     return [x,y]
-  }
-  rgba2xy(rgba){
-    let hsv = rgb2hsv(rgba);
-    return this.hsv2xy(hsv)
   }
   draw(){
     const {res,halfres,ctx,bitmap} = this;    

@@ -19,6 +19,8 @@ export default class Slider {
     this.isremovable = (typeof options.isremovable==='undefined')?false:options.isremovable;
     this.r = options.r || 7;
     this.value = options.value || 0.0;
+    this.width = options.width || 6;
+    this.offset = options.offset || 0.0;
     this.callbacks = options.callbacks;
     
   }
@@ -34,7 +36,7 @@ export default class Slider {
     if(type=='x' && con=='end')return 'translate(' + 0 +',' + 0 +')';
     if(type=='x' && con=='mid')return 'translate(' + 0 +',' + (y.range()[0]+y.range()[1])*0.5 +')';
     if(type=='y' && con=='start')return 'translate(' + 0 +',' + 0 +')';
-    if(type=='y' && con=='end')return 'translate(' + x.range()[1] +',' + 0 +')';
+    if(type=='y' && con=='end')return 'translate(' + (x.range()[1]+this.offset) +',' + 0 +')';
     if(type=='y' && con=='mid')return 'translate(' + (x.range()[0]+x.range()[1])*0.5 +',' + 0 +')';
     
   }
@@ -66,14 +68,14 @@ export default class Slider {
       this.exterior=slider.append('line')
       .style('stroke', '#000000')
       .style('stroke-opacity', '0.25')
-      .style('stroke-width', '8px')
+      .style('stroke-width', (this.width+2)+'px')
       .style('stroke-linecap', 'round');
     }
     if(isinterior){
     this.interior=slider.append('line')
     .style('stroke', '#dddddd')
     .style('stroke-opacity', '0.5')
-    .style('stroke-width', '6px')
+    .style('stroke-width', this.width+'px')
     .style('stroke-linecap', 'round');
     }
     
@@ -90,7 +92,7 @@ export default class Slider {
       const {type,isremovable}=self;
       const scale = self[type]; // x or y
       
-      const value = self.value = scale.invert(d3.event[type]).clamp(scale.domain()[0],scale.domain()[1]);   
+      const value = self.value = scale.invert(d3.event[type]).clamp(scale.domain()[0],scale.domain()[1]);
       circle.attr("c" + type, scale(value)); // cx or cy 
       self.callbacks.value(value);
       if(isremovable){

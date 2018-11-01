@@ -4,8 +4,9 @@ import  LContainer from '../lcontainer';
 import SVG from '../svg';
 import Graph from '../graph';
 import ColorSlider from '../colorslider';
-
+import Color from '../color';
 const {transparencyBackground} = require('../d3util');
+import Gradient from '../gradient';
 
 export default  class ColorGradient {
   constructor(options){
@@ -16,6 +17,11 @@ export default  class ColorGradient {
     this.width = options.width || 20;
     this.height = (options.height-this.padding) || 200;
     this.background = options.background || 'linear-gradient(rgb(255, 226, 89), rgb(255, 167, 81))';
+    this.gradient = new Gradient({stops:[0,1],colors:[new Color(),new Color()]})
+    this.rendering=true;
+    
+    this.callback = options.callback || null; 
+    
     const addable = this.addable = (typeof options.addable ==='undefined')?false:options.addable;
     
     this.sliders = {};
@@ -33,7 +39,7 @@ export default  class ColorGradient {
             const {r,g,b,opacity} = d3.color(colorScale(1-value));
             
             const newslider=new ColorSlider({
-              rgba:{r:r,g:g,b:b,a:opacity},
+              color:new Color({r:r,g:g,b:b,a:opacity}),
               value:value,r:8,type:'y',con:'mid',
               isexterior:false,
               isinterior:false,
@@ -59,18 +65,25 @@ export default  class ColorGradient {
   }
   
   updateColorScale(){
-    const {colorScale,sliders}=this;
+    const {colorScale}=this;
     const array =this.sortSliders();
-    const colors = array.map(slider=>{      
-      const {r,g,b,a}=slider.rgba;
+    const stops = array.map(slider=>1-slider.value);
+    const colors = array.map(slider=>slider.color);
+    if(stops[0]!=0){stops.unshift(0);colors.unshift(colors[0])}
+    if(stops[stops.length-1]!=1){stops.push(1);colors.push(colors[colors.length-1])}
+    
+    
+    const d3colors = array.map(slider=>{      
+      const {r,g,b,a}=slider.color.rgba;
       return d3.rgb(r,g,b,a);
-    })
-    const values = array.map(slider=>1-slider.value);
-    if(values[0]!=0){values.unshift(0);colors.unshift(colors[0])}
-    if(values[values.length-1]!=1){values.push(1);colors.push(colors[colors.length-1])}
-    colorScale.domain(values)
+    });
+    
+   
+    colorScale.domain(d3colors)
               .range(colors);
     
+    const gradient = new Gradient({stops:stops,colors:colors});
+    if(this.callback && !this.rendering)this.callback(gradient);
   }
 
   addSlider(slider){
@@ -78,7 +91,7 @@ export default  class ColorGradient {
     const {graph,sliders} = this;
     const _id='s{0}'.format(this.counter++);
     const self=this;
-    if(slider.rgba){
+    if(slider.color){
       slider.isremovable = true;
       slider.callbacks.removal=function(){
         // Remove if more than 1 slider
@@ -124,7 +137,8 @@ export default  class ColorGradient {
       const slider = inputsliders[id];
       this.addSlider(slider);
     }
-    if(inputsliders)this.changeBackgroundfromSliders()
+    if(inputsliders)this.changeBackgroundfromSliders();
+    this.rendering=false;
   }
   changeBackground(background){
     this.gradient.style('background',background);
@@ -135,7 +149,7 @@ export default  class ColorGradient {
     for(let id in sliders){
       const slider=sliders[id];
       slider.id = id;
-      if(slider.rgba){
+      if(slider.color){
         array.push(slider)
       }
     }
@@ -146,8 +160,7 @@ export default  class ColorGradient {
     this.updateColorScale();
     const array=this.sortSliders();    
     const strstr = array.map(slider=>{      
-      const {r,g,b,a}=slider.rgba;
-      return 'rgba({0},{1},{2},{3}) {4}%'.format(r,g,b,a,(1-slider.value)*100)    
+      return '{0} {1}%'.format(slider.color.rgba2str(),(1-slider.value)*100)    
     })
     if(strstr.length ==1)this.changeBackground('{0}'.format(strstr.join(',')));       
     if(strstr.length>1)this.changeBackground('linear-gradient({0})'.format(strstr.join(',')));    

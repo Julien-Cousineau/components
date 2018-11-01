@@ -10,8 +10,11 @@ export default class BarContainer {
     const bars = this.bars = options.bars || {top:{isOn:true,priority:1},bottom:{isOn:true,priority:1},left:{isOn:true,priority:0},right:{isOn:true,priority:0}};
     const self=this;
     for(let id in bars){
-      bars[id] = new Bar(extend(bars[id],{position:id}))
-      bars[id]._barcontainer = ()=>self;
+ 
+        bars[id] = new Bar(extend(bars[id],{position:id}))
+        bars[id]._barcontainer = ()=>self;
+ 
+
       
     };
 
@@ -47,7 +50,11 @@ export default class BarContainer {
       .style('height','calc(100% - {0}px)'.format(bars.top.size+bars.bottom.size))
       .style('top','{0}px'.format(bars.top.size))
       .style('left','{0}px'.format(bars.left.size))
-         for(let id in bars)bars[id].render(element);
+    for(let id in bars){
+     if(bars[id].isOn){
+      bars[id].render(element);
+     }
+    }
     
     return this;
   }

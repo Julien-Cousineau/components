@@ -1,0 +1,55 @@
+.accordion {
+    width:100%;
+    height:0px;
+    margin-right: auto;
+    margin-left: auto;
+   
+        position:absolute;
+        top:0;
+        bottom:0;
+        z-index: 100;
+        -webkit-backface-visibility: hidden;
+        -webkit-transform: translateX(-100%) rotate(-90deg);
+        -webkit-transform-origin: right top;
+        -moz-transform: translateX(-100%) rotate(-90deg);
+        -moz-transform-origin: right top;
+        -o-transform: translateX(-100%) rotate(-90deg);
+        -o-transform-origin: right top;
+        transform: translateX(-100%) rotate(-90deg);
+        transform-origin: right top;
+   
+    .card-header {
+        // width: 430px;
+    }
+    // .card-title {
+    //     height:18px
+    // }
+    // .card-title a {
+    //     float:right;
+    //     text-decoration:none;
+    //     // padding: 10px 430px;
+    //     // margin: -10px -430px;
+    // }
+    .card-body {
+        height:100px;
+    }
+    .collapsing {
+        position:absolute;
+    }
+    // .card-group img {
+    //     -webkit-backface-visibility: hidden;
+    //     -webkit-transform: translateX(-100%) rotate(90deg);
+    //     -webkit-transform-origin: right top;
+    //     -moz-transform: translateX(-100%) rotate(90deg);
+    //     -moz-transform-origin: right top;
+    //     -o-transform: translateX(-100%) rotate(90deg);
+    //     -o-transform-origin: right top;
+    //     transform: translateX(-100%) rotate(90deg);
+    //     transform-origin: right top;
+    // }
+    // .panel-group .panel img {
+    //     margin-left:400px;
+    //     margin-top:800px;
+    //     position: absolute;
+    // }    
+}

@@ -3,9 +3,9 @@ const d3 = require('../../dist/d3.min.js');
 export default  class DraggableNumber {
   constructor(options){
     if(!options)options={};
-    if(!options.callback)throw new Error("DraggableNumber need a callback");
-    this.callback = options.callback;
-    this.title = options.title || '{title}';
+    // if(!options.callback)throw new Error("DraggableNumber need a callback");
+    this.callback = options.callback || null;
+    this.title = (typeof options.title==='undefined')?'{title}':options.title;
     this.min = options.min || 0;
     this.max = options.max || 100;
     this.step = options.step || 1;
@@ -41,7 +41,7 @@ export default  class DraggableNumber {
         dy=0.0;
         span.text(value);
         self.value=value;
-        callback(value);
+        if(callback)callback(value);
         
       }
     };  
@@ -51,7 +51,7 @@ export default  class DraggableNumber {
     .on("drag",ondrag)
     .on("end",ondrag);
     dom.call(d3drag);
-    return dom;
+    return this;
   }
   hide(){this.dom.style('display','none');}
   show(){this.dom.style('display','');}
@@ -59,6 +59,7 @@ export default  class DraggableNumber {
   changeMin(value){this.min=value; this.reset();}
   changeMax(value){this.max=value; this.reset();}
   changeStep(value){this.step=value; this.reset();}
+  setValue(value){this.value=parseInt(value);this.span.text(parseInt(value))}
   reset(){
     const {min,max}=this;
     const value = this.value = this.value.clamp(min,max);

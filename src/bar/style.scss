@@ -1,84 +1,84 @@
-.barcontainer {
-transition: all 400ms;
+// .barcontainer {
+// transition: all 400ms;
     
-    .bar {
-        transition: all 400ms;
-        .handle {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            margin-top: -4px;
-            background: rgba(0, 0, 0, 0.0);
-            cursor: ns-resize;
-            opacity:0.5;
-        }
-        .handle:hover {
-          opacity:0.8;
-        }
+//     .bar {
+//         transition: all 400ms;
+//         .handle {
+//             position: absolute;
+//             bottom: 0;
+//             left: 0;
+//             right: 0;
+//             height: 8px;
+//             margin-top: -4px;
+//             background: rgba(0, 0, 0, 0.0);
+//             cursor: ns-resize;
+//             opacity:0.5;
+//         }
+//         .handle:hover {
+//           opacity:0.8;
+//         }
    
                  
-    //     &:hover{
+//     //     &:hover{
            
           
-    //         .button
-    //         {
-    //             // background:black;
-    //               -webkit-transition: opacity 0.4s ease-in;
-    //   -moz-transition: opacity 0.4s ease-in;
-    //      -o-transition: opacity 0.4s ease-in;
+//     //         .button
+//     //         {
+//     //             // background:black;
+//     //               -webkit-transition: opacity 0.4s ease-in;
+//     //   -moz-transition: opacity 0.4s ease-in;
+//     //      -o-transition: opacity 0.4s ease-in;
 
-    //               opacity:1;
-    //               right: -1.25rem;
+//     //               opacity:1;
+//     //               right: -1.25rem;
                   
              
-    //         }
-        // }
-        ::after {
-                              -webkit-transition: opacity 0.4s ease-in;
-      -moz-transition: opacity 0.4s ease-in;
-         -o-transition: opacity 0.4s ease-in;
-          position:absolute;
-          border-radius:50%;
-          opacity:0;
-         font-family: 'Font Awesome 5 Free' !important;
+//     //         }
+//         // }
+//         ::after {
+//                               -webkit-transition: opacity 0.4s ease-in;
+//       -moz-transition: opacity 0.4s ease-in;
+//          -o-transition: opacity 0.4s ease-in;
+//           position:absolute;
+//           border-radius:50%;
+//           opacity:0;
+//          font-family: 'Font Awesome 5 Free' !important;
           
-          color:grey;
+//           color:grey;
           
-          font-size: 1rem;
-          font-weight: 900;
-          text-align: center;
-          line-height: 2.0rem;
-          height: 2rem;
-          width: 2rem;
-          background-color:white;
-          box-shadow: 0px 0px 3px 2px rgba(0,0,0,.26);
-          cursor: pointer;
+//           font-size: 1rem;
+//           font-weight: 900;
+//           text-align: center;
+//           line-height: 2.0rem;
+//           height: 2rem;
+//           width: 2rem;
+//           background-color:white;
+//           box-shadow: 0px 0px 3px 2px rgba(0,0,0,.26);
+//           cursor: pointer;
            
 
-        }
-        .button.show::after {
-            opacity:1;
-        }
+//         }
+//         .button.show::after {
+//             opacity:1;
+//         }
        
-    }
-     .bartop.unactive .button::after {bottom: -2.25rem;content:'\f078';left: 50%;
-    transform: translateX(-50%);}
-     .barbottom.unactive .button::after {top: -2.25rem;content:'\f077';left: 50%;
-    transform: translateX(-50%);}
-     .barleft.unactive .button::after {right: -2.25rem; content:'\f054';top: 50%;
-    transform: translateY(-50%);}
-     .barright.unactive .button::after {left: -2.25rem;content:'\f053';top: 50%;
-    transform: translateY(-50%);}
+//     }
+//      .bartop.unactive .button::after {bottom: -2.25rem;content:'\f078';left: 50%;
+//     transform: translateX(-50%);}
+//      .barbottom.unactive .button::after {top: -2.25rem;content:'\f077';left: 50%;
+//     transform: translateX(-50%);}
+//      .barleft.unactive .button::after {right: -2.25rem; content:'\f054';top: 50%;
+//     transform: translateY(-50%);}
+//      .barright.unactive .button::after {left: -2.25rem;content:'\f053';top: 50%;
+//     transform: translateY(-50%);}
     
-      .bartop .button::after {bottom: -2.25rem;content:'\f077';left: 50%;
-    transform: translateX(-50%);}
-     .barbottom .button::after {top: -2.25rem;content:'\f078';left: 50%;
-    transform: translateX(-50%);}
-     .barleft .button::after {right: -2.25rem; content:'\f053';top: 50%;
-    transform: translateY(-50%);}
-     .barright .button::after {left: -2.25rem;content:'\f054';top: 50%;
-    transform: translateY(-50%);}      
+//       .bartop .button::after {bottom: -2.25rem;content:'\f077';left: 50%;
+//     transform: translateX(-50%);}
+//      .barbottom .button::after {top: -2.25rem;content:'\f078';left: 50%;
+//     transform: translateX(-50%);}
+//      .barleft .button::after {right: -2.25rem; content:'\f053';top: 50%;
+//     transform: translateY(-50%);}
+//      .barright .button::after {left: -2.25rem;content:'\f054';top: 50%;
+//     transform: translateY(-50%);}      
      
-}
+// }

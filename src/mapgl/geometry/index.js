@@ -9,37 +9,45 @@ import Texture from '../texture';
 
 export default class Geometry {
   constructor(options){
-    if(!options || !options.gl || !options.position)throw new Error("Geometry must contain gl");     
+    if(!options || !options.gl)throw new Error("Geometry must contain gl");     
     this.buffer={position:{},indices:{},normal:{},texcoord:{},values:{}};
     this.vtexture = {};
-    this.values={};
+    
     this.att={};
     this.gl = options.gl;
     this.type = options.type || 'surface';
     this.positionNumComponents = options.positionNumComponents || 3;
     this.valuesNumComponents = options.valuesNumComponents || 1;
     
-    this.position = options.position;
+    this.position = options.position || null;
     this.indices = options.indices || null;
-    // this.values = options.values || null;  
-    this._defaultvalueID = options.defaultvalueID || null;
-    
-    this.colIDs=[];
-    
-  
-    
+    this.windices = options.windices || null;
+    this.values= {};
+    for(const id in options.values || {}){
+      this.addValue(id,options.values[id]);
+    }
+    this.valID = options.valID || 'default';
+  }
+  get indicescount(){
+    return this.indices.length
+  }
+  get valID(){
+    if(!this.values)throw new Error("NoValues")
+    if(!this.values[this._valID]){
       
+      this._valID=Object.keys(this.values)[0];
+      console.warn(this._valID + ' does not exist')
+    }
+    return this._valID;
   }
-  get defaultvalueID(){
-    if(this.colIDs.length==0)throw new Error("NoValues")
-    if(!this._defaultvalueID)this._defaultvalueID=this.colIDs[0];
-    return this._defaultvalueID;
+  set valID(value){
+    this._valID=value;
   }
-  set defaultvalueID(value){
-    if(!this.colIDs.some(item=>item==value))throw new Error("Id does not exist");
-    this._defaultvalueID=value;
+  setvalID(value){
+    this.valID=value
+    
   }
-  get position(){return this._position}
+  get position(){if(!this._position)throw new Error("Position is empty");return this._position}
   set position(value){
     this._position=value;
     this.setposition();
@@ -48,7 +56,7 @@ export default class Geometry {
   set indices(value){
     this._indices=value;
     this.setindices();
-  }  
+  }
   setposition(){
     const {gl,position,positionNumComponents}=this;
     this.setnpoints();
@@ -57,10 +65,11 @@ export default class Geometry {
     this.buffer.position={data:createArrayBuffer(gl, position),numComponents:positionNumComponents};
   }
   setindices(){
-    const {gl,indices}=this;
+    const {gl,indices,windices}=this;
     if(indices){
       this.nelem = indices.length / 3.0;
       this.buffer.indices = {data:createElementBuffer(gl, indices)};
+      this.buffer.windices = {data:createElementBuffer(gl, indices)}; // TODO: Change primitive to add this
     }
   }
   setnpoints(){
@@ -82,39 +91,40 @@ export default class Geometry {
   addValue(id,value,att){
     if(!id)throw new Error("Must contain id");
     if(!value)throw new Error("Must contain array");
-    this.colIDs.push(id)
     const {gl,res,valuesNumComponents}=this;
     this.values[id] = value;
-    this.buffer[id] = {data:createArrayBuffer(gl, value),numComponents:valuesNumComponents};
+    this.buffer.values[id] = {data:createArrayBuffer(gl, value),numComponents:valuesNumComponents};
+
     this.vtexture[id] = new Texture({gl:gl,width:res,height:res,min:value.min(),max:value.max(),rawdata:value});
-    this.att[id+'minmax'] = new Float32Array([value.min(),value.max()]);
-    this.att[id+'att'] = att || new Float32Array([value.min(),value.max(),1.0,1.0]);
+    
+    this.att[id]={
+      minmax:new Float32Array([value.min(),value.max()]),
+    };
+
   }
-  get minmax(){
-    if(!this.values[this.defaultvalueID])throw new Error('defaultvalueID does not exist');
-    return new Float32Array([this.values[this.defaultvalueID].min(),this.values[this.defaultvalueID].max()]);
-  }
+
   get uniforms(){
     const uniforms = {};
-    if(this.minmax)uniforms.minmax={type:'float',data:this.minmax};    
     for(let id in this.values){
-      uniforms[id+'minmax'] = {type:'float',data:this.att[id+'minmax']};
-      uniforms[id+'att'] = {type:'float',data:this.att[id+'att']};
+      uniforms[id+'minmax'] = {type:'float',data:this.att[id].minmax};
     }
     return uniforms;
   }
-  changeAtt(id,f32array){this.att[id+'att']=f32array;}
-  
   get indiceType(){
     if(this.indices instanceof Uint16Array)return this.gl.UNSIGNED_SHORT;
     if(this.indices instanceof Uint32Array)return this.gl.UNSIGNED_INT;
   }
-  changeValuesRandom(){
-    const values = this.values = new Float32Array(this.npoints);
+  changeValuesRandom(id){
+    if(!id)throw new Error("Must contain id");
+    const values = new Float32Array(this.npoints);
     for(let i=0;i<this.npoints;i++)values[i]=Math.random()*1.0;
+    this.addValue(id,values);
+    
   }
-  changeValuesASC(){
-    const values = this.values = new Float32Array(this.npoints);
+  changeValuesASC(id){
+    if(!id)throw new Error("Must contain id");
+    const values = new Float32Array(this.npoints);
     for(let i=0;i<this.npoints;i++)values[i]=i / this.npoints;
+    this.addValue(id,values);
   }
 }

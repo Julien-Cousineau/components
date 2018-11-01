@@ -1,7 +1,11 @@
+import {debounce} from '@julien.cousineau/util';
 export default class Handlers{
     constructor(options){
         if(!options || !options.callback)throw new Error("Must contain callback function");
+        if(!options || !options.element)throw new Error("Must contain element");
+        this.element = options.element;
         this.callback = options.callback;
+        this.element=options.element;
         this.debug=options.debug || false;
         this.xfactor=options.xfactor || 1;
         this.xshiftfactor=options.xshiftfactor || 10;
@@ -14,9 +18,14 @@ export default class Handlers{
 
   initialize(){
     const self=this;
+    const {element} = this;
     document.onmousedown = function(e){return self.onmousedown(e)};
-    document.onmousemove = function(e){return self.onmousemove(e)};
+    document.addEventListener('mousemove',function(e){return self.onmousemove(e)},false);
     document.onmouseup   = function(e){return self.onmouseup(e)};
+    document.touchstart = function(e){return self.onmousedown(e)};
+    document.touchend = function(e){return self.onmouseup(e)};
+    document.touchcancel = function(e){return self.onmouseup(e)};
+    document.touchmove = function(e){return self.onmousemove(e)};
     document.mousewheel  = function(e){return self.onwheelmove(e)};
     document.onwheel     = function(e){return self.onwheelmove(e)};
     document.onkeydown   = function(e){return self.onkeydown(e)};
@@ -92,6 +101,7 @@ export default class Handlers{
     this.deltaZoom = 0.0;
   }
   getNewPosition(newX,newY){
+    console.log(newX,newY)
     this.resetDelta();
     this.deltaX = newX - this.lastMouseX;
     this.deltaY = newY - this.lastMouseY;

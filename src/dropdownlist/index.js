@@ -1,4 +1,5 @@
 'use strict';
+import style from './style.scss'
 export default class DropdownList {
   constructor(options){
     if(!options)throw new Error("Dropdown needs options");   
@@ -25,8 +26,9 @@ export default class DropdownList {
     button.append('i').attr('class',icon)
     
     const menu = this.menu = group.append('div')
-    .attr('class','dropdown-menu')
-    .attr('aria-labelledby',"dropdownMenuButton");
+    .attr('class','dropdown-menu dropdownlist')
+    .attr('aria-labelledby',"dropdownMenuButton")
+    .on('click', function () {event.stopPropagation();});
     this.changelist();
     return group;
   }
@@ -38,11 +40,22 @@ export default class DropdownList {
     for(let id in values){
       const value = values[id]
       
-      const formgroup = menu.append('div').attr('class','form-group')
+      const dropdownitem = menu.append('div').attr('class','dropdown-item')
+      .on('click',()=>{
+        value.isOn=!value.isOn;
+        if(value.isOn)input.node().checked=true;
+        if(!value.isOn)input.node().checked=false;
+        value.callback(id,value.isOn)
+      })
+      const formgroup = dropdownitem.append('div').attr('class','form-group')
       const formcheck = formgroup.append('div').attr('class','form-check');
-      const input = formcheck.append('input').attr('class','form-check-input').attr('type','checkbox').on('click',()=>{value.isOn=!value.isOn;value.callback(id,value.isOn)});
+      const input = formcheck.append('input').attr('class','form-check-input').attr('type','checkbox').on('click',()=>{
+        event.stopPropagation();
+        value.isOn=!value.isOn;
+        value.callback(id,value.isOn);
+      });
       const label = formcheck.append('label').attr('class','form-check-label').text(value.title);
-      if(value.isOn)input.attr('checked','')
+      if(value.isOn)input.attr('checked',true)
     
     }
   }

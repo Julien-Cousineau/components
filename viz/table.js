@@ -1,11 +1,12 @@
+'use strict';
 import {Table,Parent,LContainer,Popover} from '../src/index.js';
-
+const d3 = require('../dist/d3.min.js');
 // const lcontainer = LContainer(Parent,300,200,0);
 
-const data = [
-        {id:0,name:'item1',typeGIS:'point',isOnGIS:true,typeMDA:'proximity',active:false,weight:0.0,isOnMDA:true},
-        {id:1,name:'item2',typeGIS:'line',isOnGIS:false,typeMDA:'proximity',active:false,weight:0.0,isOnMDA:true},
-        ];
+const rows = {
+        '0':{id:0,name:'item1',type:'point',isOn:true,active:false,zorder:0},
+        '1':{id:1,name:'item2',type:'line',isOn:false,active:false,zorder:0},
+        };
 
 const po1 = new Popover({
     // isheader:false,
@@ -14,42 +15,77 @@ const po1 = new Popover({
      height:400,
 });
 const content= po1.render(Parent);
+const expandhtml = (table,element,data)=>{
+    console.log()
+    const dom = d3.select(element.child()[0]).select('td');
+    // const dom = d3.select(element[0])
+    table.nested[data.id] = createTable2();
+    table.nested[data.id].render(dom)
+}
 
-
-
-const t1  = new Table({
+const createTable=function(){
+    return new Table({
     header:`<thead>
             <tr>
-                <th rowspan="2">Name</th>
-                <th colspan="3">GIS</th>
-                <th colspan="5">Data/Proximity for MDA</th>
-            </tr>
-            <tr>
                 <th>on/off</th>
+                <th>Name</th>
                 <th>Type</th>
+                <th>zindex</th>
                 <th>Properties</th>
-                <th>on/off</th>
-                <th>Type</th>
-                <th>Active</th>
-                <th>Weight</th>
-                <th>Properties</th>
+                <th>Attributes</th>
+                <th>Search Attributes</th>
             </tr>
         </thead>`,
     isfilterbtn:true,
-    data:data,
+    style: 'table table-bordered',
+    rows:rows,
     columns:{
+        isOn:{title: "on/off",type:'check',isOn:true,callback:(id)=>{rows[id].isOnGIS=!rows[id].isOnGIS;console.log('gis',rows[id])}},
         name:{title: "Name",type:'string',isOn:true},
-        isOnGIS:{title: "on/off",type:'check',isOn:true,callback:(id)=>{const index=data.findIndex(e=>e.id==id);data[index].isOnGIS=!data[index].isOnGIS;console.log('gis',data)}},
-        typeGIS:{title: "Type",type:'string',isOn:true},
-        propertiesGIS:{title: "Properties",type:'popover',isOn:true,callback:(id)=>console.log('gis',id)},
-        isOnMDA:{title: "on/off",type:'check',isOn:true,callback:(id)=>console.log('gis',id)},
-        typeMDA:{title: "Type",type:'string',isOn:true},
-        active:{title: "Active",type:'check',isOn:true,callback:(id)=>console.log('mda',id)},
-        weight:{title: "Weight",type:'string',isOn:true},
-        propertiesMDA:{title: "Properties",type:'popover',isOn:true,callback:(id)=>console.log('mda',id)},
+        type:{title: "Type",type:'string',isOn:true},
+        zorder:{title: "Zindex",type:'dn',isOn:true,callback:(id,value)=>{console.log(id,value)}},
+        properties:{title: "Properties",type:'button',icon:'fas fa-cog',isOn:true,callback:(id)=>console.log('gis',id)},
+        pop:{title: "Attributes",type:'button',expand:expandhtml,icons:{open:'fas fa-plus-circle',close:'fas fa-minus-circle'},isOn:true,callback:(id)=>console.log('mda',id)},
+        search:{title: "Search",type:'search',icon:'fas fa-cog',isOn:true,callback:function(id,value){this.searchNested(id,value)}},
+
+        
     }
 
     
 });
+}
+const t1  = createTable();
+const createTable2=function(){
+    // const search=(value)=>{
+    //     table.searh(value)
+    // }
+    
+    return new Table({
+    header:`<thead></thead>`,
+    style:'table-hover table-dark',
+    isfilterbtn:false,
+    isshowbtn:false,
+    isshowtext:false,
+    ispage:false,
+    issearchbtn:false,
+    btns:{},
+    hascontainer:false,
+    rows:rows,
+    columns:{
+        // pop:{title: "title",type:'button',expand:expandhtml,icons:{open:'fas fa-plus-circle',close:'fas fa-minus-circle'},isOn:true,callback:(id)=>console.log('mda',id)},
+        isOn:{title: "on/off",type:'check',isOn:true,callback:(id)=>{rows[id].isOnGIS=!rows[id].isOnGIS;console.log('gis',rows[id])}},
+        name:{title: "Name",type:'string',isOn:true},
+        // type:{title: "Type",type:'string',isOn:true},
+        properties:{title: "Properties",type:'button',icon:'fas fa-cog',isOn:true,callback:(id)=>console.log(t1,'gis',id)},
+
+        
+    }
+
+    
+});
+}
+
+
+
 
 t1.render(content);

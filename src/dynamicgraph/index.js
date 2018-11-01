@@ -3,12 +3,14 @@ const d3 = require('../../dist/d3.min.js');
 import Dropdown from '../dropdown';
 import Graph from '../graph';
 import DraggableNumber from '../draggablenumber';
+import Button from '../button';
 export default class DynamicGraph extends Graph {
   constructor(options){
       super(options);
     const self=this;
     const isxdropdown = this.isxdropdown = (typeof options.isxdropdown=='undefined')?true:options.isxdropdown;
     const isydropdown = this.isydropdown = (typeof options.isydropdown=='undefined')?true:options.isydropdown;
+
     
     const xactive = this.xactive = options.xactive || 'scaleLinear';
     const yactive = this.yactive = options.yactive || 'scaleLinear';
@@ -48,7 +50,14 @@ export default class DynamicGraph extends Graph {
       callback:(value)=>self.changeDropdown('y',value),
 
     });
+    this.flipbtn = new Button({
+      title:'BTN1',
+      topofsvg:true,
+      callback:(value)=>self.flip(),
+
+    });
   }
+
   changeDropdown(axis,type){
     this[axis+'active'] = type;
     this.axes.changeScale(axis,type);
@@ -74,20 +83,21 @@ export default class DynamicGraph extends Graph {
       this[axis+'factor'].changeMin(2);
       this[axis+'factor'].changeMax(10.0);
     }
-    console.log(axis,type)
+    // console.log(axis,type)
     
   }
   
   
+  
   changeFactor(axis,value){
-    if(this[axis].exponent)this[axis].exponent(value);
-    if(this[axis].base)this[axis].base(value);
+    if(this[axis].scale.exponent)this[axis].scale.exponent(value);
+    if(this[axis].scale.base)this[axis].scale.base(value);
     this.resize();
   }
   
   render(){
       super.render();
-      const {element,svg,xdropdown,ydropdown,xfactor,yfactor}=this;
+      const {element,svg,xdropdown,ydropdown,xfactor,yfactor,flipbtn}=this;
       const group = element.append('div')
         .style('position','absolute')
         .style('right','0px')
@@ -107,8 +117,8 @@ export default class DynamicGraph extends Graph {
         yfactor.render(ygroup).style("float",'right').style("padding-right","5px").style('font-size','0.75rem').style('line-height','1.5rem');
         (this.yactive=='scaleLinear')?yfactor.hide():yfactor.show();
         ygroup.append('div').attr('class','clearfix');
-        
       }
+      flipbtn.render(group);
       
   }
   

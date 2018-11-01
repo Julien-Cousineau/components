@@ -1,0 +1,29 @@
+
+.nav-item {
+    cursor: pointer;
+}
+.jumbotron {
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 0rem;
+    /* background-repeat: no-repeat; */
+    background-position: 0px -100px;
+    // box-shadow: 0 3px 6px rgba(0,0,0,.26);
+}
+
+
+.centerContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+.bannerTitle {
+    text-align: center;
+    margin: auto;
+    color: white;
+    display: inline;
+}
+.bannerTitle.center {
+    color: white;
+    font-size: 1.5rem;
+}

@@ -13,20 +13,21 @@ export default class Camera{
     this.u_matrix = view[0];
     this.v_matrix = view[1];
     const self=this;
-    this.handlers = new Handlers({debug:false,callback:function(position){return self.changeView(position)}});
+    this.handlers = new Handlers({element:this.app.canvasgl,debug:false,callback:function(position){return self.changeView(position)}});
     window.onresize = function(e) { return self.onresize(e)};  
     this.changePView();
     this.changeMView(0,0,0);
-  }
+    this.lastUpdateCall = null;
+    }
   get app(){return this._app()}
   get gl(){return this.app.gl}
   
-   onresize(e){
+  onresize(e){
      
     // const {height,width} = this.canvasgl.node().getBBox()
-    
-    this.app.canvasgl.attr('width', window.innerWidth);
-    this.app.canvasgl.attr('height', window.innerHeight);
+    const {height,width} = this.app.canvasglparent.node().getBoundingClientRect()
+    this.app.canvasgl.attr('width', width);
+    this.app.canvasgl.attr('height', height);
     if(this.app.canvas2d){
       console.log(this.app.canvas2dp.node())
       const {height,width} = this.app.canvas2dp.node().getBoundingClientRect()
@@ -34,12 +35,21 @@ export default class Camera{
       this.app.canvas2d.attr('height', height);
     }
     this.changePView();
+    this.app.clear();
     this.app.drawScene();    
   }
   changeView(position){
-    // console.log("here")
-    this.changeMView(position.delta);
-    this.app.drawScene();
+  
+    if(this.lastUpdateCall) cancelAnimationFrame(this.lastUpdateCall); 
+    
+     this.lastUpdateCall = requestAnimationFrame(()=>{
+       console.time('cousineau')
+      this.changeMView(position.delta);
+      this.app.clear();
+      this.app.drawScene();
+      this.lastUpdateCall=null;
+      console.timeEnd('cousineau')
+     });
   }
   changePView(options){
     const pv  = this.perspectiveview = extend(Object.create(this.perspectiveview), options);

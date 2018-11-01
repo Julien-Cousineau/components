@@ -1,0 +1,15 @@
+.dropdownlist {
+    .dropdown-item.active, .dropdown-item:active {
+    color: inherit;
+    text-decoration: inherit;
+    background-color: inherit;
+    }
+   
+    .dropdown-item {
+        cursor: pointer;
+    }
+    
+    .form-group {
+        margin-bottom: 0rem;
+    }
+}

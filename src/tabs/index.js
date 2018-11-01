@@ -7,43 +7,34 @@ import Button from '../button';
 export default class Tabs {
   constructor(options) {
     if (!options) options = {}
-    const tabs = this.tabs = options.tabs || {
-        first:{title:'First',active:true,content:new Button({title:'BTN2',value:1,callback:()=>console.log('btn1')})},
-        second:{title:'Second',active:false,content:new Button({title:'BTN3',value:1,callback:()=>console.log('btn1')})},
-        third:{title:'Third',active:false,content:new Button({title:'BTN4',value:1,callback:()=>console.log('btn1')})},
-        four:{title:'Four',active:false,content:new Button({title:'BTN5',value:1,callback:()=>console.log('btn1')})},
-        five:{title:'Five',active:false,content:new Button({title:'BTN6',value:1,callback:()=>console.log('btn1')})},
-    };
+    this.tabs={};
+    this.doms={};
+    
   }
-  addTab(id,tab){
-    const {tabs,ul,content}=this;
+
+  addTab(id,obj){
+    const {tabs,doms}=this;
     const self=this;
-    tabs[id] = new Tab(tabs[id])
+    tabs[id] = new Tab(obj);
     tabs[id]._tabs = ()=>self;
-    tabs[id].render(ul,content)
-      
+    tabs[id].render(doms.ul,doms.content);
+    this[id]=tabs[id];
+    return this[id];
   }
   hideAll(){
     const {tabs}=this;
     for(let id in tabs)tabs[id].hide();
   }
 
-  render(parent) {
-    this.parent = parent;
-    const {tabs}=this;
-
-    
-
-    const ul = this.ul = parent.append("ul")
+  render(element) {
+    this.element=element;
+    this.doms.ul = element.append("ul")
     .attr('class','nav nav-tabs')
-    .attr('role','tablist')
+    .attr('role','tablist');
     
-const content = this.content = parent.append("div")
-    .attr('class','tab-content')
-    
-    for(let id in tabs)this.addTab(id,tabs[id])
-    
-    
+    this.doms.content = element.append("div")
+                               .attr('class','tab-content')
+    return this;
   }
 
 

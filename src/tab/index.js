@@ -8,35 +8,37 @@ export default class Tab {
     if (!options) options = {}
     this.title=options.title || 'MyTitle'
     this.active = (typeof options.active === 'undefined') ? false : options.active;
-    this.content= options.content || new Button({title:'BTN1',value:1,callback:()=>console.log('btn1')});
+    this.callbacks = options.callbacks || {active:null};
+    this.doms={};
   }
   get tabs(){return this._tabs()}
-  hide(){this.changeActive(false)}
+  hide(){this.changeActive(false);return this;}
   show(){
     this.tabs.hideAll();
     this.changeActive(true);
+    return this;
   }
   changeActive(active){
     this.active=active;
-    this.a.attr('class','nav-link {0}'.format(this.active?'active':''));
-    this.tabpane.attr('class','tab-pane fade {0}'.format(this.active?'show active':''));
-    
+    this.doms.a.attr('class','nav-link {0}'.format(this.active?'active':''));
+    this.doms.content.attr('class','tab-pane fade {0}'.format(this.active?'show active':''));
+    if(active && this.callbacks.active)this.callbacks.active();
+    return this;
   }
   
   render(ul,container) {
-    const {active,content,title}=this;
+    const {title}=this;
     const self=this;
-    this.ul = ul;
-    this.container = container;
-    const li = this.li = ul.append("li").attr('class','nav-item')
-    const a = this.a = li.append("a")
-    .attr('href','#')
-    .text(title)
-    .on("click",()=>self.show())
-    const tabpane = this.tabpane = container.append('div')
-    this.changeActive(active)
-    const tabpanecontent = content.render(tabpane);
-  
+    this.doms.ul = ul;
+    this.doms.container = container;
+    const li = this.doms.li = ul.append("li").attr('class','nav-item');
+    const a = this.doms.a = li.append("a")
+                              .attr('href','#')
+                              .text(title)
+                              .on("click",()=>self.show());
+    this.doms.content = container.append('div');
+    this.changeActive(this.active);
+    return this;
   }
 
 

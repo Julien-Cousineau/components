@@ -83,12 +83,14 @@ module.exports.bindTexture = bindTexture;
 const bindTextures= function(gl,program, textures) {
     // console.log(gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS));
     let unit=0;
+      // console.log(textures)
     for(let id in textures){
-      if(program.textures[id]){           
-        bindTexture(gl,program.textures[id],textures[id].buffer,unit);
+      const pid = textures[id].glslvarname || id;
+    
+      if(program.textures[pid]){           
+        bindTexture(gl,program.textures[pid],textures[id].buffer,unit);
         unit++;
       }         
-
     }
   }
   module.exports.bindTextures=bindTextures
@@ -100,25 +102,46 @@ const bindProgram=function(glprogram){
           uniforms = glprogram.uniforms,
           textures = glprogram.textures;        
     if(fb)bindFrameBuffer(gl,fb,glprogram.fbtexture);
+    // console.log(glprogram)
     bindAttributes(gl,program,geometry);
     bindElement(gl, program,geometry);
     bindTextures(gl, program,textures);
     bindUniforms(gl, program,uniforms);
   }
 module.exports.bindProgram = bindProgram;
+
+const unBindProgram=function(glprogram){
+    const gl = glprogram.gl,
+          program = glprogram.program,
+          geometry = glprogram.geometry,
+          fb = glprogram.fb,      
+          uniforms = glprogram.uniforms,
+          textures = glprogram.textures;        
+    // if(fb)bindFrameBuffer(gl,fb,glprogram.fbtexture);
+    unBindAttributes(gl,program,geometry);
+   
+  }
+module.exports.unBindProgram = unBindProgram;
+
+
 module.exports.draw=function(glprogram){
     const gl = glprogram.gl,
           program = glprogram.program,
           geometry = glprogram.geometry,
           fb = glprogram.fb,              
           textures = glprogram.textures;
+    
+    geometry.wireframe = glprogram.wireframe;
+    
     bindProgram(glprogram);
+    
     if(fb)gl.viewport(0, 0, glprogram.fbtexture.width, glprogram.fbtexture.height);
     if(geometry.indices)drawElements(gl,glprogram,geometry);
     if(!geometry.indices)drawArrays(gl,glprogram,geometry);
     if(fb)readPixels(gl,glprogram.fbtexture);
     if(fb)gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     if(fb)gl.viewport(0, 0, gl.canvas.width, gl.canvas.height); 
+    unBindProgram(glprogram)
   }
 const readPixels=function(gl,fbtexture){        
     fbtexture.values = new Uint8Array(fbtexture.width * fbtexture.height * 4);
@@ -138,7 +161,10 @@ module.exports.drawArrays = drawArrays;
 const bindUniforms =function(gl,program,uniforms){
     for(let id in program.uniforms){
       // if(textures[id])continue;
-      if(!uniforms[id])throw new Error(id + " is not defined");
+      if(!uniforms[id]){
+        
+        throw new Error(id + " is not defined");
+      }
       if(uniforms[id].type=='float'){
        const n = uniforms[id].data.length;
         switch(n){
@@ -198,26 +224,56 @@ const bindArrayAttribute=function(gl, buffer, attribute, numComponents) {
     gl.vertexAttribPointer(attribute, numComponents, gl.FLOAT, false, 0, 0);
   }
 module.exports.bindArrayAttribute = bindArrayAttribute;
+
+// const unBindArrayAttribute=function(gl, buffer, attribute, numComponents) {
+//     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+//     gl.disableVertexAttribArray(attribute);
+//     gl.vertexAttribPointer(attribute, numComponents, gl.FLOAT, false, 0, 0);
+//   }
+// module.exports.unBindArrayAttribute = unBindArrayAttribute;
+
+
 const bindAttributes=function(gl,program,geometry){
     const attributes = program.attributes;
     for(let id in attributes){
-      const geoid = (id=='value')?geometry.defaultvalueID:id;
-      if(!geometry.buffer[geoid])throw new Error(id + " is not defined");          
-      bindArrayAttribute(gl, geometry.buffer[geoid].data, program.attributes[id], geometry.buffer[geoid].numComponents);
+      if(id=='position' || id=='vindices'){
+        if(!geometry.buffer[id])throw new Error(id + " is not defined");   
+        const obj = geometry.buffer[id];
+        bindArrayAttribute(gl, obj.data, program.attributes[id], obj.numComponents);
+      } 
+      else {
+        const geoid = geometry.valID;
+        if(!geometry.buffer.values[geoid])throw new Error(geoid + " is not defined");
+        const obj = geometry.buffer.values[geoid];
+        bindArrayAttribute(gl, obj.data, program.attributes[id], obj.numComponents);
+      }
+      
+      
     }    
-  }
+  };
 module.exports.bindAttributes = bindAttributes;
 
+const unBindAttributes=function(gl,program,geometry){
+  const attributes = program.attributes;
+    for(let id in attributes){
+      gl.disableVertexAttribArray(program.attributes[id]);
+    }
+}
+module.exports.unBindAttributes = unBindAttributes;
 const bindElement=function(gl,program,geometry){
     if(geometry.indices){
-      bindElementAttribute(gl, geometry.buffer.indices.data);
+      const data = (geometry.wireframe)?geometry.buffer.windices.data:geometry.buffer.indices.data;
+      bindElementAttribute(gl, data);
     }
   }
 module.exports.bindElement=bindElement;
+
 const bindElementAttribute=function(gl, buffer) {
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer);
   }
 module.exports.bindElementAttribute = bindElementAttribute;
+
+
 
 module.exports.createFrameBuffer=function(gl){
     const fb = gl.createFramebuffer();

@@ -16,7 +16,7 @@ module.exports.randompoints=function(_npoints,_extent){
     for(let i=0;i<npoints;i++){
       values[i]=Math.random()*1.0;
     }
-    return {type:'points',position:position,values:values};
+    return {type:'points',position:position,values:{values:values}};
   }
 module.exports.quad=function(){
     return {type:'points',position:new Float32Array([0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1]),positionNumComponents:2};
@@ -53,8 +53,8 @@ module.exports.grid=function(_nrow,_ncol,_origin){
         index+=6;
       }
     }  
-    for(let i=0;i<npoints;i++)values[i]=Math.random()*1.0;
-    return {type:'surface',position:position,indices:indices,values:values};
+    for(let i=0;i<npoints;i++)values[i]=i * 1.0/npoints;
+    return {type:'surface',position:position,indices:indices,values:{values:values}};
     // return {type:'surface',position:position,indices:indices};
   }
 

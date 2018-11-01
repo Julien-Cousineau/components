@@ -1,0 +1,28 @@
+{
+  "default":{
+    "id":"name",
+    "title":"title",
+    "active":true,
+    "zorder":-1,
+    "type":"circle",
+    "paint":{
+      "color":"rgba(255,255,255,1)",
+      "minmax":[0,1],
+      "exponent":1,
+      "gradient":{"0":"#1488ccff","1":"#2b32b2ff"},
+      "colorbyatt":false,
+      "opacity":1,
+      "outlinecolor":"rgba(255,255,255,1)",
+      "cap":"butt",
+      "join":"miter",
+      "width":5,
+      "radius":5,
+      "blur":0
+    },
+    "layout":{
+      "image":null,
+      "size":null,
+      "url":null},
+      "filter":null
+  }
+}

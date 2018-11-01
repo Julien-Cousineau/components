@@ -1,10 +1,11 @@
-precision mediump float;
+precision highp float;
 
 #define PI 3.1415926535897932384626433832795
 
 attribute vec3 position;
 attribute float vindices;
 uniform mat4 u_matrix;
+uniform float u_pointsize;
 uniform float dtextureRes;
 // uniform mat4 v_matrix;
 uniform float worldSize;
@@ -32,7 +33,7 @@ float decode(vec2 pair){
 void main() {
   gl_Position = u_matrix * vec4(lngX(position[0]),latY(position[1]),position[2], 1.0);
   // fvindices = vindices;
-  gl_PointSize = 10.0;
+  gl_PointSize = u_pointsize;
   float x = (fract(vindices / dtextureRes) * dtextureRes) + 0.5; // We want the middle of pixel
   float y = floor(vindices / dtextureRes) + 0.5; // We want the middle of pixel
   vec2 pos    = vec2(x,y);

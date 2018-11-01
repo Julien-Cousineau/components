@@ -13,104 +13,45 @@ import quadvs  from '../shaders/quad.vs.glsl';
 import quadfs  from '../shaders/quad.fs.glsl';
 import fquadvs  from '../shaders/mapbox/fquad.vs.glsl';
 import fquadfs  from '../shaders/mapbox/fquad.fs.glsl';
+
+import {URL2SLF} from '../../parser';
+
 // const slf = require('../slfjs.js');
 
 
 export default class AppSlf extends App{
   constructor(options) {
     super(options)
-    this.glsl = extend(this.glsl,{
-      value: {
-        vs: vs,
-        fs: fs,
-      },
-      quaddefault: {
-        vs: quadvs,
-        fs: quadfs,
-      },
-      quad: {
-        vs: quadvs,
-        fs: quadfs,
-      },
-      fquad: {
-        vs: fquadvs,
-        fs: fquadfs,
-      },
-    })
 
 
   }
   setCamera(){return} //overwrite function
 
-  uploadSLF(slf) {
+  setSLF(slf) {
     this.slf = slf;
-    const { gl, glsl } = this;
-    const self = this;
     
-    const geoslf = this.addGeometry('slf',{ position: slf.XY, indices: slf.IKLE3F })
-    const geoquad = this.addGeometry('quad',quad())
+    const geoslf = this.addSLF('slf',slf);
+    geoslf.addValue('values',slf.getFrame());
     
-
-    const dtexture = this.addTexture('dtexture',{})
-    const fbtexture =this.addTexture('fbtexture',{width: geoslf.res, height: geoslf.res })
-    
-    dtexture.todefaultcolor();
-    
-    // this.geometries['points'].addValue('values',points.values);
-    
-    this.addProgram('value',{
+    this.addTexture('dtexture',{})
+    this.textures['dtexture'].todefaultcolor();
+    this.addProgram('points',{
         active:true,
-        mode:'TRIANGLES',
-        geometryID:'slf',
+        mode:'POINTS',
+        geometryID:'points',
         textureIDs:['dtexture'],
         vs:this.glsl.points.vs,
         fs:this.glsl.points.fs,
     })
-    this.addProgram('quadmca',{
-        active:false,
-        mode:'TRIANGLES',
-        geometryID:'quad',
-        textureIDs:[''],
-        fbID: 'fbtexture',
-        geoTextureID: 'slf',
-        uniforms: { dtextureRes: { data: [geoslf.res], type: 'float' } },
-        vs:this.glsl.quad.vs,
-        fs:this.glsl.quad.fs,
-    })
-    this.addProgram('surfacemca',{
-        active:false,
-        mode:'TRIANGLES',
-        geometryID:'slf',
-        textureIDs: ['dtexture', 'fbtexture'],
-        uniforms: {
-          dtextureRes: { data: [geoslf.res], type: 'float' },
-          // minmax:{data:[this.geometries.grid.minmax],type:'float'},
-          minmax: { data: [0, 1], type: 'float' }
-        },
-        vs:this.glsl.fquad.vs,
-        fs:this.glsl.fquad.fs,
-    })    
+     
   }
   get u_matrix(){return this._u_matrix}
   get v_matrix(){throw new Error("Not used in this context")}
   get worldSize(){return this._worldSize}
   drawScene(worldSize, projMatrix) {
-
     this._u_matrix = projMatrix;
     this._worldSize = worldSize;
-
-
-    if (this.ctx) clearRect(this.ctx);
-    // if(this.gl)GLHelper.clearScene(this.gl);
-
-    for (const name in this.programs) {
-      const program = this.programs[name];
-      if (program.active) {
-        program.draw();
-        // if(this.ctx && program.fbID)program.fbtexture.putImageData(this.ctx);
-        // if(program.fbID)console.log(program.fbtexture.decodeImage());
-      }
-    }
+    super.drawScene();
   }
   changeAttID(id) {
     if (id != 'mca') { this.changeProgram(false);

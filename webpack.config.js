@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-
+const express = require('express');
 const entrypath = (process.env.NODE_ENV === 'production') ? './src/index.js' : './viz/index.js';
 const outpath =path.join(__dirname, 'build');
 
@@ -15,6 +15,7 @@ module.exports = {
     path: outpath,
     filename: "[name].js",
     chunkFilename: '[name]-[chunkhash].js',
+    globalObject: 'this'
   },
   devtool: 'source-map',
       optimization: {
@@ -31,6 +32,11 @@ module.exports = {
     },
   devServer: {
     contentBase: outpath,
+    before(app){
+      app.use(express.static(path.join(__dirname, './server/data')));
+    },
+    // headers: { "Access-Control-Allow-Origin": "*" },
+    public: "components-jcousineau.c9users.io" 
   },
   module: {
     rules: [
@@ -38,7 +44,7 @@ module.exports = {
       { test: /\.scss$/, use: ['style-loader', 'css-loader', "sass-loader"]},
       { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
-      { test: /\.(png|jpg|gif)$/,use: [{loader: 'file-loader',options: {}}]},
+      { test: /\.(png|jpg|gif|slf)$/,use: [{loader: 'file-loader',options: {}}]},
       // { test: /\.(glsl|frag|vert)$/, loader: 'raw', exclude: /node_modules/ },
       {test: /\.glsl$/,loader: 'webpack-glsl-loader'}
     ]

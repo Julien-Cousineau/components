@@ -5,7 +5,12 @@
   "main": "./build/index.js",
   "scripts": {
     "fix": "eslint --fix src/index.js test/test.js src/slider.js src/colorgradient.js src/d3util.js src/graph.js src/input.js src/picker.js src/popover.js",
-    "test": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
+    "testold": "eslint  --fix src/index.js test/test.js && node test/test.js | faucet",
+    "test": "babel-node --presets es2015 test/index.js",
+    "test-slf": "babel-node --presets es2015 test/selafinsync.js",
+    "test-binary": "babel-node --presets es2015 test/binary.js",
+    "test-gradient": "babel-node --presets es2015 test/gradient.js",
+    "test-style": "babel-node --presets es2015 test/style.js",
     "cov": "istanbul cover test/test.js -x test/test.js",
     "newbranch": "git checkout -b <name>",
     "express": "node server/index.js",
@@ -36,10 +41,15 @@
     "@mapbox/mapbox-gl-draw": "^1.0.9",
     "@mapbox/mapbox-gl-geocoder": "^2.3.0",
     "@turf/turf": "^5.1.6",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-ignore-html-and-css-imports": "0.0.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
     "bootstrap": "^4.1.3",
     "browserify": "^16.2.2",
     "copy-webpack-plugin": "^4.5.2",
     "css-loader": "^1.0.0",
+    "csscolorparser": "^1.0.3",
     "datatables.net": "^1.10.19",
     "datatables.net-bs4": "^1.10.19",
     "eslint": "^5.0.1",
@@ -63,17 +73,24 @@
     "webpack-dev-server": "^3.1.5",
     "webpack-glsl-loader": "^1.0.1",
     "webpack-hot-middleware": "^2.22.2",
-    "whatwg-fetch": "^2.0.4"
+    "whatwg-fetch": "^2.0.4",
+    "worker-loader": "^2.0.0"
   },
   "dependencies": {
-    "@julien.cousineau/util": "^1.0.6",
+    "@julien.cousineau/util": "^1.0.13",
     "@turf/helpers": "^6.1.4",
+    "babel-plugin-transform-require-ignore": "^0.1.1",
     "body-parser": "^1.18.3",
     "compression": "^1.7.2",
     "cors": "^2.8.4",
     "d3": "^4.13.0",
     "express": "^4.16.3",
+    "idb": "^2.1.3",
     "jquery": "^3.3.1",
-    "uglify-es": "^3.3.9"
+    "material-colors": "^1.2.6",
+    "node-fetch": "^2.2.0",
+    "slf-js": "0.0.4",
+    "uglify-es": "^3.3.9",
+    "uigradients.gradients": "^2.0.2-2"
   }
 }

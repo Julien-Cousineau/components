@@ -63,6 +63,7 @@ const cg4 =new ColorGradient({
     addable:true,
     height:150,
     width:10,
+    callback:()=>console.log("callback from gradient"),
 
 sliders:{
   s1: new ColorSlider({

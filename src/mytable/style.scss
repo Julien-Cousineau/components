@@ -1,0 +1,42 @@
+.mytable {
+    table-layout: fixed;
+    .sortcol:hover {
+        cursor: pointer;
+    }
+    .box-shadow {
+        -webkit-box-shadow: inset 0px 0px 6px 3px rgba(0,0,0,0.26);
+        -moz-box-shadow: inset 0px 0px 6px 3px rgba(0,0,0,0.26);
+        box-shadow: inset 0px 0px 6px 3px rgba(0,0,0,0.26);
+    }
+    .fa, .fab, .fal, .far, .fas {
+       &:hover{
+           cursor:pointer;
+       } 
+    }
+    .form-check {
+        padding-left: 0;
+    }
+    .form-check-input {
+        margin-top: 0;
+        margin-left: 0;
+    }
+    
+    img{
+        width:20px;
+    }
+}
+tbody.table-scroll {
+    position: absolute;
+    overflow-y: scroll;
+    height: calc(100% - 72px);
+    }
+    
+tr.table-scroll {
+    width: 100%;
+    table-layout: fixed;
+    display: inline-table;
+}
+    
+thead > tr > th.table-scroll {
+    border: none;
+}

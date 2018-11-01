@@ -1,13 +1,18 @@
 'use strict';
 const d3 = require('../../dist/d3.min.js');
-import Scale from '../scale';
+import Scale from './scale';
 
 export default class Axes {
   constructor(options){
     if(!options)options={};
-    this.xscale = options.xscale || {axis:'x',show:false,type:'scaleLinear',minmax:[0,1]};
-    this.yscale = options.yscale || {axis:'y',show:false,type:'scaleLinear',minmax:[0,1]};
-    this.addAxes()
+    const xscale = options.xscale || {axis:'x',show:false,type:'scaleLinear',minmax:[0,1]};
+    const yscale = options.yscale || {axis:'y',show:false,type:'scaleLinear',minmax:[0,1]};
+    
+    const self=this;
+    const x = this._x = new Scale(xscale);
+    const y = this._y =  new Scale(yscale);
+    x._axes = ()=>self;
+    y._axes = ()=>self;
     
 
   }
@@ -15,26 +20,19 @@ export default class Axes {
   get canvas(){return this.graph.canvas}
   get width(){return this.graph.width}
   get height(){return this.graph.height} 
-  get extent(){return this.graph.extent} 
+
   
-  addAxes(){
-  const {xscale,yscale}=this;
-    const self=this;
-    const x = this.x = new Scale(xscale);
-    const y = this.y =  new Scale(yscale);
-    x._axes = ()=>self;
-    y._axes = ()=>self;
-      
-  }
+
+  get isflip(){return this.graph.isflip}
+  get x(){return (!this.isflip)?this._x:this._y}
+  get y(){return (!this.isflip)?this._y:this._x}
+ 
   
   render(){
     const {canvas}=this;
     this.element = canvas.append("g");
     this.x.render();
     this.y.render();
-    this.setRange();
-    this.setDomain();
-    
   }
   
 
@@ -51,18 +49,25 @@ export default class Axes {
     const {x,y}=this;
     x.setDomain();
     y.setDomain();
-    this.draw();
+    this.graph.draw();
   }
   resize(){
     this.setRange(); 
-    this.draw();
+    this.graph.draw();
   }
   draw(){
     const {x,y}=this;
     x.draw();
     y.draw();
   }
+  flip(){
+    this.x.flip();
+    this.y.flip();
+  }
 
+  
+ 
+  
 
 
 }

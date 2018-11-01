@@ -14,7 +14,6 @@ const graph1 = new GraphHistogram(
       isyaxisminmax:true,
       xscale:{axis:'x',show:true,type:'scaleLinear',minmax:[0,20],editable:true},
       yscale:{axis:'y',show:true,type:'scaleLinear',minmax:[0,1],editable:true},
-      extent:[0,0,10,10]
       });
 svg.render(lcontainer)
 svg.addGraph('graph1',graph1)

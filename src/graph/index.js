@@ -8,7 +8,8 @@ export default  class Graph {
     this._width = options.width || null;
     this._height = options.height || null;
     this._origin = options.origin || null;
-    const extent = this.extent = options.extent || [0,0,1,1];
+    const isflip = this.isflip = (typeof options.isflip=='undefined')?false:options.isflip;
+   
 
     this.isclick = (typeof options.isclick=='undefined')?false:options.isclick;
     this.callbacks = options.callbacks || {};
@@ -27,6 +28,7 @@ export default  class Graph {
   get origin(){const {SVG}=this;return this._origin || [SVG.margin.left,SVG.margin.top]}
   get x(){return this.axes.x.scale}
   get y(){return this.axes.y.scale}
+
   
 
 
@@ -41,6 +43,7 @@ export default  class Graph {
     const {canvas,origin,axes}=this;
     canvas.attr("transform","translate(" + origin[0] + "," + origin[1] + ")");
     axes.resize();
+    this.draw()
   }
 
   addSlider(id,slider){
@@ -51,6 +54,14 @@ export default  class Graph {
     this.sliders[id]=slider;
     slider.render();
   }
+  flip(){
+    this.isflip = !this.isflip;
+    this.axes.flip();
+    this.resize();
+  }
+  draw(){
+    this.axes.draw();
+  };
 
 
 }

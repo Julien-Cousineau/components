@@ -1,0 +1,68 @@
+.gradientpalette {
+  padding: 15px;
+  .color-group {
+    height:100%;
+    min-height: 2rem;
+      .btn {
+        padding:5px 2px;
+        background-color:white;
+        margin:0px;
+        height:100%;
+      }
+      .btn.active {
+        box-shadow: inset 0px 0px 20px 1px rgba(150,150,255,0.5);
+      }
+      .gcolor {
+        background-color:red;
+        height:100%;
+        
+        
+        border-radius:5px;
+        
+      }
+  }
+
+  .colorpanels {
+    margin-right: 0px;
+    margin-left: 0px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height:125px;
+    -webkit-box-shadow: inset 0px 0px 6px 1px rgba(0,0,0,0.26);
+    -moz-box-shadow: inset 0px 0px 6px 1px rgba(0,0,0,0.26);
+    box-shadow: inset 0px 0px 6px 1px rgba(0,0,0,0.26);
+        padding: 2px;
+    
+    
+    .colorpanel {
+      float: left; 
+      width: 10%; 
+      text-align: center;
+      height:100px;
+      // line-height: 100px;
+      position:relative;
+      .spancontainer {
+        // transform:rotate(-90deg);
+        height:100%;
+        // pointer-events: none;
+        .textcontainer {
+            transform:translate(calc(50% - 0.5rem), 100px) rotate(-90deg);
+            transform-origin: left top 0;
+          p {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            width: 100px;
+            padding: 0 5px;
+            overflow: hidden;
+            line-height: 1rem;
+          }
+          
+        }
+      }
+      :hover {
+        opacity:0.8;
+        cursor:pointer;    
+      }
+    }
+  }
+}

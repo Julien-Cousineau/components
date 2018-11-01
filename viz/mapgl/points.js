@@ -1,4 +1,4 @@
-import {MapGL,Parent,Primitive} from '../../src/index.js';
+import {MapGL,Parent,Primitive,Gradient,Color} from '../../src/index.js';
 
 const { grid, randompoints, quad } = Primitive;
 
@@ -6,19 +6,12 @@ const mapGL  = new MapGL({
 });
 mapGL.render(Parent);
 
-const _points= randompoints();
+const _points= randompoints(10000000);
 
-const mypoints = mapGL.addGeometry('points',_points)
-mypoints.addValue('values',_points.values);
+const layer = mapGL.addLayer('debug',{geometry:_points,slayer:'debug'});
 
-mapGL.addTexture('dtexture',{})
-mapGL.textures['dtexture'].todefaultcolor();
-mapGL.addProgram('points',{
-    active:true,
-    mode:'POINTS',
-    geometryID:'points',
-    textureIDs:['dtexture'],
-    vs:mapGL.glsl.points.vs,
-    fs:mapGL.glsl.points.fs,
-})
-    
+// const attributed = layer.getAttribute('values');
+// const program = attributed.getProgram('circle');
+// attributed.show();
+// program.show();
+mapGL.camera.onresize()

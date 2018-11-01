@@ -3,11 +3,11 @@ const d3 = require('../../dist/d3.min.js');
 import Slider from '../slider';
 import Popup from '../popup';
 import Picker from '../picker';
-
+import Color from '../color';
 export default  class ColorSlider extends Slider {
   constructor(options){
     super(options);
-    const rgba = this.rgba = options.rgba || {r:255,g:0,b:0,a:1};
+    const color = this.color = options.color || new Color({r:255,g:0,b:0,a:1});
     this.popup = new Popup();    
     const self = this;
     this.picker = new Picker({
@@ -16,8 +16,8 @@ export default  class ColorSlider extends Slider {
      isheader:false,
      width:275,
      height:360,     
-      rgba:rgba,
-      callback:function(rgba){self.changeColor(rgba)}
+     color:color,
+     callback:function(color){self.changeColor(color)}
       
     })    
     
@@ -37,12 +37,11 @@ export default  class ColorSlider extends Slider {
     const {circle,popup,callbacks}=this;
     if(circle)popup.show(position);    
   }
-  changeColor(rgba){
+  changeColor(color){
     const {circle}=this;
-    this.rgba = rgba;
-    const {r,g,b,a}=rgba;   
-    circle.style('fill','rgba({0},{1},{2},{3})'.format(r,g,b,a))
-    this.callbacks.updategradient(rgba);
+    this.color = color;
+    circle.style('fill','{0}'.format(color.rgba2str()))
+    this.callbacks.updategradient(color);
   }
   render(){       
     super.render();
