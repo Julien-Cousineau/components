@@ -31,7 +31,7 @@ export default class SelafinSync extends Selafin{
     if(index!=-1)return this._getFrame(frame,index);
     
     if(!this.binaries[id])throw new Error("id does not exist");
-    const buffer = await this.fetchdb.getBuffer(this.binaries[id].url,extend(this.binaries[id],{responseType:'arraybuffer'}));
+    const buffer = await this.fetchdb.getBuffer(this.binaries[id].url,extend(this.binaries[id],{title:id,responseType:'arraybuffer'}));
     const data = new Float32Array(buffer);
     // for(let i=0;i<data.length;i++)data[i]*=Math.random();
     return  data;

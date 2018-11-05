@@ -43,7 +43,7 @@ export default class FetchDB {
     let buffer = await this.getDBData(url);
     if(!buffer){
       const progressbar = new ProgressBar();
-      const modal = new Modal({show:true}).render();
+      const modal = new Modal(extend(options,{show:true})).render();
       progressbar.render(modal.doms.modalbody);
       await modal.show();
       buffer = await Fetch.request(url,extend(options,{callbacks:{progress:(con,perc,title)=>{progressbar.update(con,perc)}}}));
