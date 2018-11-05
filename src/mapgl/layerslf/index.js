@@ -53,6 +53,15 @@ export default class LayerSLF extends Layer {
       this.geometries[this.id].addValue(id,array);
       this.attributes[id]=new Attribute(extend({_layer:()=>self,id:id},options)).createPrograms();
   }
+  drawScene() {
+    const program = this.attributes['quad'].getProgram('quadmca');
+    if(program.active){
+      program.draw();
+      this.attributes['quad'].geometry.values['quad']=program.fbtexture.decodeImage();
+    }
+    super.drawScene();
+    
+  }  
 
     
 }

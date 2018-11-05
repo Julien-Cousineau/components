@@ -1,4 +1,4 @@
-import {createElementBuffer} from '../helper';
+import {createElementBuffer,createArrayBuffer} from '../helper';
 import Geometry from '../geometry';
 export default class GeometrySLF extends Geometry {
   constructor(options){
@@ -12,8 +12,6 @@ export default class GeometrySLF extends Geometry {
     // for(let i=0;i<slf.NPOIN2;i++)dvalues[i]=i * 1.0/slf.NPOIN2;
     for(let i=0;i<slf.NPOIN2;i++)dvalues[i]=i * 0.0;
     this.addValue('quad',dvalues)
-    // console.log(slf.XY)
-    // console.log(slf.IKLE3F)
     
   }
   get position(){return this.slf.XY}
@@ -26,6 +24,7 @@ export default class GeometrySLF extends Geometry {
     this.nelem = slf.IKLE3F.length / 3.0;
     this.buffer.indices = {data:createElementBuffer(gl, slf.IKLE3F)};
     this.buffer.windices = {data:createElementBuffer(gl, slf.IKLEW)};
+    this.buffer.triarea = {data:createArrayBuffer(gl, slf.TRINODEAREA),numComponents:1};
   }
 
  

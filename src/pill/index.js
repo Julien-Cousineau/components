@@ -41,8 +41,12 @@ export default class Pill {
     return this;
   }
   show(){
-    $(this.tabheader.node()).tab('show');
-    return this;
+  
+    const dom = this.tabheader;
+    return new Promise((resolve, reject)=>{
+       $(dom.node()).tab('show');
+       $(dom.node()).on('shown.bs.tab',()=>resolve(this))
+    })
   }
   clear(){
     this.tabcontent.html("");

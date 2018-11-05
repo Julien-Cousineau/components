@@ -24,12 +24,12 @@ export default class GUISProgram extends Panel{
       
       const {gradient,minmax,exponent,color,colorbyatt,radius,width}=this.sprogram.paint;
       this.components = {
-        gradientbtn:new GradientBtn({gradient:gradient,minmax:minmax,exponent:exponent,callbacks:{gradient:callbacks.gradient,minmax:callbacks.minmax,exponent:callbacks.exponent}}),
+        gradientbtn:new GradientBtn({gradient:gradient,disabled:false,minmax:minmax,exponent:exponent,callbacks:{gradient:callbacks.gradient,minmax:callbacks.minmax,exponent:callbacks.exponent}}),
         buttoncolor: new ButtonColor({color:color,callbacks:{color:callbacks.color}}),
         active:new Checkbox({title:'Active',value:this.sprogram.active,callback:callbacks.active}),
         att:new Checkbox({title:'Color by attribute',value:colorbyatt,callback:callbacks.colorbyatt}),
-        radius:new DraggableNumber({title:'Point size: ',value:radius, min:1,max:10,callback:callbacks.radius}),
-        width:new DraggableNumber({title:'Line width: ',value:width, min:1,max:10,callback:callbacks.width})
+        radius:new DraggableNumber({title:'Point size: ',after:false,value:radius, min:1,max:10,callback:callbacks.radius}),
+        width:new DraggableNumber({title:'Line width: ',after:false,value:width, min:1,max:10,callback:callbacks.width})
       }
       this.rendering={
         symbol:['active','att'],
@@ -54,6 +54,7 @@ export default class GUISProgram extends Panel{
     super.render(element);
     const {doms,components}=this;
     const componentids = this.rendering[this.sprogram.type];
+    const tiltle = doms.card.append('div').attr('class','row').append('h5').text(this.sprogram.type).style("text-transform", "capitalize")
     for(let i=0;i<componentids.length;i++){
       const id = componentids[i];
       const component = components[id];

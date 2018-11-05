@@ -9,6 +9,8 @@ export default class GradientBtn {
     this.exponent = options.exponent || 1.0;
     this.padding = options.padding || 8;
     this.width = options.width || 20;
+    this.disabled = (typeof options.disabled=='undefined')?true:options.disabled;
+    this.left =options.left || 0;
     this.height = (options.height-this.padding) || 200;
     const callbacks = this.callbacks = options.callbacks || {};
     this.svg = new SVG({
@@ -18,7 +20,7 @@ export default class GradientBtn {
     const tooltip = this.tooltip = new Tooltip();
     this.graph = new Graph({
       isyaxis:true,isxaxis:true,
-      yscale:{axis:'y',show:true,editable:true,type:'scalePow',minmax:this.minmax,pars:{exponent:this.exponent},axisposition:1,flipaxisdirection:true,callbacks:callbacks},
+      yscale:{axis:'y',show:true,editable:!this.disabled,type:'scalePow',minmax:this.minmax,pars:{exponent:this.exponent},axisposition:1,flipaxisdirection:true,callbacks:callbacks},
       xscale:{axis:'x',show:false,type:'scaleLinear',minmax:[0,1]}
     });
     
@@ -44,21 +46,22 @@ export default class GradientBtn {
     const {svg,graph,padding,height,width,gradient}=this;
     
     
-    const dom = this.dom=LContainer(element,width,height,padding);
-    
+    const dom = this.dom=LContainer(element,width+40,height,padding);
+    if(this.left)dom.style('left',this.left+"px").style('position','relative');
     const bsize =6;
     this.gradientbackgrounddom = dom.append('div')
     .style('position','absolute')
     .style('top','10px')
     .style('box-sizing','content-box')
     .style('width', (width-2)+'px')
-    .style('height', (height-32)+'px')
+    .style('height', (height-22)+'px')
     .style('background', transparencyBackground)
     .style('background-size', '{0}px {0}px'.format(bsize))
     .style('background-position', '0 0, 0 {0}px, {0}px -{0}px, -{0}px 0px'.format(bsize*0.5))
+   
     svg.render(dom);    
     svg.addGraph('graph',graph);
-    
+
     this.gradientdom=dom.append('div')
     .style('position','absolute')
     .style('top','10px')
@@ -67,12 +70,11 @@ export default class GradientBtn {
     .style('border-radius', '5px')
     .style('background', gradient.background)    
     .style('width', (width-2)+'px')
-    .style('height', (height-32)+'px')
-    .style('cursor','pointer')
+    .style('height', (height-22)+'px')
+    if(!this.disabled)this.gradientdom.style('cursor','pointer');
     
-    const self=this;
-    this.gradientdom.on("click",()=>self.showGradientPalette())
-   
+    if(!this.disabled)this.gradientdom.on("click",()=>this.showGradientPalette())
+   return this;
     
     
     

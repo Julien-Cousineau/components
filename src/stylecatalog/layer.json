@@ -1132,7 +1132,9 @@
 		"quad": {
 			"id": "quad",
 			"title": "Suitability",
-			"active": true,
+			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",				
 			"zorder": 0,
 			"attactive": false,
 			"att": [0, 1, 1, 2],
@@ -1142,6 +1144,7 @@
 					"id": "Fill",
 					"title": "Fill",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -1149,9 +1152,14 @@
 						"minmax": [0, 1],
 						"exponent": 1,
 						"gradient": {
-							"0": "rgba(255,0,0,1)",
-							"0.9": "rgba(255,0,0,0.25)",
-							"1.0": "rgba(255,0,0,0)"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -1235,8 +1243,10 @@
 			"id": "bottom",
 			"title": "Bed Elev",
 			"active": false,
+			"units":"m",
+			"xlabel":"Bed Elevation",					
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [0, -10, 1, 0.05],
 			"range": [-500, 0],
 			"sprograms": {
@@ -1244,6 +1254,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -1335,25 +1346,35 @@
 		"velocity": {
 			"id": "name",
 			"title": "Speed",
-			"active": false,
+			"active": true,
+			"units":"m/s",
+			"xlabel":"Speed",					
 			"zorder": 0,
 			"attactive": true,
 			"att": [1.0, 3, 1, 0.8],
+			"w":80,
 			"range": [0, 5],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
 						"color": "rgba(255,255,255,1)",
-						"minmax": [0, 5],
+						"minmax": [0, 2],
 						"exponent": 1,
 						"gradient": {
-							"0": "#1488ccff",
-							"1": "#2b32b2ff"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -1374,7 +1395,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -1404,7 +1425,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -1437,9 +1458,12 @@
 			"id": "boat",
 			"title": "Boat Prox.",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",				
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [30000, 0, 1, 0.05],
+			"w":5,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -1448,6 +1472,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -1568,9 +1593,12 @@
 			"id": "marina",
 			"title": "Marina Prox.",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",				
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0.05],
+			"w":5,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -1579,6 +1607,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -1699,9 +1728,12 @@
 			"id": "circuit",
 			"title": "Circuit Prox.",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",				
 			"zorder": 0,
 			"attactive": false,
 			"att": [30000, 7939.453125, 1, 0.05],
+			"w":5,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -1710,6 +1742,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -1831,9 +1864,12 @@
 			"id": "coastline",
 			"title": "Coastline",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
-			"attactive": true,
-			"att": [30000, 0, 1, 0.05],
+			"attactive": false,
+			"att": [5001, 5000, 1, 0.05],
+			"w":5,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -1842,6 +1878,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -1964,14 +2001,18 @@
 			"title": "Diving Sites",
 			"active": false,
 			"zorder": 0,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"attactive": false,
 			"att": [500, 5000, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2001,7 +2042,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2031,7 +2072,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2094,15 +2135,19 @@
 			"id": "name",
 			"title": "Ferry",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",		
 			"zorder": 0,
 			"attactive": false,
-			"att": [500, 5000, 1, 0.0],
+			"att": [5000, 5001, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2110,8 +2155,8 @@
 						"minmax": [0, 30000],
 						"exponent": 1,
 						"gradient": {
-							"0": "#1488ccff",
-							"1": "#2b32b2ff"
+							"1": "#3288bd",
+							"0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -2132,7 +2177,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2162,7 +2207,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2225,9 +2270,12 @@
 			"id": "name",
 			"title": "Ferry Route",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -2236,6 +2284,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -2263,7 +2312,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2293,7 +2342,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2352,19 +2401,431 @@
 				}
 			}
 		},
+		"fossil": {
+			"id": "fossil",
+			"title": "Fossil Fuel Comm.",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [30000, 0, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},		
+		"hazardline": {
+			"id": "hazardline",
+			"title": "Hazard(Lines)",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1000, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},
+		"hazardpoint": {
+			"id": "hazardpoint",
+			"title": "Hazard(Points)",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1000, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},				
 		"hydro": {
 			"id": "hydro",
 			"title": "Trasmissions",
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"active": false,
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [100000, 0, 1, 0.05],
+			"w":0,
 			"range": [0, 100000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2488,15 +2949,19 @@
 			"id": "name",
 			"title": "Pipeline",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
 			"attactive": false,
 			"att": [5000, 30000, 1, 0.00],
+			"w":0,
 			"range": [0, 100],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2507,7 +2972,7 @@
 							"0": "#1488ccff",
 							"1": "#2b32b2ff"
 						},
-						"colorbyatt": false,
+						"colorbyatt": true,
 						"opacity": 1,
 						"outlinecolor": "rgba(255,255,255,1)",
 						"cap": "butt",
@@ -2526,7 +2991,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2556,7 +3021,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2619,15 +3084,19 @@
 			"id": "name",
 			"title": "Shipwrecks",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [5000,10000, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2657,7 +3126,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2687,7 +3156,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2750,15 +3219,19 @@
 			"id": "telecables",
 			"title": "TeleCables",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
 			"attactive": false,
 			"att": [500,5000, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2788,7 +3261,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2818,7 +3291,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -2877,19 +3350,159 @@
 				}
 			}
 		},
+		"substations": {
+			"id": "substations",
+			"title": "Substations",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [50000, 0, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"legendactive":true,					
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},				
 		"ports": {
 			"id": "ports",
 			"title": "Ports",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",					
 			"zorder": 0,
 			"attactive": false,
 			"att": [1000,5000, 1, 0.0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -2919,7 +3532,7 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
@@ -2949,7 +3562,7 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -3020,10 +3633,13 @@
 		"quad": {
 			"id": "quad",
 			"title": "Suitability",
-			"active": true,
+			"active": false,
+			"xlabel":"",			
+			"units":"_",			
 			"zorder": 0,
 			"attactive": false,
 			"att": [0, 1, 1, 1.05],
+			"w": 100,
 			"range": [0, 1],
 			"sprograms": {
 				"fill": {
@@ -3032,14 +3648,20 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 1],
 						"exponent": 1,
 						"gradient": {
-							"0": "rgba(255,0,0,1)",
-							"0.9": "rgba(0,0,255,0.1)",
-							"1.0": "rgba(0,0,255,0)"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -3158,12 +3780,14 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [0, -50, 1, 0.05],
+			"w": 5,
 			"range": [-500, 0],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -3282,7 +3906,6 @@
 				}
 			}
 		},
-
 		"boat": {
 			"id": "boat",
 			"title": "Boat Prox.",
@@ -3290,14 +3913,16 @@
 			"xlabel":"Proximity Distance",
 			"active": false,
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [50000, 5000, 1, 0.05],
-			"range": [0, 100000],
+			"w": 5,
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -3424,13 +4049,15 @@
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
-			"att": [500, 5000, 1, 0.05],
-			"range": [0, 30000],
+			"att": [500, 5000, 1, 0.00],
+			"w": 0,
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -3557,13 +4184,15 @@
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
-			"att": [30000, 7939.453125, 1, 0.05],
-			"range": [0, 30000],
+			"att": [30000, 7939.453125, 1, 0.00],
+			"w":0,
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -3690,9 +4319,10 @@
 			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [30000, 0, 1, 0.05],
-			"range": [0, 30000],
+			"w":5,
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
@@ -3700,6 +4330,7 @@
 					"active": true,
 					"zorder": 0,
 					"type": "fill",
+					"legendactive":true,					
 					"paint": {
 						"color": "rgba(255,255,255,1)",
 						"minmax": [0, 30000],
@@ -3826,12 +4457,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -3959,12 +4591,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4092,12 +4725,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4216,6 +4850,414 @@
 				}
 			}
 		},
+		"fossil": {
+			"id": "fossil",
+			"title": "Fossil Fuel Comm.",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [30000, 0, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},
+		"hazardline": {
+			"id": "hazardline",
+			"title": "Hazard(Lines)",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1000, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},
+		"hazardpoint": {
+			"id": "hazardpoint",
+			"title": "Hazard(Points)",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1000, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "fill",
+					"legendactive":true,					
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},					
 		"hydro": {
 			"id": "hydro",
 			"title": "Trasmissions",
@@ -4223,14 +5265,16 @@
 			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
-			"attactive": true,
-			"att": [100000, 0, 1, 0.05],
-			"range": [0, 100000],
+			"attactive": false,
+			"att": [50000, 0, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4359,12 +5403,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [5000, 30000, 1, 0],
-			"range": [0, 100],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4490,14 +5535,15 @@
 			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [5000, 10000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4625,12 +5671,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4758,12 +5805,13 @@
 			"zorder": 0,
 			"attactive": false,
 			"att": [1000, 5000, 1, 0],
-			"range": [0, 30000],
+			"range": [0, 50000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4882,21 +5930,159 @@
 				}
 			}
 		},
+		"substations": {
+			"id": "substations",
+			"title": "Substations",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
+			"active": false,
+			"zorder": 0,
+			"attactive": false,
+			"att": [50000, 0, 1, 0.05],
+			"w":5,
+			"range": [0, 50000],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"legendactive":true,					
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#77a1d3ff",
+							"1": "#e684aeff",
+							"0.5": "#79cbcaff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},		
 		"j": {
 			"id": "j",
 			"title": "Wave Power",
 			"units":"kW/m",
 			"xlabel":"Wave Power",
-			"active": false,
+			"active": true,
 			"zorder": 1,
 			"attactive": true,
 			"att": [1000, 50000, 1, 0.85],
+			"w":85,
 			"range": [0, 100000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -4904,9 +6090,14 @@
 						"minmax": [0, 50000],
 						"exponent": 1,
 						"gradient": {
-							"0": "#77a1d3ff",
-							"1": "#e684aeff",
-							"0.5": "#79cbcaff"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -5025,12 +6216,14 @@
 			"zorder": 1,
 			"attactive": false,
 			"att": [0, 10, 1, 0.05],
+			"w":5,
 			"range": [0, 10],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -5159,12 +6352,14 @@
 			"zorder": 1,
 			"attactive": false,
 			"att": [0, 20, 1, 0.0],
+			"w":0,
 			"range": [0, 20],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -5290,15 +6485,18 @@
 			"units":"s",
 			"xlabel":"Te",			
 			"active": false,
+			
 			"zorder": 1,
 			"attactive": false,
 			"att": [0, 20, 1, 0.0],
+			"w":0,			
 			"range": [0, 20],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -5427,12 +6625,14 @@
 			"zorder": 1,
 			"attactive": false,
 			"att": [0, 20, 1, 0.0],
+			"w":0,
 			"range": [0, 20],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -5561,12 +6761,14 @@
 			"zorder": 1,
 			"attactive": false,
 			"att": [0, 20, 1, 0.0],
+			"w":0,
 			"range": [0, 20],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -5697,7 +6899,9 @@
 		"quad": {
 			"id": "quad",
 			"title": "Suitability",
-			"active": true,
+			"active": false,
+			"units":"_",
+			"xlabel":"",			
 			"zorder": 0,
 			"attactive": false,
 			"att": [0, 1, 1, 1],
@@ -5767,6 +6971,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -5774,9 +6979,14 @@
 						"minmax": [0, 1],
 						"exponent": 1,
 						"gradient": {
-							"0": "red",
-							"0.9": "rgba(255, 0, 0, 0.25)",
-							"1": "rgba(255, 0, 0, 0.0)"
+						"1.0": "rgba(0,0,0,0)",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -5784,7 +6994,7 @@
 						"cap": "butt",
 						"join": "miter",
 						"width": 5,
-						"radius": 5,
+						"radius": 2,
 						"blur": 0
 					},
 					"layout": {
@@ -5800,9 +7010,12 @@
 			"id": "depth",
 			"title": "Depth",
 			"active": false,
+			"units":"m",
+			"xlabel":"Depth",			
 			"zorder": 0,
 			"attactive": true,
 			"att": [2,3, 1, 0.05],
+			"w":5,
 			"range": [0,10],
 			"sprograms": {
 				"fill": {
@@ -5869,6 +7082,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -5901,6 +7115,8 @@
 			"id": "boat",
 			"title": "Boat Prox.",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": 0,
 			"attactive": false,
 			"att": [30000, 0, 1, 0.05],
@@ -5970,6 +7186,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -6001,6 +7218,8 @@
 		"circuit": {
 			"id": "circuit",
 			"title": "Circuit Prox.",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
@@ -6010,7 +7229,7 @@
 				"fill": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
@@ -6071,18 +7290,19 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": false,
+					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
 						"color": "#000000ff",
-						"minmax": [0, 1],
+						"minmax": [0, 30000],
 						"exponent": 1,
 						"gradient": {
 							"0": "#1488ccff",
 							"1": "#2b32b2ff"
 						},
-						"colorbyatt": false,
+						"colorbyatt": true,
 						"opacity": 1,
 						"outlinecolor": "rgba(255,255,255,1)",
 						"cap": "butt",
@@ -6103,6 +7323,8 @@
 		"diving": {
 			"id": "diving",
 			"title": "Diving Sites",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
@@ -6174,6 +7396,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -6206,6 +7429,8 @@
 			"id": "ferry",
 			"title": "Ferry",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": 0,
 			"attactive": false,
 			"att": [500, 5000, 1, 0.05],
@@ -6276,11 +7501,12 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
 						"color": "#000000ff",
-						"minmax": [0, 3000],
+						"minmax": [0, 30000],
 						"exponent": 1,
 						"gradient": {
 							"0": "#1488ccff",
@@ -6307,6 +7533,8 @@
 		"ferryroute": {
 			"id": "ferry",
 			"title": "Ferry Route",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
@@ -6378,11 +7606,12 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
 						"color": "#000000ff",
-						"minmax": [0, 3000],
+						"minmax": [0, 30000],
 						"exponent": 1,
 						"gradient": {
 							"0": "#1488ccff",
@@ -6409,10 +7638,13 @@
 		"fossil": {
 			"id": "fossil",
 			"title": "Fossil Communities",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
 			"attactive": true,
 			"att": [30000, 7939.453125, 1, 0.0],
+			"w":5,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -6480,6 +7712,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -6511,6 +7744,8 @@
 		"marina": {
 			"id": "marina",
 			"title": "Marina",
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"active": false,
 			"zorder": 0,
 			"attactive": false,
@@ -6581,6 +7816,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -6613,6 +7849,8 @@
 			"id": "hydro",
 			"title": "Trasmissions",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": 0,
 			"attactive": false,
 			"att": [30000, 0, 1, 0.05],
@@ -6683,11 +7921,12 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
 						"color": "#000000ff",
-						"minmax": [0, 1],
+						"minmax": [0, 30000],
 						"exponent": 1,
 						"gradient": {
 							"0": "#1488ccff",
@@ -6715,6 +7954,8 @@
 			"id": "freshwaterf",
 			"title": "Fresh Water F",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": -1,
 			"attactive": false,
 			"att": [30000, 7939.453125, 1, 0.3],
@@ -6817,6 +8058,8 @@
 			"id": "hkp",
 			"title": "Power",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": -1,
 			"attactive": true,
 			"att": [100000, 1000000, 1, 0.8],
@@ -6887,6 +8130,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -6919,9 +8163,12 @@
 			"id": "pipeline",
 			"title": "Pipeline",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": 0,
-			"attactive": true,
+			"attactive": false,
 			"att": [10000, 11000, 1, 0],
+			"w":0,
 			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
@@ -6988,6 +8235,7 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
@@ -7016,14 +8264,16 @@
 				}
 			}
 		},
-		"velocity": {
-			"id": "name",
-			"title": "Speed",
+		"substations": {
+			"id": "substations",
+			"title": "Substations Prox.",
 			"active": false,
+			"units":"m",
+			"xlabel":"Proximity Distance",			
 			"zorder": 0,
-			"attactive": true,
-			"att": [1.0, 3, 1, 0.95],
-			"range": [1, 5],
+			"attactive": false,
+			"att": [30000, 0, 1, 0.05],
+			"range": [0, 30000],
 			"sprograms": {
 				"fill": {
 					"id": "My ID",
@@ -7033,7 +8283,112 @@
 					"type": "fill",
 					"paint": {
 						"color": "rgba(255,255,255,1)",
-						"minmax": [0, 5],
+						"minmax": [0, 30000],
+						"exponent": 0.8762246621621621,
+						"gradient": {
+							"0": "#70e1f5ff",
+							"1": "#ffd194ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"legendactive":true,					
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "#000000ff",
+						"minmax": [0, 30000],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 2,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		},		
+		"velocity": {
+			"id": "name",
+			"title": "Speed",
+			"active": true,
+			"units":"m/s",
+			"xlabel":"Speed",			
+			"zorder": 0,
+			"attactive": true,
+			"att": [0.1, 1.5, 1, 0.90],
+			"w":90,
+			"range": [0, 5],
+			"sprograms": {
+				"fill": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1.5],
 						"exponent": 1,
 						"gradient": {
 							"0": "#1488ccff",
@@ -7089,16 +8444,22 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+					"legendactive":true,					
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
 						"color": "rgba(255,255,255,1)",
-						"minmax": [1, 3],
+						"minmax": [0, 1.5],
 						"exponent": 1,
 						"gradient": {
-							"0": "rgba(0,0,255,1)",
-							"0.25": "rgba(0,0,255,0.25)",
-							"1": "rgba(0,0,255,0)"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -7106,7 +8467,7 @@
 						"cap": "butt",
 						"join": "miter",
 						"width": 5,
-						"radius": 5,
+						"radius": 2,
 						"blur": 0
 					},
 					"layout": {
@@ -7129,7 +8490,7 @@
 		"quad": {
 			"id": "quad",
 			"title": "Suitability",
-			"active": true,
+			"active": false,
 			"zorder": 0,
 			"attactive": false,
 			"att": [0, 1, 1, 2],
@@ -7332,9 +8693,12 @@
 		"velocity": {
 			"id": "name",
 			"title": "Speed",
-			"active": false,
+			"active": true,
+			"units":"m/s",
+			"xlabel":"Speed",				
 			"zorder": 0,
 			"attactive": true,
+
 			"att": [1.0, 3, 1, 0.8],
 			"range": [0, 5],
 			"sprograms": {
@@ -7342,15 +8706,22 @@
 					"id": "My ID",
 					"title": "My Title",
 					"active": true,
+			  "legendactive":true,								
 					"zorder": 0,
 					"type": "fill",
 					"paint": {
 						"color": "rgba(255,255,255,1)",
-						"minmax": [0, 5],
+						"minmax": [0, 2],
 						"exponent": 1,
 						"gradient": {
-							"0": "#1488ccff",
-							"1": "#2b32b2ff"
+						"1.0": "#3288bd",
+      "0.6": "#66c2a5",
+      "0.5": "#abdda4",
+      "0.4": "#e6f598",
+      "0.3": "#fee08b",
+      "0.2": "#fdae61",
+      "0.1": "#f46d43",
+      "0.0": "#d53e4f"
 						},
 						"colorbyatt": true,
 						"opacity": 1,
@@ -7371,11 +8742,11 @@
 				"line": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "line",
 					"paint": {
-						"color": "rgba(255,255,255,1)",
+						"color": "rgba(0,0,0,1)",
 						"minmax": [0, 1],
 						"exponent": 1,
 						"gradient": {
@@ -7401,11 +8772,11 @@
 				"circle": {
 					"id": "My ID",
 					"title": "My Title",
-					"active": true,
+					"active": false,
 					"zorder": 0,
 					"type": "circle",
 					"paint": {
-						"color": "rgba(255,255,255,1)",
+						"color": "rgba(0,0,0,1)",
 						"minmax": [0, 1],
 						"exponent": 1,
 						"gradient": {
@@ -7418,7 +8789,7 @@
 						"cap": "butt",
 						"join": "miter",
 						"width": 5,
-						"radius": 5,
+						"radius": 2,
 						"blur": 0
 					},
 					"layout": {
@@ -9578,8 +10949,8 @@
 	"zorder": 0,
 	"type":"point",
 	"category":"Results",
-	"refsource":"",
-	"description":"Calculated from...",
+	"refsource":"From this app",
+	"description":"Wave hotspots based on multi-criteria analysis",
 	"activeatt":"quad",
 	"sattributes": {
 		"default": {
@@ -10725,6 +12096,150 @@
 		}
 	}
 },
+ "coastline":{
+	"id": "coastline",
+	"title": "Coastline",
+	"active": false,
+	"zorder": 0,
+	"type":"line",
+	"activeatt":"value",
+	"category":"General",
+	"refsource":"<p class=\"d-inline\">Unknown - </p><a class=\"d-inline\"  target=\"_blank\" href=\"https://catalogue.data.gov.bc.ca/dataset/ferry-terminals\">link</a>",
+	"description":"",		
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(0,0,0,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 1,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
  "ferryroute":{
 	"id": "ferryroute",
 	"title": "Ferry Route",
@@ -10863,6 +12378,150 @@
 						"image": null,
 						"size": null,
 						"url": null
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
+ "fossil":{
+	"id": "fossil",
+	"title": "Fossil Fuel Comm.",
+	"active": true,
+	"zorder": 0,
+	"category":"Socio-Economic",
+	"type":"symbol",
+	"activeatt":"value",
+	"refsource":"<p class=\"d-inline\">BC Data Catalogue - </p><a class=\"d-inline\"  target=\"_blank\" href=\"https://catalogue.data.gov.bc.ca/dataset/coastal-bc-diving-sites\">link</a>",
+	"description":"The locations of coastal British Columbia scuba diving sites.",		
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "fossil",
+						"size": 0.15,
+						"url": "img/fossil.png"
 					},
 					"filter": null
 				}
@@ -11148,6 +12807,150 @@
 						"image": null,
 						"size":null,
 						"url": null
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
+ "hazardpoint":{
+	"id": "hazardpoint",
+	"title": "Hazard Points",
+	"active": true,
+	"zorder": 0,
+	"category":"Socio-Economic",
+	"type":"symbol",
+	"activeatt":"value",
+	"refsource":"<p class=\"d-inline\">BC Data Catalogue - </p><a class=\"d-inline\"  target=\"_blank\" href=\"https://catalogue.data.gov.bc.ca/dataset/coastal-bc-diving-sites\">link</a>",
+	"description":"The locations of coastal British Columbia scuba diving sites.",		
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "hazard",
+						"size": 0.08,
+						"url": "img/hazard.png"
 					},
 					"filter": null
 				}
@@ -11583,6 +13386,150 @@
 		}
 	}
 },
+ "ports":{
+	"id": "ports",
+	"title": "Ports",
+	"active": true,
+	"zorder": 0,
+	"category":"Socio-Economic",
+	"type":"symbol",
+	"activeatt":"value",
+	"refsource":"<p class=\"d-inline\">BC Data Catalogue - </p><a class=\"d-inline\"  target=\"_blank\" href=\"https://catalogue.data.gov.bc.ca/dataset/coastal-bc-diving-sites\">link</a>",
+	"description":"The locations of coastal British Columbia scuba diving sites.",		
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "rports",
+						"size": 0.5,
+						"url": "img/rports.png"
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
  "ship":{
 	"id": "shipwreck",
 	"title": "Shipwrecks",
@@ -11727,6 +13674,150 @@
 		}
 	}
 },
+ "substations":{
+	"id": "substations",
+	"title": "SubStations",
+	"active": false,
+	"zorder": 0,
+	"type":"symbol",
+	"activeatt":"value",
+	"category":"Socio-Economic",
+	"refsource":"<p class=\"d-inline\">BC Data Catalogue - </p><a class=\"d-inline\"  target=\"_blank\" href=\"https://catalogue.data.gov.bc.ca/dataset/shipwreck-point-locations\">link</a>",
+	"description":"The locations of coastal shipwrecks in British Columbia.",				
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "rshipwreck",
+						"size": 0.65,
+						"url": "img/rshipwreck.png"
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": true,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "substations",
+						"size": 0.06,
+						"url": "img/substations.png"
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
  "firstnation":{
 	"id": "firstnation",
 	"title": "Heritage areas",
@@ -11864,6 +13955,147 @@
 						"image": "rfirstnation",
 						"size": 0.5,
 						"url": "img/rfirstnation.png"
+					},
+					"filter": null
+				}
+			}
+		}
+	}
+},
+ "telecables":{
+	"id": "telecables",
+	"title": "Telecommunications Cables",
+	"active": false,
+	"zorder": 0,
+	"type":"line",
+	"activeatt":"value",
+	"sattributes": {
+		"default": {
+			"id": "default",
+			"title": "Default",
+			"active": true,
+			"zorder": 0,
+			"attactive": false,
+			"att": [0, 1, 1, 2],
+			"range": [0, 100],
+			"sprograms": {
+				"fill": {
+					"id": "Fill",
+					"title": "Fill",
+					"active": false,
+					"zorder": 0,
+					"type": "fill",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#008000ff",
+							"1": "#ff0000ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"line": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": true,
+					"zorder": 0,
+					"type": "line",
+					"paint": {
+						"color": "rgba(0,200,0,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": false,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 2,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": "boat",
+						"size": 0.05,
+						"url": "img/boat.png"
+					},
+					"filter": null
+				},
+				"circle": {
+					"id": "My ID",
+					"title": "My Title",
+					"active": false,
+					"zorder": 0,
+					"type": "circle",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size": null,
+						"url": null
+					},
+					"filter": null
+				},
+				"symbol": {
+					"id": "symbol",
+					"title": "Symbol",
+					"active": false,
+					"zorder": 0,
+					"type": "symbol",
+					"paint": {
+						"color": "rgba(255,255,255,1)",
+						"minmax": [0, 1],
+						"exponent": 1,
+						"gradient": {
+							"0": "#1488ccff",
+							"1": "#2b32b2ff"
+						},
+						"colorbyatt": true,
+						"opacity": 1,
+						"outlinecolor": "rgba(255,255,255,1)",
+						"cap": "butt",
+						"join": "miter",
+						"width": 5,
+						"radius": 5,
+						"blur": 0
+					},
+					"layout": {
+						"image": null,
+						"size":null,
+						"url": null
 					},
 					"filter": null
 				}

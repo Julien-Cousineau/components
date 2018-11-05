@@ -24,7 +24,7 @@ export default class StatGUI{
       // columns['x']={title:"Lng",active:true,render:(o)=>o.element.text(o.data.toFixed(4))};
       // columns['y']={title:"Lat",active:true,render:(o)=>o.element.text(o.data.toFixed(4))};
       columns['x']={title:"",width:'40px',sortable:false,active:true,render:(o)=>o.element.append('i').attr('class','fas fa-bullseye').on('click',()=>{console.log(o.row);if(this.callbacks.showLocation)this.callbacks.showLocation(o.row)})};
-      if(attribute.id =='quad' || attribute.attactive)columns[id]={title:attribute.title,active:true,render:(o)=>o.element.text(o.data)};
+      if(attribute.id =='quad' || attribute.attactive)columns[id]={title:attribute.sattribute.title + ", " + attribute.sattribute.units,active:true,render:(o)=>o.element.text(o.data)};
     }
     this.element.html('');
     this.table =new MyTable({className:'table-scroll',small:true,columns:columns}).render(this.element);
@@ -32,10 +32,12 @@ export default class StatGUI{
   }
   updateData(){
     const {layer}=this;
+    if(!this.layer.active)return;
     this.addSpinner();
+    
     const array = layer.attributes['quad'].value;
     
-    this.stack.push({id:'myid',array:array,desc:true,slice:[0,1000]});
+    this.stack.push({id:'myid',array:array,desc:true,slice:[0,50]});
   }  
   setData(err,obj){
     if(err){this.removeSpinner();return console.warn(err);}
@@ -47,8 +49,8 @@ export default class StatGUI{
       obj['x']=this.layer.geometry.slf.MESHX[nodeindex];
       obj['y']=this.layer.geometry.slf.MESHY[nodeindex];
       for(const id in this.layer.attributes){
-        if(this.layer.attributes[id].active || this.layer.attributes[id].attactive){
-          obj[id]=this.layer.attributes[id].value[nodeindex];
+        if(id=="quad" ||  this.layer.attributes[id].attactive){
+          obj[id]=this.layer.attributes[id].value[nodeindex].toFixed(2);
           
         }
       }

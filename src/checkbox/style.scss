@@ -1,0 +1,8 @@
+.mycheckbox {
+    cursor:pointer;
+    .disabled{
+        cursor:auto;
+    }
+    .on{opacity:1}
+    .off{opacity:0.25}
+}

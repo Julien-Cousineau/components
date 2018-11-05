@@ -29,6 +29,8 @@ export default class Attribute {
   set att(value){this.sattribute.att=value}
   get weight(){return this.sattribute.weight}
   set weight(value){this.sattribute.weight=value}
+  get w(){return this.sattribute.w}
+  set w(value){this.sattribute.w=value}
   get value(){return this.geometry.values[this.id]}
   
   get gl(){return this.layer.gl}
@@ -37,6 +39,7 @@ export default class Attribute {
   get v_matrix(){return this.app.v_matrix}
   get ctx(){return this.app.ctx}
   get worldSize(){return this.app.worldSize}
+  get zoom(){return this.app.zoom}
   get geometries(){return this.layer.geometries}
   get geoID(){return this.layer.id}
   get geometry(){return this.geometries[this.geoID]}
@@ -87,6 +90,7 @@ export default class Attribute {
   }
   async checkData(){await this.getData()}
   drawScene() {
+    if(!this.active)return;
     
     this.geometries[this.geoID].setvalID(this.id);
     const programs=this.programs;

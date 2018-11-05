@@ -24,10 +24,11 @@
     img{
         width:20px;
     }
+    .on {cursor:pointer};
 }
 tbody.table-scroll {
     position: absolute;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: calc(100% - 72px);
     }
     

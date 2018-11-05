@@ -85,7 +85,6 @@ export default  class LayerMapBox {
     mapbox.addSource(id, source);
 
     for(let id in sublayers){
-      console.log(sublayers[id].obj)
       mapbox.addLayer(sublayers[id].obj);
     }
 

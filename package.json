@@ -77,7 +77,7 @@
     "worker-loader": "^2.0.0"
   },
   "dependencies": {
-    "@julien.cousineau/util": "^1.0.13",
+    "@julien.cousineau/util": "^1.0.14",
     "@turf/helpers": "^6.1.4",
     "babel-plugin-transform-require-ignore": "^0.1.1",
     "body-parser": "^1.18.3",

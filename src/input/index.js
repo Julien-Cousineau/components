@@ -1,3 +1,4 @@
+const d3 = require('../../dist/d3.min.js');
 export default  class Input {
   constructor(options){
     this.title  = options.title  || '';
@@ -10,7 +11,7 @@ export default  class Input {
   }
   render(element){
     const {title,margin,type,min,max,value,callback} = this;
-    const fg = element.append('div').attr('class','form-group').style('z-index',0);
+    const fg =this.fg= element.append('div').attr('class','form-group').style('z-index',0);
     if(title!='')this.label = fg.append('label').style('margin',margin).text(title);
     const input = this.input = fg.append('input')
     .attr('class','form-control input-sm')
@@ -33,10 +34,28 @@ export default  class Input {
       if(max)input.attr('max',max)   
       input.on('change keydown paste input',()=>{self.value=this.input.node().value;callback(self.value)})
     }
+    if(type=='numberenter'){
+      if(min)input.attr('min',min)
+      if(max)input.attr('max',max)   
+
+      input.on('keypress',()=>{
+        this.value=this.input.node().value;
+          if(d3.event.keyCode === 32 || d3.event.keyCode === 13){
+            input.node().blur()
+          }
+      });
+      input.on('focusout',()=>{
+        this.value=this.input.node().value;
+        callback(this.value);
+      })
+    }
     return fg
   }
   setValue(value){
     this.value=value;
     if(this.input)this.input.node().value=value;
+  }
+  remove(){
+    this.fg.remove();
   }
 }

@@ -39,12 +39,13 @@ export default class StyleGUISLayer{
     const checkbox = new Checkbox({title:'active',value:slayer.active,callback:this.setActive.bind(this)})
     checkbox.render(container.append("div").attr('class','row').attr('class','col-sm-12'))
     const r=container.append('div').attr('class','row')
-    r.append('div').attr('class','col-sm-2').append("p").attr('class','small').text('Source:')
-    r.append('div').attr('class','col-sm-10').append("p").attr('class','small').html(slayer.refsource);
-                                               
+    r.append('div').attr('class','col-sm-4').append("p").attr('class','small').text('Source:')
+    r.append('div').attr('class','col-sm-8').append("p").attr('class','small').html(slayer.refsource);
+    
+                  
     const r2=container.append('div').attr('class','row')
-    r2.append('div').attr('class','col-sm-2').append("p").attr('class','small').text('Description:')
-    r2.append('div').attr('class','col-sm-10').append("p").attr('class','small').text(slayer.description);
+    r2.append('div').attr('class','col-sm-4').append("p").attr('class','small').text('Description:')
+    r2.append('div').attr('class','col-sm-8').append("p").attr('class','small').text(slayer.description);
     return this;  
   }    
 }

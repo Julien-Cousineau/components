@@ -79,7 +79,7 @@ import DragDrop from './dragdrop';
 import GUISLayer from './stylegui/slayer.js';
 import GUISAttribute from './stylegui/sattribute.js';
 import GUISProgram from './stylegui/sprogram.js';
-
+import GUISuit from './stylegui/ssuit.js';
 import GUILayer from './stylegui/layer.js';
 import GUIAttribute from './stylegui/attribute.js';
 // import GUIProgram from './stylegui/program.js';
@@ -98,6 +98,7 @@ import to from './to';
 
 // import {Parent as p} from './parent'
 export {
+    GUISuit,
     to,
     Fetch,
     DragDrop,

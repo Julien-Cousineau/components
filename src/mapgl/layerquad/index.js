@@ -16,4 +16,5 @@ export default class LayerQuad extends Layer {
     this.attributes[this.id]=new AttributeQuad({_layer:()=>self,id:'default'}).createPrograms();
     return this;
   }
+
 }

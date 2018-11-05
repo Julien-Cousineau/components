@@ -236,8 +236,9 @@ module.exports.bindArrayAttribute = bindArrayAttribute;
 const bindAttributes=function(gl,program,geometry){
     const attributes = program.attributes;
     for(let id in attributes){
-      if(id=='position' || id=='vindices'){
-        if(!geometry.buffer[id])throw new Error(id + " is not defined");   
+      
+      if(id=='position' || id=='vindices' || id=='triarea'){
+        if(!geometry.buffer[id])throw new Error(id + " is not defined"); 
         const obj = geometry.buffer[id];
         bindArrayAttribute(gl, obj.data, program.attributes[id], obj.numComponents);
       } 

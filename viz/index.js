@@ -81,10 +81,10 @@
 // require('./maplayer.js')
 // require('./maplayer.bc.js')
 // require('./maplayer.bc2.js')
-require('./maplayer.wave.js')
+// require('./maplayer.wave.js')
 // require('./maplayer.river.js')
 // require('./maplayer/layerslf.js')
 
 // require('./selafinsync.js')
 
-// require('./bcatlas.js')
+require('./bcatlas.js')

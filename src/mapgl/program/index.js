@@ -59,6 +59,7 @@ export default class Program{
   get u_matrix(){return this.attribute.u_matrix}
   get v_matrix(){return this.attribute.v_matrix}
   get worldSize(){return this.attribute.worldSize}
+  get zoom(){return this.attribute.zoom}
 
   get geometry(){
     if(!this.geometries[this.geometryID])throw new Error("Geometry does not exist");
@@ -106,13 +107,14 @@ export default class Program{
   }
 
   get uniforms(){
-    const {geoTextureID,geometries,geometry,_uniforms,program,u_matrix,v_matrix,worldSize}=this;
+    const {geoTextureID,geometries,geometry,_uniforms,program,u_matrix,v_matrix,worldSize,zoom}=this;
     let uniforms = (geoTextureID)?
         extend(geometries[geoTextureID].uniforms,_uniforms):
         extend(geometry.uniforms,_uniforms);
     if(program.uniforms.u_matrix)uniforms=extend(uniforms,{u_matrix:{type:'matrix',data:new Float32Array(u_matrix)}});
     if(program.uniforms.v_matrix)uniforms=extend(uniforms,{v_matrix:{type:'matrix',data:new Float32Array(v_matrix)}});
     if(program.uniforms.worldSize)uniforms=extend(uniforms,{worldSize:{type:'float',data:new Float32Array([worldSize])}});
+    if(program.uniforms.zoom)uniforms=extend(uniforms,{zoom:{type:'float',data:new Float32Array([zoom])}});
     return uniforms;
   }
   changeSource(vs,fs){

@@ -145,7 +145,7 @@ export default class MapBoxGL extends MapBox {
           gl.blendFunc(gl.ONE,gl.ONE_MINUS_SRC_ALPHA);this.context.blendFunc.current=[gl.ONE,gl.ONE_MINUS_SRC_ALPHA];
           gl.colorMask(true, true, true, true);this.context.colorMask.current=[true,true,true,true];
           gl.blendColor(0.0, 0.0,0.0,0);
-          self.mapGL.drawScene(self.mapbox.transform.worldSize,self.mapbox.transform.projMatrix)
+          self.mapGL.drawScene(self.mapbox.transform.worldSize,self.mapbox.transform.zoom,self.mapbox.transform.projMatrix)
           this.context.program.current=null;
           this.context.bindElementBuffer.current =null;
           this.context.activeTexture.current=null;

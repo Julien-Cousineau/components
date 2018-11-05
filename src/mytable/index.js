@@ -40,7 +40,7 @@ class Sorter{
     }
     render(element){
         const icon = element.append('i')
-        .attr('class','sortcol fa fa-sort float-right')
+        .attr('class','sortcol fa fa-sort float-left')
         .attr('aria-hidden','true')
         .on('click',()=>{this.asc=!this.asc;this.callback(this.asc)})
     }
@@ -85,7 +85,8 @@ export default class MyTable{
             if(row.showdetail){
               const tr=this.renderTR(tbody);
               const td=this.renderTD(tr).attr('colspan',Object.keys(columns).length).attr('class','p-3 box-shadow');
-              const table  = new MyTable(row.subtable).render(td).setCallbacks(this.callbacks);
+              
+              const table  = new MyTable(row.subtable).setCallbacks(this.callbacks).render(td);
             }
         },this);
     }
@@ -95,7 +96,8 @@ export default class MyTable{
         for(const id in columns){
             const column=columns[id];
             if(column.active){
-              const th = this.renderTH(thead).text(column.title);
+              const th = this.renderTH(thead);
+              th.append("p").attr('class','m-0 float-left').text(column.title);
               if(column.width)th.style('width',column.width);
               if(column.sortable)new Sorter((asc)=>{this.sort(id,asc)}).render(th);  
             }

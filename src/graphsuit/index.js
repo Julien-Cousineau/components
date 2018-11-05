@@ -105,8 +105,9 @@ export default class GraphSuit extends GraphLine {
 
     this.addSlider('top',this.tslider);
     this.addSlider('bottom',this.bslider);
-    this.pgraph.draw();
+    this.setDomain([this.xmin,this.xmax])
     this.updateLine();
+    this.pgraph.draw();
 
   }
   draw(){
@@ -131,8 +132,8 @@ export default class GraphSuit extends GraphLine {
     const  data = [],
           start = [viewablex[0],(top >= bottom)?viewabley[0]:viewabley[1]],
             end = [viewablex[1],(top >= bottom)?viewabley[1]:viewabley[0]];
-    
-  
+
+
     data.push(start);
     for (var i = 0; i < n; i++){
       const x = vmin + (i*step);

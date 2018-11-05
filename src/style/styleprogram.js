@@ -12,6 +12,7 @@ export default  class StyleProgram extends Style  {
       this.paint  = new Paint(extend({_style:()=>self},options.paint));
       this.layout = new Layout(extend({_style:()=>self},options.layout));
       this.filter = options.filter || null;  
+      this.legendactive = (typeof options.legendactive === 'undefined') ? false : options.legendactive;
       // this.panel  = new Panel({_style:()=>self,title:this.type,col:6});  
   }
   get sattribute(){return this._sattribute()}

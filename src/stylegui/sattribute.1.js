@@ -1,15 +1,11 @@
 import {SVG,GraphSuit,Checkbox,ButtonColor,DraggableNumber,Tabs,GUISProgram} from '../index.js';
-// import StyleAttribute from '../style/styleattribute.js';
-export default class GUISuit{
+import StyleAttribute from '../style/styleattribute.js';
+export default class GUISAttribute{
   constructor(options){
       options = options || {};
-      if(!options.attribute)throw Error("GUIAttribute needs a attribute");
-      
-    this.attribute=options.attribute;
-    this.sattribute = this.attribute.sattribute;
-      
-      
-    const callbacks=this.callbacks = options.callbacks ||{changed:function(){console.log('GUISuit changed')}};
+      if(!options.sattribute)console.warn("StyleGUIAttribute needs a style pointer");
+      this.sattribute = options.sattribute || new StyleAttribute();
+      const callbacks=this.callbacks = options.callbacks ||{changed:function(){console.log('StyleGUIAttribute changed')}};
 
       
   }
@@ -58,37 +54,42 @@ export default class GUISuit{
             });
       
      
+      this.sprogramsguis={}
+      for(const id in this.sprograms){
+        const callback = (this.callbacks.changeStyle)?this.callbacks.changeStyle:null;
+        this.sprogramsguis[id]= new GUISProgram({sprogram:this.sprograms[id],callback:callback});
+      }
       
-    // this.attActive = new Checkbox({
-    //     title:'Active',
-    //     value:this.sattribute.attactive,
-    //     callback:(value)=>self.setAttActive(value)
-    // })
+    this.attActive = new Checkbox({
+        title:'Active',
+        value:this.sattribute.attactive,
+        callback:(value)=>self.setAttActive(value)
+    })
     
-    // this.weight  = new DraggableNumber({
-    //       title:'Weight: ',
-    //       value:this.sattribute.weight,
-    //       min:0,
-    //       max:100,
-    //       callback:(value)=>self.setWeight(value)
-    //   });
+    this.weight  = new DraggableNumber({
+          title:'Weight: ',
+          value:this.sattribute.weight,
+          min:0,
+          max:100,
+          callback:(value)=>self.setWeight(value)
+      });
     
     
     
-    // const tabs =this.tabs= new Tabs();
+    const tabs =this.tabs= new Tabs();
     element.append('h4').text(this.sattribute.title)
-    // tabs.render(element);
-    // const tab_style= tabs.addTab('style',{active:true,title:'Style'});
-    // const container_style = element.append('div').attr('class','container-fluid').append('div').attr('class','row')
-    // for(const id in this.sprogramsguis)this.sprogramsguis[id].render(container_style);
+    tabs.render(element);
+    const tab_style= tabs.addTab('style',{active:true,title:'Style'});
+    const container_style = tab_style.doms.content.append('div').attr('class','container-fluid').append('div').attr('class','row')
+    for(const id in this.sprogramsguis)this.sprogramsguis[id].render(container_style);
     
     
-    // const tab_suit= tabs.addTab('suitability',{active:false,title:'Suitability'});
-    // const container_suit = element.append('div').attr('class','container-fluid')
-    // this.attActive.render(container_suit.append('div').attr('class','row').append('div').attr('class','col-sm-12'))
-    // this.weight.render(container_suit.append('div').attr('class','row').append('div').attr('class','col-sm-12'))
+    const tab_suit= tabs.addTab('suitability',{active:false,title:'Suitability'});
+    const container_suit = tab_suit.doms.content.append('div').attr('class','container-fluid')
+    this.attActive.render(container_suit.append('div').attr('class','row').append('div').attr('class','col-sm-12'))
+    this.weight.render(container_suit.append('div').attr('class','row').append('div').attr('class','col-sm-12'))
           
-    this.svg.render(element)
+    this.svg.render(tab_suit.doms.content)
     this.svg.addGraph('graph1',this.graph)
     this.graph.draw()
     return this;

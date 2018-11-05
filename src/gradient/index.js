@@ -31,13 +31,14 @@ export default  class Gradient {
     return gradients;
   }
   static parseObj(obj){
+    
     const stops = [];
     const colors = [];
     for(const stop in obj){
-      stops.push(stop);
+      stops.push(parseFloat(stop));
       colors.push(Color.parseString(obj[stop]));
     }
-    
+    // console.log('parseObj', new Gradient({stops:stops,colors:colors}))
     return new Gradient({stops:stops,colors:colors});
   }
   static parseName(name){
@@ -58,9 +59,11 @@ export default  class Gradient {
     
   }
   get background(){
-    const strstr = this.stops.map((stop,i)=>{      
-      return '{0} {1}%'.format(this.colors[i].rgba2str(),stop*100)    
+    const strstr = this.stops.map((stop,i)=>[stop,this.colors[i]]).sort((a,b)=>a[0]-b[0]).map((item)=>{      
+      
+      return '{0} {1}%'.format(item[1].rgba2str(),item[0]*100)    
     })
+   
     if(strstr.length ==1)return '{0}'.format(strstr.join(','));       
     if(strstr.length>1)return 'linear-gradient({0})'.format(strstr.join(','));    
   }

@@ -37,6 +37,7 @@ export default class Layer {
   get u_matrix(){return this.app.u_matrix}
   get v_matrix(){return this.app.v_matrix}
   get worldSize(){return this.app.worldSize}
+  get scale(){return this.app.scale}
   get mapbox(){return this.app.mapbox}
   
   createAttributes(){
@@ -68,20 +69,28 @@ export default class Layer {
   }
   drawScene() {
     
-    const attribute=this.attributes;
-    const keys = Object.keys(attribute).sort((a,b)=>{return attribute[a].zorder-attribute[b].zorder});
+    const attributes=this.attributes;
+    const array = Object.keys(attributes).map(key=>attributes[key]).filter(attribute=>attribute.active);
+    if(array.length==0)return;
+    const maxzorder =array.reduce((prev, current)=>(prev.zorder > current.zorder) ? prev : current).zorder;
+    const newarray =array.filter(sattribute=>sattribute.zorder>=maxzorder);
+    newarray.sort((a,b)=>b.zorder-a.zorder)
+    const att = newarray[newarray.length-1];
+    att.drawScene()
     
+    // atts.forEach(att=>att.drawScene());
    
      
-    for(let i=0;i<keys.length;i++){
+    // for(let i=0;i<keys.length;i++){
       
-      const name = keys[i];
+      // const name = keys[i];
+      
       // console.log(this.attributes[name])
-      const attribute = this.attributes[name];
-      if (attribute.active) {
-         attribute.drawScene();
-      }
-    }
+      // const attribute = this.attributes[name];
+      // if (attribute.active) {
+        // attribute.drawScene();
+      // }
+    // }
   }
   toggle(){this.active = !this.active;}
   show(){this.active=true}

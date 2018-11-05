@@ -49,7 +49,7 @@ export default  class StyleLayer extends Style  {
       const paint = this.getSAttribute('default').getSProgram('line').paint;
       let svg = element.append('svg');
       svg.attr('height',10).attr('width',30).append('line').attr('x1',5).attr('y1',5).attr('x2',25).attr('y2',5).style('stroke',paint.color).style('stroke-width',paint.width)
-      return this;
+      
     }
     if(type=='point'){
       const paint = this.getSAttribute('default').getSProgram('circle').paint;
@@ -66,7 +66,7 @@ export default  class StyleLayer extends Style  {
                       .attr("cy", function (d) { return d.cy; })
                       .attr("r", function (d) { return d.r; })
                       .style("fill", function(d) { return d.c; });
-      return this;
+    
       
       
     }
@@ -74,10 +74,10 @@ export default  class StyleLayer extends Style  {
       // let img = d3.select(document.createElementNS('img', "img"));
       let img = element.append('img').attr('src',this.getSAttribute('default').getSProgram('symbol').layout.url);
 
-      return this;
+      
       // return img
     }
-    return '';
+    return element;
   }
 
 }

@@ -77,6 +77,12 @@ export default class Selafin{
     // ~~> keeping buffer?
     if (!(keepbuffer)) this.uint8array = null;
     
+    this.initializeProperties();
+    
+    // ~~> get Area before transform
+    // this.TRIAREA;
+    // console.log(this.TRIAREA)
+    
     // ~~> transform xy mesh
     if (debug) console.time('Transform mesh XY');
     this.transform();
@@ -87,7 +93,7 @@ export default class Selafin{
     this.minmax = this.getMinMax();
     if (debug) console.timeEnd('Get min/max');
     
-    this.initializeProperties();
+    
 
     
     if (debug) {
@@ -99,6 +105,7 @@ export default class Selafin{
     // ~~> initialize dynamic properties
     this._TRIXY = null;
     this._TRIAREA = null;
+    this._TRINODEAREA = null;
     this._CX = null;
     this._CY = null;
   }
@@ -444,6 +451,10 @@ export default class Selafin{
     if (!(this._CY)) this.getTriCentroid();
     return this._CY;
   }
+  get TRINODEAREA(){
+    if (!(this._TRINODEAREA)) this.getTriArea();
+    return this._TRINODEAREA;
+  }
   get TRIAREA(){
     if (!(this._TRIAREA)) this.getTriArea();
     return this._TRIAREA;
@@ -507,6 +518,7 @@ export default class Selafin{
     if (this.debug) console.time('Get element area');
     // Area was compute using cross-product
     let area = this._TRIAREA = new Float32Array(this.NELEM3);
+    let narea = this._TRINODEAREA =new Float32Array(this.NPOIN3);
     let n1,n2,n3;
     for(let i=0,n=this.NELEM3;i<n;i++){
       n1 = this.IKLE3[i];
@@ -515,6 +527,9 @@ export default class Selafin{
       area[i] = 0.5 * ((this.MESHX[n2] - this.MESHX[n1]) * (this.MESHY[n3] - this.MESHY[n1]) - 
                        (this.MESHX[n3] - this.MESHX[n1]) * (this.MESHY[n2] - this.MESHY[n1])
                       );
+      narea[n1]+=area[i];
+      narea[n2]+=area[i];
+      narea[n3]+=area[i];
     }
     if (this.debug) console.timeEnd('Get element area');
   }

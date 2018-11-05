@@ -10,7 +10,7 @@ import Texture from '../texture';
 export default class Geometry {
   constructor(options){
     if(!options || !options.gl)throw new Error("Geometry must contain gl");     
-    this.buffer={position:{},indices:{},normal:{},texcoord:{},values:{}};
+    this.buffer={position:{},indices:{},triarea:{},normal:{},texcoord:{},values:{}};
     this.vtexture = {};
     
     this.att={};

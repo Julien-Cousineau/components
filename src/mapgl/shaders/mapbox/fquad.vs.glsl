@@ -4,11 +4,13 @@ precision highp float;
 
 attribute vec3 position;
 attribute float vindices;
+attribute float triarea;
 uniform mat4 u_matrix;
 uniform float u_pointsize;
 uniform float dtextureRes;
 // uniform mat4 v_matrix;
 uniform float worldSize;
+uniform float zoom;
 // varying float fvindices;
 uniform sampler2D fbtexture;
 varying float fvalue;
@@ -19,6 +21,7 @@ float latY(float lat) {
   float y = 180.0 / PI * log(tan(PI / 4.0 + lat * PI / 360.0));
   return (180.0 -y) * worldSize / 360.0;
 }
+// float scale = pow(2.0,22.0-zoom) * 0.000000001;
 
 uniform vec2 minmax;
 // float divider = 1.0 / abs(minmax[1]-minmax[0]);
@@ -31,7 +34,11 @@ float decode(vec2 pair){
 
 
 void main() {
+  // if(triarea > scale) {
   gl_Position = u_matrix * vec4(lngX(position[0]),latY(position[1]),position[2], 1.0);
+  // } else {
+    // gl_Position = vec4(2,2,2,1.0);
+  // }
   // fvindices = vindices;
   gl_PointSize = u_pointsize;
   float x = (fract(vindices / dtextureRes) * dtextureRes) + 0.5; // We want the middle of pixel

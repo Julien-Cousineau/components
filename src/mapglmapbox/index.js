@@ -12,10 +12,12 @@ export default class MapGLMapBox extends MapGL{
   get u_matrix(){return this._u_matrix}
   get v_matrix(){return null}
   get worldSize(){return this._worldSize}
-  drawScene(worldSize, projMatrix) {
+  get zoom(){return this._zoom}
+  drawScene(worldSize,zoom, projMatrix) {
      
     this._u_matrix = projMatrix;
-    this._worldSize = worldSize;
+    this._worldSize = worldSize
+    this._zoom = zoom;
     super.drawScene();
   }
 }

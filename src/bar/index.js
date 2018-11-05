@@ -72,7 +72,7 @@ export default class BarContainer {
   getStyle(){
        const {position,size,shadow,positionlocation,element,positiontype,sizetype,osizetype,padding}=this;
        const {top,bottom,left,right}=padding;
-       console.log(position,positiontype)
+       
        element
        .style(position,0)
        .style(positiontype,0)
@@ -116,7 +116,7 @@ export default class BarContainer {
   render(parent) {
     this.parent = parent;
     const {position,positiontype,positionlocation,priority}=this;
-    console.log(positiontype,positionlocation)
+    
     const elementmargin = this.elementmargin = parent.append("div")
     .attr('class','barcontainer')
     .style('position','absolute')
