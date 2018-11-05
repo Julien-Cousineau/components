@@ -9,36 +9,36 @@ const outpath =path.join(__dirname, 'build');
 
 module.exports = {
   entry: {
-    index: [entrypath],
+    index: entrypath,
   },
 
   output: {
     path: outpath,
-    filename: "[name].js",
-    chunkFilename: '[name]-[chunkhash].js',
-    globalObject: 'this'
   },
-  devtool: 'source-map',
-      optimization: {
-     runtimeChunk: 'single',
-     splitChunks: {
-       cacheGroups: {
-         vendor: {
-           test: /[\\/]node_modules[\\/]/,
-           name: 'vendors',
-           chunks: 'all'
-         }
-       }
-     }
-    },
-  devServer: {
-    contentBase: outpath,
-    before(app){
-      app.use(express.static(path.join(__dirname, './server/data')));
-    },
-    // headers: { "Access-Control-Allow-Origin": "*" },
-    public: "components-jcousineau.c9users.io" 
+  // devtool: 'source-map',
+  optimization: {
+    minimize: false
   },
+    //   optimization: {
+    // runtimeChunk: 'single',
+    // splitChunks: {
+    //   cacheGroups: {
+    //     vendor: {
+    //       test: /[\\/]node_modules[\\/]/,
+    //       name: 'vendors',
+    //       chunks: 'all'
+    //     }
+    //   }
+    // }
+    // },
+  // devServer: {
+  //   contentBase: outpath,
+  //   before(app){
+  //     app.use(express.static(path.join(__dirname, './server/data')));
+  //   },
+  //   // headers: { "Access-Control-Allow-Origin": "*" },
+  //   public: "components-jcousineau.c9users.io" 
+  // },
   module: {
     rules: [
       { test: /\.css$/,use: ['style-loader', 'css-loader']},
@@ -50,9 +50,9 @@ module.exports = {
       {test: /\.glsl$/,loader: 'webpack-glsl-loader'}
     ]
   },
-  node: {
-   fs: "empty"
-  },
+  // node: {
+  // fs: "empty"
+  // },
 
 
 

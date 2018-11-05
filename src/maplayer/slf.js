@@ -19,6 +19,7 @@ export default  class LayerSLF {
       const source = this.source = options.source || null; // {type:'geojson',data:''}
       this.showdetail = false;
       this.type='slf';
+      this.layertype = "slf";
   }
   get mapboxgl(){return this._mapboxgl();}
   get mapGL(){return this.mapboxgl.mapGL}

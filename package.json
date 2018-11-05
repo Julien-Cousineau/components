@@ -16,7 +16,7 @@
     "express": "node server/index.js",
     "app": "webpack-dev-server --mode development --config webpack.config.app.js  --disable-host-check --host $IP --port $PORT",
     "start": "webpack-dev-server --mode development --hot --disable-host-check --host $IP --port $PORT",
-    "build": "NODE_ENV='production' webpack --mode production",
+    "build": "NODE_ENV='production' webpack --mode production --config webpack.prod.js",
     "push": "git add . && git commit -m 'comment here' && git push -u origin master",
     "prepare": "npm run build",
     "patch": "npm version patch && npm publish --access=public",

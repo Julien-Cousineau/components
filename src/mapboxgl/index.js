@@ -3,7 +3,7 @@ import MapGLMapBox from '../mapglmapbox';
 
 import { grid, randompoints, quad } from '../mapgl/primitive';
 // import StencilMode from 'mapbox-gl/src/gl/stencil_mode'
-import {LayerMapbox,LayerSLF} from '../index.js';
+import {LayerSLF} from '../index.js';
 
 import { extend } from '@julien.cousineau/util';
 
@@ -21,7 +21,7 @@ export default class MapBoxGL extends MapBox {
 
   async addLayer(id,layer){
     if(this.layers[id])throw new Error("Layer id exist");
-    if(layer.constructor.name=='LayerMapBox')return await super.addLayer(id,layer);
+    if(layer.layertype=='mapbox')return await super.addLayer(id,layer);
     this.layers[id] = layer;
     await layer.addToMap();
   }
@@ -31,32 +31,32 @@ export default class MapBoxGL extends MapBox {
   //   return;
   // }
   showhideLayer(layerid) {
-    if(this.layers[layerid].constructor.name=='LayerMapBox')return super.showhideLayer(layerid);
+    if(this.layers[layerid].layertype=='mapbox')return super.showhideLayer(layerid);
     this.mapGL.toggle(layerid);
     this.drawScene();
   }
   async showhideAttribute(layerid,attributeid){
-    if(this.layers[layerid].constructor.name=='LayerMapBox')return super.showhideAttribute(layerid,attributeid); //TODO
+    if(this.layers[layerid].layertype=='mapbox')return super.showhideAttribute(layerid,attributeid); //TODO
     const attribute = await this.mapGL.getLayer(layerid).getAttribute(attributeid);
     attribute.toggle()
     this.drawScene();
   }
   async showhideProgram(layerid,attributeid,programid){
-    if(this.layers[layerid].constructor.name=='LayerMapBox')return super.showhideAttribute(layerid,attributeid); //TODO
+    if(this.layers[layerid].layertype=='mapbox')return super.showhideAttribute(layerid,attributeid); //TODO
     const attribute = await this.mapGL.getLayer(layerid).getAttribute(attributeid);
     attribute.getProgram(programid).toggle()
     this.drawScene();
   }
   async setGradient(layerid,attributeid,programid,gradient){
     if(!this.layers[layerid])return;
-    if(this.layers[layerid].constructor.name=='LayerMapBox')return super.showhideAttribute(layerid,attributeid); //TODO
+    if(this.layers[layerid].layertype=='mapbox')return super.showhideAttribute(layerid,attributeid); //TODO
     const attribute = await this.mapGL.getLayer(layerid).getAttribute(attributeid);
     attribute.setTexture(programid,gradient);
     this.drawScene();
   }
   setRStyle(id,rstyle){
     if(!this.layers[id])return;
-    if(this.layers[id].constructor.name=='LayerMapBox')return super.setRStyle(id,rstyle);
+    if(this.layers[id].layertype=='mapbox')return super.setRStyle(id,rstyle);
     this.layers[id].rstyle = rstyle;
     this.setPaintProperty(id,'rstyle',rstyle);
     

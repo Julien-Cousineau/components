@@ -76,6 +76,7 @@ export default class MyTable{
         const {tbody,data,columns}=this;
         this.tbody.html("");
         // const array = (Array.isArray(data))?data:Object.keys(data).map(key=>data[key]);
+       
         data.forEach(row=>{
             const tr=this.renderTR(tbody);
             for(const id in columns){

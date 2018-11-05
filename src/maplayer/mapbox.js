@@ -16,6 +16,7 @@ export default  class LayerMapBox {
       // this.name = this.id
       this.slayer = options.slayer || null;
       this.programid = options.programid || null;
+      this.layertype = "mapbox";
       
       
       

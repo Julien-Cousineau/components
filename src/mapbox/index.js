@@ -163,7 +163,7 @@ export default class MapBox {
   }
   reloadMapBoxLayers(){
     const {layers} = this;
-    Object.keys(layers).filter((key) =>layers[key].constructor.name=='LayerMapBox')
+    Object.keys(layers).filter((key) =>layers[key].layertype=='mapbox')
                        .forEach(key=>layers[key].addToMap());
   }
   async addLayers() {

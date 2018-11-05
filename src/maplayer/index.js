@@ -89,13 +89,16 @@ export default class MapLayer extends MapBoxGL {
         if (dragdrop)this.dragdrop = new DragDrop({callback:(obj)=>this.addLayer(this.loadLayer(obj))}).render(this.element);
     }
     async addLayer(id,layer){
+     
       await super.addLayer(id,layer);
-      if(layer.constructor.name=='LayerMapBox')this.tables.gis.addData(layer);
-        if(layer.constructor.name=='LayerSLF'){
+      
+      if(layer.layertype=='mapbox')this.tables.gis.addData(layer);
+        if(layer.layertype=='slf'){
           const tab=this.btabs.addTab(layer.title,{title:layer.title}).show();
         
           this.stats[id]=new StatGUI({layer:layer,callbacks:{updateData:(rows)=>{const geojson=GeoJSON.fromArray(rows);this.layers['hp'+layer.id].source.data=geojson;this.mapbox.getSource('hp'+layer.id).setData(geojson)},showLocation:(o)=>{this.mapbox.flyTo({center: [o['x'],o['y']],zoom:12})}}}).render(tab.doms.content);
           this.updateHotspot(layer);
+         
           this.tables.model.addData(layer);
           
           const obj = {id:'hp'+layer.id,active:true,source:{type: 'geojson',data:GeoJSON.dummy()},slayer:layer.id+'hot'};

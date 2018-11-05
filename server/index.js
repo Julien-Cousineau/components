@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 // require('dotenv').config();
 
-const PORT = 8081;
+const PORT = 8080;
 const app = express();
 app.use(cors());
 app.use(compress()); 
@@ -19,9 +19,10 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     })); 
     
 app.use(express.static(path.join(__dirname, './data')));
-app.get('/', (req, res) => {
-  res.send("OK");
-});
+app.use(express.static(path.join(__dirname, '../build')));
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
 
 
 app.listen(PORT,'0.0.0.0', function() {
