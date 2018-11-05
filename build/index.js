@@ -16269,7 +16269,7 @@ class fetchdb_FetchDB {
     let buffer = await this.getDBData(url);
     if(!buffer){
       const progressbar = new ProgressBar();
-      const modal = new src_modal["a" /* default */]({show:true}).render();
+      const modal = new src_modal["a" /* default */](Object(util["extend"])(options,{show:true})).render();
       progressbar.render(modal.doms.modalbody);
       await modal.show();
       buffer = await fetch["a" /* default */].request(url,Object(util["extend"])(options,{callbacks:{progress:(con,perc,title)=>{progressbar.update(con,perc)}}}));
@@ -16314,7 +16314,7 @@ class selafinsync_SelafinSync extends selafin_Selafin{
     if(index!=-1)return this._getFrame(frame,index);
     
     if(!this.binaries[id])throw new Error("id does not exist");
-    const buffer = await this.fetchdb.getBuffer(this.binaries[id].url,Object(util["extend"])(this.binaries[id],{responseType:'arraybuffer'}));
+    const buffer = await this.fetchdb.getBuffer(this.binaries[id].url,Object(util["extend"])(this.binaries[id],{title:id,responseType:'arraybuffer'}));
     const data = new Float32Array(buffer);
     // for(let i=0;i<data.length;i++)data[i]*=Math.random();
     return  data;
@@ -63943,32 +63943,32 @@ const bcatlas_layers ={
                   
                 }
             }},    
-        tidef:{
-            id:'tidef',
-            slayer:'tidef-slf',
-            type:'slf',
-            source:{ 
-                type: 'slf', 
-                data: '/mesh.200.slf',
-                fromProj:'EPSG:3156',
-                toProj:'EPSG:4326',
-                binaries:{
-                  velocity:{url:'/value/tide200/mesh200_velocity.binary'},
-                  // boat:{url:'/proximity/mesh200_boat.binary'},
-                  // circuit:{url:'/proximity/mesh1800_circuit.binary'},
-                  // coastline:{url:'/proximity/mesh1800_coastline.binary'},
-                  // diving:{url:'/proximity/mesh1800_diving.binary'},
-                  // ferry:{url:'/proximity/mesh1800_ferry.binary'},
-                  // ferryroute:{url:'/proximity/mesh1800_ferryroute.binary'},
-                  // hydro:{url:'/proximity/mesh1800_hydro.binary'},
-                  // marina:{url:'/proximity/mesh1800_marina.binary'},
-                  // pipeline:{url:'/proximity/mesh1800_pipeline.binary'},
-                  // ports:{url:'/proximity/mesh1800_ports.binary'},
-                  // ship:{url:'/proximity/mesh1800_ship.binary'},
-                  // telecables:{url:'/proximity/mesh1800_telecables.binary'},
+        // tidef:{
+        //     id:'tidef',
+        //     slayer:'tidef-slf',
+        //     type:'slf',
+        //     source:{ 
+        //         type: 'slf', 
+        //         data: '/mesh.200.slf',
+        //         fromProj:'EPSG:3156',
+        //         toProj:'EPSG:4326',
+        //         binaries:{
+        //           velocity:{url:'/value/mesh200_velocity.binary'},
+        //           // boat:{url:'/proximity/mesh200_boat.binary'},
+        //           // circuit:{url:'/proximity/mesh1800_circuit.binary'},
+        //           // coastline:{url:'/proximity/mesh1800_coastline.binary'},
+        //           // diving:{url:'/proximity/mesh1800_diving.binary'},
+        //           // ferry:{url:'/proximity/mesh1800_ferry.binary'},
+        //           // ferryroute:{url:'/proximity/mesh1800_ferryroute.binary'},
+        //           // hydro:{url:'/proximity/mesh1800_hydro.binary'},
+        //           // marina:{url:'/proximity/mesh1800_marina.binary'},
+        //           // pipeline:{url:'/proximity/mesh1800_pipeline.binary'},
+        //           // ports:{url:'/proximity/mesh1800_ports.binary'},
+        //           // ship:{url:'/proximity/mesh1800_ship.binary'},
+        //           // telecables:{url:'/proximity/mesh1800_telecables.binary'},
                   
-                }
-            }},  
+        //         }
+        //     }},  
 }
 
 
